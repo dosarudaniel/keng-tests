@@ -1,8 +1,10 @@
-## get NIC type and the PCI address using
-#  lshw -c network -businfo
+## Deployment steps   
+
+
+Get NIC type and the PCI address using `lshw -c network -businfo`
 Bus info          Device      Class          Description
-========================================================
-pci@30d5:00:02.0  enP12501s2  network        MT28800 Family [ConnectX-5 Ex Virtual Function]
+========================================================     
+pci@30d5:00:02.0  enP12501s2  network        MT28800 Family [ConnectX-5 Ex Virtual Function]     
 pci@662a:00:02.0  enP16266s3  network        MT28800 Family [ConnectX-5 Ex Virtual Function]
 
 ## Deployment
