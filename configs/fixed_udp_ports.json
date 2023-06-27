@@ -1,0 +1,92 @@
+{
+    "ports": [
+        {
+            "name": "tx",
+            "location": "localhost:5552"
+        },
+        {
+            "name": "rx",
+            "location": "192.168.0.56:5551"
+        }
+    ],
+    "layer1": [
+        {
+            "name": "l1",
+            "port_names": [
+                "tx",
+                "rx"
+            ],
+            "speed": "speed_100_gbps"
+        }
+    ],
+    "flows": [
+        {
+            "name": "f1",
+            "tx_rx": {
+                "choice": "port",
+                "port": {
+                    "tx_name": "tx",
+                    "rx_name": "rx"
+                }
+            },
+            "metrics": {
+                "enable": true
+            },
+            "size": {
+                "choice": "fixed",
+                "fixed": 9000
+            },
+            "rate": {
+                "choice": "percentage",
+                "percentage": 100
+            },
+            "duration": {
+                "choice": "fixed_packets",
+                "fixed_packets": {
+                    "packets": 100000000
+                }
+            },
+            "packet": [
+                {
+                    "choice": "ethernet",
+                    "ethernet": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "00:15:5d:a4:08:1f"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "00:15:5d:a4:08:20"
+                        }
+                    }
+                },
+                {
+                    "choice": "ipv4",
+                    "ipv4": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "1.1.1.1"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "1.1.1.2"
+                        }
+                    }
+                },
+                {
+                    "choice": "udp",
+                    "udp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 6001
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 6002
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
