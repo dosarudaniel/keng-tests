@@ -56,7 +56,7 @@ def results_ok(api, packets, size_0, size_1, csv_dir=None):
     total_rx_bps = 0
 
     for flow_res in flow_results:
-        print("Flow " + flow_res.name + " " + str(sizes[i]) + "B ")
+        print(flow_res.name + " " + str(sizes[i]) + "B ")
         
         print("TX rate " + str(flow_res.frames_tx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
         total_tx_rate += flow_res.frames_tx_rate
