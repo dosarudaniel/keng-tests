@@ -705,17 +705,16 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
         print(border)
         print(
             row_format.format(
-                'Port', 'Tx Frames', 'Tx Bytes', 'Tx FPS', 'Rx Frames', 'Rx Bytes',
-                'Rx FPS', 'Tx Bytes Rate', 'Rx Bytes Rate'
+                'Port', 'Tx Frames', 'Tx Bytes', 'Tx FPS',
+                'Rx Frames', 'Rx Bytes', 'Rx FPS',
+                'Tx Bytes Rate', 'Rx Bytes Rate'
             )
         )
         for stat in port_stats:
             print(
                 row_format.format(
                     stat.name, stat.frames_tx, stat.bytes_tx, stat.frames_tx_rate,
-                    stat.frames_rx,
-                    stat.bytes_rx, 
-                    stat.frames_rx_rate,
+                    stat.frames_rx, stat.bytes_rx, stat.frames_rx_rate,
                     stat.bytes_tx_rate,
                     stat.bytes_rx_rate
                 )
