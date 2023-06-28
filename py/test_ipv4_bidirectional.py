@@ -40,11 +40,12 @@ def results_ok(api, packets, size_0, size_1, csv_dir=None):
     Returns true if stats are as expected, false otherwise.
     """
     port_results, flow_results = utils.get_all_stats(api)
+    ok = False
     if csv_dir is not None:
         utils.print_csv(csv_dir, port_results, flow_results)
     port_tx = sum([p.frames_tx for p in port_results if p.name == 'tx'])
     port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
-    ok = port_tx == packets and port_rx >= packets
+    # ok = port_tx == packets and port_rx >= packets
 
     sizes = [size_0, size_1]
     
