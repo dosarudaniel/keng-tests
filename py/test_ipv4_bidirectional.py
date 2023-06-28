@@ -50,20 +50,25 @@ def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
     port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
     ok = port_tx == packets and port_rx >= packets
 
-    print( str(size) + "B ")
+    sizes = [size_0, size_1]
+    names = [name_0, name_1]
     
     print(flow_results)
     total_tx_rate = 0
     total_rx_rate = 0
+    i = 0
+
     for flow_res in flow_results:
-        print("TX rate " + str(flow_res.frames_tx_rate * size * 8 / 1000000000) + " Gbps")
+        print(names[i] + " " + str(sizes[i]) + "B ")
+        print("TX rate " + str(flow_res.frames_tx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
         total_tx_rate += flow_res.frames_tx_rate
-        print("RX rate " + str(flow_res.frames_rx_rate * size * 8 / 1000000000) + " Gbps")
+        print("RX rate " + str(flow_res.frames_rx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
         total_rx_rate += flow_res.frames_tx_rate
+        i = i + 1
 
     print('-' * 40)
-    print("Total TX rate " + str(total_tx_rate * size * 8 / 1000000000) + " Gbps")
-    print("Total RX rate " + str(total_rx_rate * size * 8 / 1000000000) + " Gbps")
+    print("Total TX rate " + " Gbps")
+    print("Total RX rate " + " Gbps")
     print('-' * 40)
     
     
@@ -73,8 +78,8 @@ def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
         flow_rx = sum([f.frames_rx for f in flow_results])
         flow_rx_bytes = sum([f.bytes_rx for f in flow_results])
         ok = ok and flow_rx == packets and flow_tx == packets
-        ok = ok and flow_tx_bytes >= packets * (size - 4)
-        ok = ok and flow_rx_bytes == packets * size
+        ok = ok and flow_tx_bytes >= packets * (sizes[0] - 4)
+        ok = ok and flow_rx_bytes == packets * sizes[0]
 
     return ok and all(
         [f.transmit == 'stopped' for f in flow_results]
