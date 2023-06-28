@@ -35,7 +35,7 @@ def test_fixed_ports_ipv4(api):
     utils.stop_traffic(api, cfg)
 
 
-def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
+def results_ok(api, packets, size_0, size_1, csv_dir=None):
     """
     Returns true if stats are as expected, false otherwise.
     """
@@ -48,7 +48,6 @@ def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
 
     sizes = [size_0, size_1]
     
-    print(flow_results)
     total_tx_rate = 0
     total_rx_rate = 0
     i = 0
