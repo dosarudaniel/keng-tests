@@ -35,12 +35,11 @@ def results_ok(api, packets, size, csv_dir=None):
     Returns true if stats are as expected, false otherwise.
     """
     port_results, flow_results = utils.get_all_stats(api)
-    ok = False
     if csv_dir is not None:
         utils.print_csv(csv_dir, port_results, flow_results)
     port_tx = sum([p.frames_tx for p in port_results if p.name == 'tx'])
     port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
-    # ok = port_tx == packets and port_rx >= packets
+    ok = port_tx == packets # and port_rx >= packets
 
     print("Flow stats - rate in gbps : packet size = " + str(size) + "B ")
     for flow_res in flow_results:
@@ -52,9 +51,9 @@ def results_ok(api, packets, size, csv_dir=None):
         flow_tx_bytes = sum([f.bytes_tx for f in flow_results])
         flow_rx = sum([f.frames_rx for f in flow_results])
         flow_rx_bytes = sum([f.bytes_rx for f in flow_results])
-        # ok = ok and flow_rx == packets and flow_tx == packets
-        # ok = ok and flow_tx_bytes >= packets * (size - 4)
-        # ok = ok and flow_rx_bytes == packets * size
+        ok = ok and flow_rx == packets and flow_tx == packets
+        ok = ok and flow_tx_bytes >= packets * (size - 4)
+        ok = ok and flow_rx_bytes == packets * size
 
     return ok and all(
         [f.transmit == 'stopped' for f in flow_results]
