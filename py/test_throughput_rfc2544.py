@@ -45,6 +45,7 @@ def test_throughput_rfc2544(api):
 
         # Trial tests
         while step < NO_STEPS:
+            print("")
             print("Step: {}".format(step))
 
             rate_pps = int((right_pps + left_pps) / 2)
