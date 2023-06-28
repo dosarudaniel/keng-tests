@@ -19,14 +19,19 @@ def test_throughput_rfc2544(api):
     """
     cfg = utils.load_test_config(api, 'throughput_rfc2544.json', apply_settings=True)
 
-    # packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
+    packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
     # packet_sizes = [64, 512, 1518, 9000]
-    packet_sizes = [9000]
+    # packet_sizes = [9000]
 
     results = {}
     
     expected_runtime = len(packet_sizes) * ((NO_STEPS-1) * 6 + 62)
+    print("-" * 50)
     print("\n\n This is a throughput test (based on RFC-2544 procedure). The expected runtime is {}s".format(expected_runtime))
+    print("Frame sizes in the test: " + str(packet_sizes))
+    print("Packet loss tolerance:" + str(PACKET_LOSS_TOLERANCE))
+    print("-" * 50)
+    print("")
 
     for size in packet_sizes:
         print("--- Determining throughput for {} B packets --- ".format(size))
