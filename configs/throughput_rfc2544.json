@@ -42,7 +42,10 @@
                 "pps": 10000000
             },
             "duration": {
-                "choice": "continuous"
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
+                }
             },
             "packet": [
                 {
