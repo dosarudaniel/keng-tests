@@ -712,8 +712,10 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
         for stat in port_stats:
             print(
                 row_format.format(
-                    stat.name, stat.frames_tx, stat.bytes_tx, stat.frames_tx_rate, stat.frames_rx,
-                    stat.bytes_rx, stat.bytes_tx_rate,
+                    stat.name, stat.frames_tx, stat.bytes_tx, stat.frames_tx_rate,
+                    stat.frames_rx,
+                    stat.bytes_rx, 
+                    stat.bytes_tx_rate,
                     stat.frames_rx_rate, stat.bytes_rx_rate
                 )
             )
