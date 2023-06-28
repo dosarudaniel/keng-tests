@@ -42,9 +42,9 @@ def results_ok(api, packets, size, csv_dir=None):
     ok = port_tx == packets # and port_rx >= packets
 
     for flow_res in flow_results:
-        print("Flow " + flow_res.name + " " + str(size) + "B:")
-        print("TX rate " + str(round(flow_res.frames_tx_rate * size * 8 / 1000000000, 2)) + " Gbps")
-        print("RX rate " + str(round(flow_res.frames_rx_rate * size * 8 / 1000000000, 2)) + " Gbps") 
+        print(flow_res.name + " " + str(size) + "B:")
+        print("TX Rate " + str(round(flow_res.frames_tx_rate * size * 8 / 1000000000, 3)) + " Gbps")
+        print("RX Rate " + str(round(flow_res.frames_rx_rate * size * 8 / 1000000000, 3)) + " Gbps") 
     
     if utils.flow_metric_validation_enabled():
         flow_tx = sum([f.frames_tx for f in flow_results])
