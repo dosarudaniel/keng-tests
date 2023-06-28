@@ -55,6 +55,7 @@ def results_ok(api, packets, size_0, size_1, csv_dir=None):
     total_tx_bps = 0
     total_rx_bps = 0
 
+    print('-' * 22)
     for flow_res in flow_results:
         print(flow_res.name + " " + str(sizes[i]) + "B ")
         
@@ -66,11 +67,12 @@ def results_ok(api, packets, size_0, size_1, csv_dir=None):
         total_rx_rate += flow_res.frames_rx_rate
         total_rx_bps += flow_res.frames_rx_rate * sizes[i] * 8
         i = i + 1
+        print("")
 
     print("Totals")
     print("TX Rate " + str(round(total_tx_bps/1000000000, 3)) + " Gbps")
     print("RX Rate " + str(round(total_rx_bps/1000000000, 3)) + " Gbps")
-    print('-' * 40)
+    print('-' * 22)
     
     
     if utils.flow_metric_validation_enabled():
