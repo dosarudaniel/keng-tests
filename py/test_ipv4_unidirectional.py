@@ -41,8 +41,8 @@ def results_ok(api, packets, size, csv_dir=None):
     port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
     ok = port_tx == packets # and port_rx >= packets
 
-    print("Flow stats - rate in gbps : packet size = " + str(size) + "B ")
     for flow_res in flow_results:
+        print("Flow " + flow_res.name + " " + str(size) + "B:")
         print("TX rate " + str(round(flow_res.frames_tx_rate * size * 8 / 1000000000, 2)) + " Gbps")
         print("RX rate " + str(round(flow_res.frames_rx_rate * size * 8 / 1000000000, 2)) + " Gbps") 
     
