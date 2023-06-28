@@ -74,6 +74,8 @@ def results_ok(api, packets, size_0, size_1, csv_dir=None):
     print("RX Rate " + str(round(total_rx_bps/1000000000, 3)) + " Gbps")
     print('-' * 22)
     
+    print("\n\n\n\n\n\n")
+    
     
     if utils.flow_metric_validation_enabled():
         flow_tx = sum([f.frames_tx for f in flow_results])
