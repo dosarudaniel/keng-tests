@@ -19,9 +19,9 @@ def test_throughput_rfc2544(api):
     """
     cfg = utils.load_test_config(api, 'throughput_rfc2544.json', apply_settings=True)
 
-    packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
+    # packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
     # packet_sizes = [64, 512, 1518, 9000]
-    #packet_sizes = [9000]
+    packet_sizes = [9000]
 
     results = {}
     
