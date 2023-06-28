@@ -1,3 +1,4 @@
+#!/bin/bash
 
 cd /home/ixia/ixia-c-tests
 
