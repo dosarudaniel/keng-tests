@@ -50,7 +50,7 @@ def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
     port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
     ok = port_tx == packets and port_rx >= packets
 
-    print(" str(size) + "B ")
+    print( str(size) + "B ")
     
     print(flow_results)
     total_tx_rate = 0
