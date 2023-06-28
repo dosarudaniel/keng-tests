@@ -93,10 +93,7 @@
                 "percentage": 100
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000000
-                }
+                "choice": "continuous"
             },
             "packet": [
                 {
