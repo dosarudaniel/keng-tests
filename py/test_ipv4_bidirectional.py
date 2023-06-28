@@ -21,17 +21,13 @@ def test_fixed_ports_ipv4(api):
     )
 
     packets = cfg.flows[0].duration.fixed_packets.packets
-    
-    
-    name_0 = cfg.flows[0].name
-    name_1 = cfg.flows[1].name
-    
+
     size_0 = cfg.flows[0].size.fixed
     size_1 = cfg.flows[1].size.fixed
 
     utils.start_traffic(api, cfg)
     utils.wait_for(
-        lambda: results_ok(api, packets, size_0, size_1, name_0, name_1),
+        lambda: results_ok(api, packets, size_0, size_1),
         'stats to be as expected',
         timeout_seconds=1000
     )
@@ -51,7 +47,6 @@ def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
     ok = port_tx == packets and port_rx >= packets
 
     sizes = [size_0, size_1]
-    names = [name_0, name_1]
     
     print(flow_results)
     total_tx_rate = 0
@@ -59,7 +54,7 @@ def results_ok(api, packets, size_0, size_1, name_0, name_1, csv_dir=None):
     i = 0
 
     for flow_res in flow_results:
-        print(names[i] + " " + str(sizes[i]) + "B ")
+        print(flow_res.name + " " + str(sizes[i]) + "B ")
         print("TX rate " + str(flow_res.frames_tx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
         total_tx_rate += flow_res.frames_tx_rate
         print("RX rate " + str(flow_res.frames_rx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
