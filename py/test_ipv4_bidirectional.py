@@ -58,18 +58,18 @@ def results_ok(api, packets, size_0, size_1, csv_dir=None):
     for flow_res in flow_results:
         print(flow_res.name + " " + str(sizes[i]) + "B ")
         
-        print("TX rate " + str(flow_res.frames_tx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
+        print("TX Rate " + str(flow_res.frames_tx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
         total_tx_rate += flow_res.frames_tx_rate
         total_tx_bps += flow_res.frames_tx_rate * sizes[i] * 8
         
-        print("RX rate " + str(flow_res.frames_rx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
+        print("RX Rate " + str(flow_res.frames_rx_rate * sizes[i] * 8 / 1000000000) + " Gbps")
         total_rx_rate += flow_res.frames_rx_rate
         total_rx_bps += flow_res.frames_rx_rate * sizes[i] * 8
         i = i + 1
 
     print("Totals")
-    print("TX rate " + round(total_tx_bps/1000000000, 3) + " Gbps")
-    print("RX rate " + round(total_rx_bps/1000000000, 3) + " Gbps")
+    print("TX Rate " + round(total_tx_bps/1000000000, 3) + " Gbps")
+    print("RX Rate " + round(total_rx_bps/1000000000, 3) + " Gbps")
     print('-' * 40)
     
     
