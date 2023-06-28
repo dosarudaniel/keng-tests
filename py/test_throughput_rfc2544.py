@@ -19,17 +19,17 @@ def test_throughput_rfc2544(api):
     """
     cfg = utils.load_test_config(api, 'throughput_rfc2544.json', apply_settings=True)
 
-    #packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
-    # packet_sizes = [64, 512, 1518, 9000]
-    packet_sizes = [9000]
+    packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
+    #packet_sizes = [64, 512, 1518, 9000]
+    #packet_sizes = [9000]
 
     results = {}
     
     expected_runtime = len(packet_sizes) * ((NO_STEPS-1) * 6 + 62)
     print("\n" +"-" * 50)
-    print("This is a throughput test (based on RFC-2544 procedure). The expected runtime is {}s".format(expected_runtime))
+    print("This is a throughput test (based on RFC-2544 procedure). The expected runtime is {}s.".format(expected_runtime))
     print("Frame sizes in the test: " + str(packet_sizes))
-    print("Packet loss tolerance:" + str(PACKET_LOSS_TOLERANCE))
+    print("Packet loss tolerance: " + str(PACKET_LOSS_TOLERANCE))
     print("-" * 50)
     print("")
 
@@ -90,7 +90,7 @@ def test_throughput_rfc2544(api):
         max_mpps_str = str(max_mpps) + " Mpps"
         max_mbps_str = str(max_mbps) + " Mbps"
 
-        print("- Determined max RX rate for {} packets is {}. Equivalent to {}.\n"
+        print("- Determined max RX rate for {}B packets is {}. Equivalent to {}.\n"
               .format(size, max_mpps_str, max_mbps_str))
 
         time.sleep(TEST_GAP_TIME)
