@@ -26,8 +26,8 @@ def test_throughput_rfc2544(api):
     results = {}
     
     expected_runtime = len(packet_sizes) * ((NO_STEPS-1) * 6 + 62)
-    print("-" * 50)
-    print("\n\n This is a throughput test (based on RFC-2544 procedure). The expected runtime is {}s".format(expected_runtime))
+    print("\n" +"-" * 50)
+    print("This is a throughput test (based on RFC-2544 procedure). The expected runtime is {}s".format(expected_runtime))
     print("Frame sizes in the test: " + str(packet_sizes))
     print("Packet loss tolerance:" + str(PACKET_LOSS_TOLERANCE))
     print("-" * 50)
