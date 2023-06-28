@@ -90,14 +90,15 @@ def test_throughput_rfc2544(api):
         max_mpps_str = str(max_mpps) + " Mpps"
         max_mbps_str = str(max_mbps) + " Mbps"
 
-        print("- Determined max RX rate for {} packets is {}. Equivalent to {}"
+        print("- Determined max RX rate for {} packets is {}. Equivalent to {}.\n"
               .format(size, max_mpps_str, max_mbps_str))
 
         time.sleep(TEST_GAP_TIME)
 
         if max_pps_for_low_loss > 0:
             # Actual test: to confirm the result determined during trial tests
-            # We are running a 60s test again, and check the packet loss percentage
+            # We are running a FINAL_RUN_TIMEs test again, and check the packet loss percentage
+            print("To confirm the results determined during trial tests we are running a " + str(FINAL_RUN_TIME) +"s test again, and check the packet loss percentage")
             cfg.flows[0].rate.pps = max_pps_for_low_loss
 
             utils.start_traffic(api, cfg)
