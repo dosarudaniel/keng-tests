@@ -54,7 +54,7 @@ def test_throughput_rfc2544(api):
             print("Step: {}".format(step))
 
             rate_pps = int((right_pps + left_pps) / 2)
-            print("Current search interval: [{}; {}]. Trial run with {}; "
+            print("Current search interval: [{} Gbps; {} Gbps]. Trial run with {} Gbps. "
                 .format(round(left_pps * 8 * size / 1000000000, 3), 
                         round(right_pps * 8 * size / 1000000000, 3), 
                         round(rate_pps * 8 * size / 1000000000, 3)))
