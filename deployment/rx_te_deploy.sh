@@ -14,7 +14,7 @@ cat  /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 sudo docker run --rm -d --net=host --privileged --cpuset-cpus "0,1,2" \
 --name ixia-TE-5552-RX \
 -e OPT_LISTEN_PORT=5552 \
--e ARG_IFACE_LIST="pci@662a:00:02.0" \
+-e ARG_IFACE_LIST="pci@$PCI_ADDRESS" \
 -v /mnt/huge:/mnt/huge \
 -v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
 -v /sys/bus/pci/drivers:/sys/bus/pci/drivers \

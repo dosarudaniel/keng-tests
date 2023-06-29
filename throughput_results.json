@@ -1,56 +1,56 @@
 {
   "64": [
-    "0.436 Mpps",
-    "223.0 Mbps",
-    "0 packets lost",
-    "0.0 % loss"
+    "0.581 Mpps",
+    "298.0 Mbps",
+    "1287 packets lost",
+    "0.01539 % loss"
   ],
   "128": [
-    "0.495 Mpps",
-    "507.0 Mbps",
-    "1879 packets lost",
-    "0.02634 % loss"
+    "0.433 Mpps",
+    "443.0 Mbps",
+    "1739 packets lost",
+    "0.02775 % loss"
   ],
   "256": [
     "0.343 Mpps",
     "702.0 Mbps",
+    "2 packets lost",
+    "4e-05 % loss"
+  ],
+  "512": [
+    "0.43 Mpps",
+    "1762.0 Mbps",
+    "428 packets lost",
+    "0.00691 % loss"
+  ],
+  "768": [
+    "0.337 Mpps",
+    "2070.0 Mbps",
     "0 packets lost",
     "0.0 % loss"
   ],
-  "512": [
-    "0.574 Mpps",
-    "2350.0 Mbps",
-    "1102 packets lost",
-    "0.01331 % loss"
-  ],
-  "768": [
-    "0.744 Mpps",
-    "4569.0 Mbps",
-    "3923 packets lost",
-    "0.03664 % loss"
-  ],
   "1024": [
-    "0.506 Mpps",
-    "4143.0 Mbps",
-    "209 packets lost",
-    "0.00286 % loss"
+    "0.547 Mpps",
+    "4478.0 Mbps",
+    "6000 packets lost",
+    "0.07627 % loss"
   ],
   "1280": [
-    "0.507 Mpps",
-    "5192.0 Mbps",
-    "621 packets lost",
-    "0.00846 % loss"
+    "0.345 Mpps",
+    "3534.0 Mbps",
+    "1407 packets lost",
+    "0.02819 % loss"
   ],
   "1518": [
-    "0.603 Mpps",
-    "7325.0 Mbps",
-    "828 packets lost",
-    "0.00948 % loss"
+    "0.44 Mpps",
+    "5349.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
   ],
   "9000": [
-    "0.514 Mpps",
-    "36978.0 Mbps",
-    "11 packets lost",
-    "0.00015 % loss"
+    "0.482 Mpps",
+    "34737.0 Mbps",
+    "2784 packets lost",
+    "0.04046 % loss"
   ]
 }
