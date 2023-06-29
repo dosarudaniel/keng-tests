@@ -34,7 +34,7 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 9000
+                "fixed": 1518
             },
             "rate": {
                 "choice": "percentage",
