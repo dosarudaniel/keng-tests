@@ -54,8 +54,10 @@ def test_throughput_rfc2544(api):
             print("Step: {}".format(step))
 
             rate_pps = int((right_pps + left_pps) / 2)
-            print("left_pps={}; rate_pps={}; right_pps={}; "
-                .format(left_pps, rate_pps, right_pps))
+            print("Current search interval: [{}; {}]. Trial run with {}; "
+                .format(round(left_pps * 8 * size / 1000000000, 3), 
+                        round(right_pps * 8 * size / 1000000000, 3), 
+                        round(rate_pps * 8 * size / 1000000000, 3)))
             cfg.flows[0].rate.pps = rate_pps
 
             utils.start_traffic(api, cfg)
