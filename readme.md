@@ -1,3 +1,11 @@
+Requirements:
+- docker `sudo apt install docker.io`    
+- pip3   `sudo apt install python3-pip`    
+- jq     `sudo apt install jq`
+- Python requirements: `python3 -m pip install -r py/requirements.txt`
+` 
+
+
 ## Deployment steps     
 
 
