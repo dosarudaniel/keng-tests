@@ -705,18 +705,21 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
         print(border)
         print(
             row_format.format(
-                'Port', 'Tx Frames', 'Tx Bytes', 'Tx FPS',
-                'Rx Frames', 'Rx Bytes', 'Rx FPS',
+                'Port', 
+                'Tx Frames', 'Rx Frames', 
+                'Tx Bytes', 'Rx Bytes',
+                'Tx FPS', 'Rx FPS',
                 'Tx Bytes Rate', 'Rx Bytes Rate'
             )
         )
         for stat in port_stats:
             print(
                 row_format.format(
-                    stat.name, stat.frames_tx, stat.bytes_tx, stat.frames_tx_rate,
-                    stat.frames_rx, stat.bytes_rx, stat.frames_rx_rate,
-                    stat.bytes_tx_rate,
-                    stat.bytes_rx_rate
+                    stat.name, 
+                    stat.frames_tx, stat.frames_rx, 
+                    stat.bytes_tx, stat.bytes_rx,
+                    stat.frames_tx_rate, stat.frames_rx_rate,
+                    stat.bytes_tx_rate, stat.bytes_rx_rate
                 )
             )
         print(border)
@@ -734,8 +737,10 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
                 timestamps = True
 
         flow_stat_header = [
-            'Flow', 'Tx Frames', 'Tx Bytes', 'Tx FPS', 'Rx Frames',
-            'Rx Bytes', 'Rx FPS', 
+            'Flow', 
+            'Tx Frames', 'Rx Frames',
+            'Tx Bytes', 'Rx Bytes',
+            'Tx FPS', 'Rx FPS',
             #'Transmit State',
             'Lost frames',
             'Loss']
@@ -764,12 +769,9 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
             stat_fields = list((stat._properties).keys())
             flow_stat_values = [
                 stat.name,
-                stat.frames_tx,
-                stat.bytes_tx,
-                stat.frames_tx_rate,
-                stat.frames_rx,
-                stat.bytes_rx,
-                stat.frames_rx_rate,
+                stat.frames_tx, stat.frames_rx,
+                stat.bytes_tx, stat.bytes_rx,
+                stat.frames_tx_rate, stat.frames_rx_rate,
                 # stat.transmit,
                 stat.frames_tx - stat.frames_rx,
                 str(round((stat.frames_tx - stat.frames_rx) * 100 / stat.frames_tx, 3)) + " %"
