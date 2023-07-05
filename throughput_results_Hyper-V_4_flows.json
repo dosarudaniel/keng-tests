@@ -1,0 +1,55 @@
+  "64": [
+    "0.748 Mpps",
+    "383.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "128": [
+    "0.639 Mpps",
+    "655.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "256": [
+    "1.017 Mpps",
+    "2083.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "512": [
+    "0.814 Mpps",
+    "3333.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "768": [
+    "0.78 Mpps",
+    "4792.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "1024": [
+    "0.673 Mpps",
+    "5511.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "1280": [
+    "0.941 Mpps",
+    "9632.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "1518": [
+    "0.931 Mpps",
+    "11308.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ],
+  "9000": [
+    "0.851 Mpps",
+    "61277.0 Mbps",
+    "0 packets lost",
+    "0.0 % loss"
+  ]
+}
