@@ -1,11 +1,19 @@
-  
+## Document version  
+Make sure you have the latest version of this readme file by executing:
+```
+cd /home/ixia/ixia-c-tests
+git pull
+```
+
 ## VM settings
 Before starting make sure that your VM has the following settings: 4 SR-IOV Mellanox Network adapters, 1 management interface, at least 16 CPU cores, 16GB of memory as it can be seen in the below image:    
 ![Topology](/configs/Keng-Agent%20VM%20settings.png "")    
     
 Optional: Change the hostname of the VM on the second server executing:
-`sudo vi /etc/hostname`
-`reboot`
+```
+sudo vi /etc/hostname
+reboot
+```
 
 Check your management IP address by executing `ip a sh` and looking at the management interface.
 
