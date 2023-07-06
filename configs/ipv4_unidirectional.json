@@ -18,19 +18,19 @@
         },
         {
             "name": "VM2-TE1",
-            "location": "192.168.0.56:5551"
+            "location": "192.168.0.61:5551"
         },
         {
             "name": "VM2-TE2",
-            "location": "192.168.0.56:5552"
+            "location": "192.168.0.61:5552"
         },
         {
             "name": "VM2-TE3",
-            "location": "192.168.0.56:5553"
+            "location": "192.168.0.61:5553"
         },
         {
             "name": "VM2-TE4",
-            "location": "192.168.0.56:5554"
+            "location": "192.168.0.61:5554"
         }
     ],
     "layer1": [
@@ -82,7 +82,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:3b"
+                            "value": "00:15:5d:a4:08:3e"
                         },
                         "src": {
                             "choice": "value",
