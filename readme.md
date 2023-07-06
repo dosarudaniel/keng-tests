@@ -122,6 +122,7 @@ FRAME_SIZE = 9000
 PACKETS = 1000000
 ```
 
+## Running tests
 The ixia-c-tests repository contains 6 scripts:
 - `unidirectional_test.sh` - runs single flow unidirectional traffic
 - `unidirectional_test_multiple_flows.sh`
@@ -131,7 +132,7 @@ Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
 - `rfc2544_test_multiple_flows.sh`
 - `rfc2544_test.sh`
 
-Single flow tests:
+### Single flow tests:
 To start testing on the first VM:
 `/home/ixia/ixia-c-test/unidirectional_test.sh`
 To change the frame size, edit this file `/home/ixia/ixia-c-test/config/ipv4_unidirectional.json`
@@ -142,8 +143,7 @@ To change the frame size, edit this file `/home/ixia/ixia-c-test/config/ipv4_bid
 `/home/ixia/ixia-c-test/rfc2544_test.sh`
 To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `/home/ixia/ixia-c-test/py/test_throughput_rfc2544.py`
 
-
-Multiple flows tests:
+### Multiple flows tests:
 To start testing on the first VM:
 `/home/ixia/ixia-c-testunidirectional_test_multiple_flows.sh`
 To change the frame size, edit this file `/home/ixia/ixia-c-test/py/test_ipv4_unidirectional_4_flows.py`
@@ -154,6 +154,8 @@ To change the frame size, edit this file `/home/ixia/ixia-c-test/py/test_ipv4_bi
 `/home/ixia/ixia-c-test/rfc2544_test_multiple_flows.sh`
 To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `/home/ixia/ixia-c-test/py/test_throughput_rfc2544_multiple_flows.py`
 
+
+## Further optimizations
 Higher performance and lower loss can be further achieved if the Hyper-V is fully optimized:
 - CPU affinity (isolate the used CPU cores)
 - Having the NIC card in the same NUMA node as the CPU cores used by the VM
