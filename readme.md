@@ -21,19 +21,19 @@ Requirements: on Ubuntu 22.04.02 Server
 `ethtool -i <interface name>`
 As an example: 
 ```
-root@ixia-c-ubuntu:/home/ixia/ixia-c-tests# ethtool -i eth1
+root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i eth1
 driver: hv_netvsc  
 ```
 and
 ```
-root@ixia-c-ubuntu:/home/ixia/ixia-c-tests# ethtool -i enP12501s2
+root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i enP12501s2
 driver: mlx5_core
 version: 5.15.0-76-generic
 ```
 
 `lspci | grep -i Ethernet`   
 ```
-root@ixia-c-ubuntu:/home/ixia/ixia-c-tests# lspci | grep -i Ethernet
+root@keng-agent:/home/ixia/ixia-c-tests# lspci | grep -i Ethernet
 30d5:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
 5850:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
 aeca:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
@@ -64,7 +64,7 @@ cd /home/ixia/ixia-c-test/deployment
 
 To validate that the deployment was succesfully, run on VM1 :
 ```
-root@ixia-c-ubuntu:/home/ixia/ixia-c-tests/deployment# docker ps
+root@keng-agent:/home/ixia/ixia-c-tests/deployment# docker ps
 CONTAINER ID   IMAGE                                                              COMMAND                  CREATED         STATUS         PORTS     NAMES
 5ac4e8831d8e   ghcr.io/open-traffic-generator/licensed/ixia-c-controller:latest   "./bin/controller --…"   4 seconds ago   Up 3 seconds             Ixia-c-Controller
 659bedecaefa   ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35      "./entrypoint.sh"        4 hours ago     Up 4 hours               TE1-5551
