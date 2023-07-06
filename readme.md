@@ -1,9 +1,13 @@
-VM names 
-Keng-Agent 1 on server 1  
-Kent Agent 1 on server 2   
+VM names    
+- `Keng-Agent 1` on server 1     
+- `Kent Agent 1` on server 2     
 
-Make sure that your VM has the following Network adapters:
-<insert image with VM settings>
+Before starting make sure that your VM has the following Network adapters:
+`TODO <insert image with VM settings>`
+
+Optional: Change the second server VM hostname using:
+`sudo vi /etc/hostname`
+`reboot`
 
 Requirements: on Ubuntu 22.04.02 Server
 - docker `sudo apt install docker.io`  
