@@ -1,37 +1,36 @@
   
-
-Before starting make sure that your VM has the following settings:
-![Topology](/configs/Keng-Agent%20VM%20settings.png "")
-
-Optional: Change the second server VM hostname using:
+## VM settings
+Before starting make sure that your VM has the following settings: 4 SR-IOV Mellanox Network adapters, 1 management interface, at least 16 CPU cores, 16GB of memory as it can be seen in the below image:    
+![Topology](/configs/Keng-Agent%20VM%20settings.png "")    
+    
+Optional: Change the hostname of the VM on the second server executing:
 `sudo vi /etc/hostname`
 `reboot`
 
-Check your management IP address by executing `ip a sh` and looking at the eth0 interface.
+Check your management IP address by executing `ip a sh` and looking at the management interface.
 
-Requirements: on Ubuntu 22.04.02 Server
+### Requirements: 
+On Ubuntu 22.04.02 Server VM we should already have docker, net-tools, pip3, jq and python requirements
 - docker `sudo apt install docker.io`  
 - ifconfig `sudo apt install net-tools`  
 - pip3   `sudo apt install python3-pip`    
 - jq     `sudo apt install jq`
 - python requirements: `python3 -m pip install -r /home/ixia/ixia-x-tests/py/requirements.txt`
-- check if SR-IOV is enabled on the VM:
-`ip a sh` 
-  
-`ethtool -i <interface name>`
-As an example: 
+
+Check if SR-IOV is enabled on the VM by running: `ip a sh` to get the interface name and `ethtool -i <interface name>` to get information about interface driver.     
+For example:    
 ```
 root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i eth1
 driver: hv_netvsc  
 ```
-and
+and the actual interface used by the Keng Agent traffic engine should have mlx5_core driver:
 ```
 root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i enP12501s2
 driver: mlx5_core
 version: 5.15.0-76-generic
 ```
-
-`lspci | grep -i Ethernet`   
+To double check SR-IOV, we can execute:
+`lspci | grep -i Ethernet` and observe the [ConnectX-5 Ex Virtual Function] 
 ```
 root@keng-agent:/home/ixia/ixia-c-tests# lspci | grep -i Ethernet
 30d5:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
@@ -39,8 +38,6 @@ root@keng-agent:/home/ixia/ixia-c-tests# lspci | grep -i Ethernet
 aeca:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
 ea49:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
 ```
-
-
 
 
 ## Deployment steps     
@@ -62,7 +59,7 @@ cd /home/ixia/ixia-c-test/deployment
 ./te_deploy.sh
 ```
 
-To validate that the deployment was succesfully, run on VM1 :
+To validate that the deployment was succesful, run on VM1 :
 ```
 root@keng-agent:/home/ixia/ixia-c-tests/deployment# docker ps
 CONTAINER ID   IMAGE                                                              COMMAND                  CREATED         STATUS         PORTS     NAMES
@@ -74,7 +71,7 @@ bbfa1015f3f7   ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35    
 ```
 You should see 4 Traffic Engines and 1 controller.
 
-On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip addres of the second VM in the ports array - here is an example (snippet from `/home/ixia/ixia-c-tests/settings.json`). We have 4 ports per VM:
+On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip address of the second VM in the ports array - here is an example (snippet from `/home/ixia/ixia-c-tests/settings.json`). We have 4 ports per VM:
 ```
   "ports": [
     "localhost:5551",
@@ -125,8 +122,8 @@ FRAME_SIZE = 9000
 PACKETS = 1000000
 ```
 
-On VM1 you should find the following tests:
-The ixia-c-tests directory containes 6 scripts:
+## Running tests
+The ixia-c-tests repository contains 6 scripts:
 - `unidirectional_test.sh` - runs single flow unidirectional traffic
 - `unidirectional_test_multiple_flows.sh`
 - `bidirectional_test.sh`
@@ -135,7 +132,7 @@ Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
 - `rfc2544_test_multiple_flows.sh`
 - `rfc2544_test.sh`
 
-Single flow tests:
+### Single flow tests:
 To start testing on the first VM:
 `/home/ixia/ixia-c-test/unidirectional_test.sh`
 To change the frame size, edit this file `/home/ixia/ixia-c-test/config/ipv4_unidirectional.json`
@@ -146,8 +143,7 @@ To change the frame size, edit this file `/home/ixia/ixia-c-test/config/ipv4_bid
 `/home/ixia/ixia-c-test/rfc2544_test.sh`
 To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `/home/ixia/ixia-c-test/py/test_throughput_rfc2544.py`
 
-
-Multiple flows tests:
+### Multiple flows tests:
 To start testing on the first VM:
 `/home/ixia/ixia-c-testunidirectional_test_multiple_flows.sh`
 To change the frame size, edit this file `/home/ixia/ixia-c-test/py/test_ipv4_unidirectional_4_flows.py`
@@ -158,6 +154,8 @@ To change the frame size, edit this file `/home/ixia/ixia-c-test/py/test_ipv4_bi
 `/home/ixia/ixia-c-test/rfc2544_test_multiple_flows.sh`
 To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `/home/ixia/ixia-c-test/py/test_throughput_rfc2544_multiple_flows.py`
 
+
+## Further optimizations
 Higher performance and lower loss can be further achieved if the Hyper-V is fully optimized:
 - CPU affinity (isolate the used CPU cores)
 - Having the NIC card in the same NUMA node as the CPU cores used by the VM
