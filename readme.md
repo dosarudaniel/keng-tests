@@ -15,21 +15,21 @@ Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
 - `rfc2544_test.sh`
 
 ## Deployment steps     
-Topology:
+
+Before running the above tests we need to deploy the Keysight Elastic Network Generator and the associated traffic engines, here is the topology we want to deploy:
 ![Topology](/configs/Hyper-V%20topology.png "Text to show on mouseover")
 
-Before running the above tests we need to deploy the Keysight Elastic Network Generator and the associated traffic engines:
-On the first VM you should deploy the TX traffic engine and the controller:
+On the first VM we should deploy the traffic engines and the controller. To do that execute as a root the following:
 ```
 cd /home/ixia/ixia-c-test/deployment
 ./te_deploy.sh
 ./controller_deploy.sh
 ```
 
-On the second VM you should deploy the RX traffic engine
+On the second VM you should deploy the (RX) traffic engines
 ```
 cd /home/ixia/ixia-c-test/deployment
-./rx_te_deploy.sh 662a:00:02.0   # for the RX VM
+./te_deploy.sh
 ```
 
 To start testing on the first VM:
