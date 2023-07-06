@@ -42,7 +42,8 @@ ea49:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX
 
 ## Deployment steps     
 Before running the above tests we need to deploy the Keysight Elastic Network Generator and the associated traffic engines, here is the topology we want to deploy:
-![Topology](/configs/Hyper-V%20topology.png "")
+
+<img src="https://github.com/dosarudaniel/ixia-c-tests/blob/main/configs/Hyper-V%20topology.png" width="400">
 
 On the first VM we should deploy the traffic engines and the controller. To do that execute as a root the following:
 ```
