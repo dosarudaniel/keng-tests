@@ -1,13 +1,13 @@
   
-
-Before starting make sure that your VM has the following settings:
-![Topology](/configs/Keng-Agent%20VM%20settings.png "")
-
-Optional: Change the second server VM hostname using:
+## VM settings
+Before starting make sure that your VM has the following settings: 4 SR-IOV Network adapters, 1 management interface, at least 16 CPU cores, 16GB of memory as it can be seen in the below image:    
+![Topology](/configs/Keng-Agent%20VM%20settings.png "")    
+    
+Optional: Change the hostname of the VM on the second server executing:
 `sudo vi /etc/hostname`
 `reboot`
 
-Check your management IP address by executing `ip a sh` and looking at the eth0 interface.
+Check your management IP address by executing `ip a sh` and looking at the management interface.
 
 Requirements: on Ubuntu 22.04.02 Server
 - docker `sudo apt install docker.io`  
@@ -62,7 +62,7 @@ cd /home/ixia/ixia-c-test/deployment
 ./te_deploy.sh
 ```
 
-To validate that the deployment was succesfully, run on VM1 :
+To validate that the deployment was succesful, run on VM1 :
 ```
 root@keng-agent:/home/ixia/ixia-c-tests/deployment# docker ps
 CONTAINER ID   IMAGE                                                              COMMAND                  CREATED         STATUS         PORTS     NAMES
@@ -74,7 +74,7 @@ bbfa1015f3f7   ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35    
 ```
 You should see 4 Traffic Engines and 1 controller.
 
-On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip addres of the second VM in the ports array - here is an example (snippet from `/home/ixia/ixia-c-tests/settings.json`). We have 4 ports per VM:
+On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip address of the second VM in the ports array - here is an example (snippet from `/home/ixia/ixia-c-tests/settings.json`). We have 4 ports per VM:
 ```
   "ports": [
     "localhost:5551",
@@ -125,8 +125,7 @@ FRAME_SIZE = 9000
 PACKETS = 1000000
 ```
 
-On VM1 you should find the following tests:
-The ixia-c-tests directory containes 6 scripts:
+The ixia-c-tests repository contains 6 scripts:
 - `unidirectional_test.sh` - runs single flow unidirectional traffic
 - `unidirectional_test_multiple_flows.sh`
 - `bidirectional_test.sh`
