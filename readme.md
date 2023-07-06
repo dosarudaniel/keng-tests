@@ -1,9 +1,7 @@
-VM names    
-- `Keng-Agent 1` on server 1     
-- `Kent Agent 1` on server 2     
+  
 
 Before starting make sure that your VM has the following Network adapters:
-`TODO <insert image with VM settings>`
+![Topology](/configs/Keng-Agent%20VM%20settings.png "")
 
 Optional: Change the second server VM hostname using:
 `sudo vi /etc/hostname`
