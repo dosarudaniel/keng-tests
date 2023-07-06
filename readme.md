@@ -1,6 +1,6 @@
   
 ## VM settings
-Before starting make sure that your VM has the following settings: 4 SR-IOV Network adapters, 1 management interface, at least 16 CPU cores, 16GB of memory as it can be seen in the below image:    
+Before starting make sure that your VM has the following settings: 4 SR-IOV Mellanox Network adapters, 1 management interface, at least 16 CPU cores, 16GB of memory as it can be seen in the below image:    
 ![Topology](/configs/Keng-Agent%20VM%20settings.png "")    
     
 Optional: Change the hostname of the VM on the second server executing:
@@ -9,29 +9,28 @@ Optional: Change the hostname of the VM on the second server executing:
 
 Check your management IP address by executing `ip a sh` and looking at the management interface.
 
-Requirements: on Ubuntu 22.04.02 Server
+### Requirements: 
+On Ubuntu 22.04.02 Server VM we should already have docker, net-tools, pip3, jq and python requirements
 - docker `sudo apt install docker.io`  
 - ifconfig `sudo apt install net-tools`  
 - pip3   `sudo apt install python3-pip`    
 - jq     `sudo apt install jq`
 - python requirements: `python3 -m pip install -r /home/ixia/ixia-x-tests/py/requirements.txt`
-- check if SR-IOV is enabled on the VM:
-`ip a sh` 
-  
-`ethtool -i <interface name>`
-As an example: 
+
+Check if SR-IOV is enabled on the VM by running: `ip a sh` to get the interface name and `ethtool -i <interface name>` to get information about interface driver.     
+For example:    
 ```
 root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i eth1
 driver: hv_netvsc  
 ```
-and
+and the actual interface used by the Keng Agent traffic engine should have mlx5_core driver:
 ```
 root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i enP12501s2
 driver: mlx5_core
 version: 5.15.0-76-generic
 ```
-
-`lspci | grep -i Ethernet`   
+To double check SR-IOV, we can execute:
+`lspci | grep -i Ethernet` and observe the [ConnectX-5 Ex Virtual Function] 
 ```
 root@keng-agent:/home/ixia/ixia-c-tests# lspci | grep -i Ethernet
 30d5:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
@@ -39,8 +38,6 @@ root@keng-agent:/home/ixia/ixia-c-tests# lspci | grep -i Ethernet
 aeca:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
 ea49:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
 ```
-
-
 
 
 ## Deployment steps     
