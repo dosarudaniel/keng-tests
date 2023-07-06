@@ -1,3 +1,9 @@
+Keng-Agent 1 on server 1
+Kent Agent 1 on server 2
+
+Make sure that your VM has the following Network adapters:
+<insert image with VM settings>
+
 Requirements: on Ubuntu 22.04.02 Server
 - docker `sudo apt install docker.io`  
 - ifconfig `sudo apt install net-tools`  
