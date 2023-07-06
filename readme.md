@@ -1,6 +1,6 @@
   
 
-Before starting make sure that your VM has the following Network adapters:
+Before starting make sure that your VM has the following settings:
 ![Topology](/configs/Keng-Agent%20VM%20settings.png "")
 
 Optional: Change the second server VM hostname using:
