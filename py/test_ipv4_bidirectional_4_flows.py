@@ -20,6 +20,15 @@ def test_fixed_ports_ipv4(api):
         api, 'ipv4_bidirectional_4flows.json', apply_settings=True
     )
 
+    FRAME_SIZE = 9000
+    PACKETS = 10000000
+    LINE_RATE_PERCENTAGE = 20
+    
+    for flow in cfg.flows:
+        flow.duration.fixed_packets.packets = PACKETS
+        flow.size.fixed = FRAME_SIZE
+        flow.rate.percentage = LINE_RATE_PERCENTAGE
+
     sizes = []
     packets = sum([flow.duration.fixed_packets.packets for flow in cfg.flows])
 

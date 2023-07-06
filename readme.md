@@ -6,31 +6,24 @@ Requirements:
 ` 
 
 The ixia-c-tests directory containes 6 scripts that runs different tests:
+Runs unidirectional traffic:
 - unidirectional_test.sh
 - unidirectional_test_multiple_flows.sh
+Runs bidirectional traffic
 - bidirectional_test.sh
 - bidirectional_test_multiple_flows.sh
+Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
 - rfc2544_test_multiple_flows.sh
 - rfc2544_test.sh
 
 ## Deployment steps     
+Topology:
 
-Get NIC type and the PCI address using `lspci`
-```
-root@ixia-c-ubuntu:/home/ixia/ixia-c-tests# lspci
-0000:00:00.0 Host bridge: Intel Corporation 440BX/ZX/DX - 82443BX/ZX/DX Host bridge (AGP disabled) (rev 03)
-0000:00:07.0 ISA bridge: Intel Corporation 82371AB/EB/MB PIIX4 ISA (rev 01)
-0000:00:07.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)
-0000:00:07.3 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 02)
-0000:00:08.0 VGA compatible controller: Microsoft Corporation Hyper-V virtual VGA
-30d5:00:02.0 Ethernet controller: Mellanox Technologies MT28800 Family [ConnectX-5 Ex Virtual Function] (rev 80)
-```
+Before running the above tests we need to deploy the Keysight Elastic Network Generator:
 
-The pci address from the above should be passed to the traffic engine deployment scripts.
 For e.g.:
 ```
-cd /home/ixia/ixia-c-test/deployment
-./tx_te_deploy.sh 30d5:00:02.0   # for the TX VM
+
 ```
 
 On the first VM you should deploy the TX traffic engine and the controller:

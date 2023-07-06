@@ -17,7 +17,7 @@ def test_throughput_rfc2544_multiple_flows(api):
     """
     RFC-2544 Throughput determination test
     """
-    cfg = utils.load_test_config(api, 'ipv4_unidirectional_4flows_rfc2544.json', apply_settings=True)
+    cfg = utils.load_test_config(api, 'throughput_rfc2544_4_flows.json', apply_settings=True)
 
     # packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
     # packet_sizes = [64, 512, 1518, 9000]
