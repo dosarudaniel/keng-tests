@@ -2,34 +2,27 @@ Requirements:
 - docker `sudo apt install docker.io`    
 - pip3   `sudo apt install python3-pip`    
 - jq     `sudo apt install jq`
-- Python requirements: `python3 -m pip install -r py/requirements.txt`
+- python requirements: `python3 -m pip install -r py/requirements.txt`
 ` 
 
 The ixia-c-tests directory containes 6 scripts that runs different tests:
-Runs unidirectional traffic:
-- unidirectional_test.sh
-- unidirectional_test_multiple_flows.sh
-Runs bidirectional traffic
-- bidirectional_test.sh
-- bidirectional_test_multiple_flows.sh
+- `unidirectional_test.sh` - runs single flow unidirectional traffic
+- `unidirectional_test_multiple_flows.sh`
+- `bidirectional_test.sh`
+- `bidirectional_test_multiple_flows.sh`
 Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
-- rfc2544_test_multiple_flows.sh
-- rfc2544_test.sh
+- `rfc2544_test_multiple_flows.sh`
+- `rfc2544_test.sh`
 
 ## Deployment steps     
 Topology:
+![Topology](/configs/ "Text to show on mouseover")
 
-Before running the above tests we need to deploy the Keysight Elastic Network Generator:
-
-For e.g.:
-```
-
-```
-
+Before running the above tests we need to deploy the Keysight Elastic Network Generator and the associated traffic engines:
 On the first VM you should deploy the TX traffic engine and the controller:
 ```
 cd /home/ixia/ixia-c-test/deployment
-./tx_te_deploy.sh 30d5:00:02.0   # for the TX VM
+./te_deploy.sh
 ./controller_deploy.sh
 ```
 
