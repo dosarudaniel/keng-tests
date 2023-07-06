@@ -16,7 +16,7 @@ Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
 
 ## Deployment steps     
 Topology:
-![Topology](/configs/ "Text to show on mouseover")
+![Topology](/configs/Hyper-V%20topology.png "Text to show on mouseover")
 
 Before running the above tests we need to deploy the Keysight Elastic Network Generator and the associated traffic engines:
 On the first VM you should deploy the TX traffic engine and the controller:
