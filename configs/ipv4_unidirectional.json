@@ -64,7 +64,7 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 9000
             },
             "rate": {
                 "choice": "percentage",
@@ -73,7 +73,7 @@
             "duration": {
                 "choice": "fixed_packets",
                 "fixed_packets": {
-                    "packets": 10000000
+                    "packets": 1000000
                 }
             },
             "packet": [

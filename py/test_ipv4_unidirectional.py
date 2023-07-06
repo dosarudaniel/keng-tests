@@ -14,6 +14,14 @@ def test_ipv4_unidirectional(api):
         api, 'ipv4_unidirectional.json', apply_settings=True
     )
 
+    # FRAME_SIZE = 9000
+    # PACKETS = 1000000
+    # LINE_RATE_PERCENTAGE = 100
+
+    # for flow in cfg.flows:
+    #     flow.duration.fixed_packets.packets = PACKETS
+    #     flow.size.fixed = FRAME_SIZE
+    #     flow.rate.percentage = LINE_RATE_PERCENTAGE
 
     print(cfg.ports)
 

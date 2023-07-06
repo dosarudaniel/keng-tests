@@ -21,10 +21,9 @@ def test_fixed_ports_ipv4(api):
     )
 
     FRAME_SIZE = 9000
-    PACKETS = 10000000
-    LINE_RATE_PERCENTAGE = 20
+    PACKETS = 1000000
+    LINE_RATE_PERCENTAGE = 25
 
-    
     for flow in cfg.flows:
         flow.duration.fixed_packets.packets = PACKETS
         flow.size.fixed = FRAME_SIZE
