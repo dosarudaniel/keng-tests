@@ -1,5 +1,6 @@
-Keng-Agent 1 on server 1
-Kent Agent 1 on server 2
+VM names 
+Keng-Agent 1 on server 1  
+Kent Agent 1 on server 2   
 
 Make sure that your VM has the following Network adapters:
 <insert image with VM settings>
