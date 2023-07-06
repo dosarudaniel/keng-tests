@@ -17,7 +17,7 @@ def test_fixed_ports_ipv4(api):
     - all captured frames have expected src and dst ports
     """
     cfg = utils.load_test_config(
-        api, 'ipv4_bidirectional.json', apply_settings=True
+        api, 'ipv4_bidirectional_4flows.json', apply_settings=True
     )
 
     sizes = []

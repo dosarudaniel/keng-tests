@@ -1,32 +1,62 @@
 {
     "ports": [
         {
-            "name": "p1",
+            "name": "VM1-TE1",
+            "location": "localhost:5551"
+        },
+        {
+            "name": "VM1-TE2",
             "location": "localhost:5552"
         },
         {
-            "name": "p2",
+            "name": "VM1-TE3",
+            "location": "localhost:5553"
+        },
+        {
+            "name": "VM1-TE4",
+            "location": "localhost:5554"
+        },
+        {
+            "name": "VM2-TE1",
             "location": "192.168.0.56:5551"
+        },
+        {
+            "name": "VM2-TE2",
+            "location": "192.168.0.56:5552"
+        },
+        {
+            "name": "VM2-TE3",
+            "location": "192.168.0.56:5553"
+        },
+        {
+            "name": "VM2-TE4",
+            "location": "192.168.0.56:5554"
         }
     ],
     "layer1": [
         {
             "name": "l1",
             "port_names": [
-                "p1",
-                "p2"
+                "VM1-TE1",
+                "VM1-TE2",
+                "VM1-TE3",
+                "VM1-TE4",
+                "VM2-TE1",
+                "VM2-TE2",
+                "VM2-TE3",
+                "VM2-TE4"
             ],
             "speed": "speed_100_gbps"
         }
     ],
     "flows": [
         {
-            "name": "p1->p2",
+            "name": "f1 VM1-TE1 -> VM2-TE1",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "p1",
-                    "rx_name": "p2"
+                    "tx_name": "VM1-TE1",
+                    "rx_name": "VM2-TE1"
                 }
             },
             "metrics": {
@@ -34,16 +64,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 9000
+                "fixed": 1518
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 100
+                "percentage": 10 
             },
             "duration": {
                 "choice": "fixed_packets",
                 "fixed_packets": {
-                    "packets": 1000000000
+                    "packets": 10000000
                 }
             },
             "packet": [
@@ -52,7 +82,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:2b"
+                            "value": "00:15:5d:a4:08:3b"
                         },
                         "src": {
                             "choice": "value",
@@ -76,12 +106,12 @@
             ]
         },
         {
-            "name": "p2->p1",
+            "name": "f2 VM2-TE1 -> VM1-TE1",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "p2",
-                    "rx_name": "p1"
+                    "tx_name": "VM2-TE1",
+                    "rx_name": "VM1-TE1"
                 }
             },
             "metrics": {
@@ -89,16 +119,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 9000
+                "fixed": 1518
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 100
+                "percentage": 10 
             },
             "duration": {
                 "choice": "fixed_packets",
                 "fixed_packets": {
-                    "packets": 1000000000
+                    "packets": 10000000
                 }
             },
             "packet": [
@@ -111,7 +141,7 @@
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:2b"
+                            "value": "00:15:5d:a4:08:3b"
                         }
                     }
                 },
@@ -120,11 +150,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "1.1.1.2"
+                            "value": "1.1.1.1"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "1.1.1.1"
+                            "value": "1.1.1.2"
                         }
                     }
                 }

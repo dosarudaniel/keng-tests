@@ -17,8 +17,18 @@ def test_fixed_ports_ipv4(api):
     - all captured frames have expected src and dst ports
     """
     cfg = utils.load_test_config(
-        api, 'ipv4_bidirectional.json', apply_settings=True
+        api, 'ipv4_unidirectional_4_flows.json', apply_settings=True
     )
+
+    FRAME_SIZE = 9000
+    PACKETS = 10000000
+    LINE_RATE_PERCENTAGE = 20
+
+    
+    for flow in cfg.flows:
+        flow.duration.fixed_packets.packets = PACKETS
+        flow.size.fixed = FRAME_SIZE
+        flow.rate.percentage = LINE_RATE_PERCENTAGE
 
     sizes = []
     packets = sum([flow.duration.fixed_packets.packets for flow in cfg.flows])
@@ -26,9 +36,12 @@ def test_fixed_ports_ipv4(api):
     for flow in cfg.flows:
         sizes.append(flow.size.fixed)
 
-    # for flow in cfg.flows:
-    #     flow.metrics.latency.enable = True
-    #     flow.metrics.latency.mode = flow.metrics.latency.CUT_THROUGH
+    #for flow in cfg.flows:
+    #    flow.metrics.latency.enable = True
+    #    flow.metrics.latency.mode = flow.metrics.latency.CUT_THROUGH
+
+    # cfg.flows[1].metrics.latency.enable = True
+    # cfg.flows[1].metrics.latency.mode = cfg.flows[1].metrics.latency.CUT_THROUGH
 
     utils.start_traffic(api, cfg)
     utils.wait_for(

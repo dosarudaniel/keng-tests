@@ -9,7 +9,7 @@ NO_STEPS                   = 13
 TRIAL_RUN_TIME             = 5  # seconds
 FINAL_RUN_TIME             = 60 # seconds
 TEST_GAP_TIME              = 1  # seconds
-RESULTS_FILE_PATH          = "./throughput_results_rfc2544_1_flow.json"
+RESULTS_FILE_PATH          = "./throughput_results_rfc2544_4_flows.json"
 
 
 @pytest.mark.performance
@@ -19,10 +19,9 @@ def test_throughput_rfc2544_multiple_flows(api):
     """
     cfg = utils.load_test_config(api, 'ipv4_unidirectional_4flows_rfc2544.json', apply_settings=True)
 
-    packet_sizes = [1518, 9000]
-    #packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
+    # packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
     # packet_sizes = [64, 512, 1518, 9000]
-    # packet_sizes = [1518]
+    packet_sizes = [1518, 9000]
 
     results = {}
     
@@ -133,7 +132,8 @@ def test_throughput_rfc2544_multiple_flows(api):
                     break
                 
                 print("The {}s test with {}pps per flow did NOT pass, trying again with {} pps PER FLOW.".format(FINAL_RUN_TIME, max_pps_for_low_loss, (int) (0.95 * max_pps_for_low_loss)))
-                max_pps_for_low_loss = (int) (0.95 * max_pps_for_low_loss)
+                max_pps_for_low_loss = (int) (0.95 * max_pps_for_low_loss) # To find out faster the maximum TPUT for 0 loss, decrease this number, for e.g. 0.95
+                
                 time.sleep(TEST_GAP_TIME)
 
         else:

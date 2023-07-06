@@ -3,8 +3,14 @@
   "http_server": "https://localhost:8443",
   "grpc_server": "localhost:40051",
   "ports": [
-    "192.168.0.54:5551",
-    "192.168.0.56:5552"
+    "localhost:5551",
+    "localhost:5552",
+    "localhost:5553",
+    "localhost:5554",
+    "192.168.0.56:5551",
+    "192.168.0.56:5552",
+    "192.168.0.56:5553",
+    "192.168.0.56:5554"
   ],
   "soft_dut": "localhost:22",
   "speed": "speed_100_gbps",
@@ -17,5 +23,5 @@
   "http_transport": true,
   "dynamic_stats_output": true,
   "capture_validation": false,
-  "flow_metric_validation": true
+  "flow_metric_validation": false
 }

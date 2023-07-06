@@ -745,9 +745,9 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
             'Lost frames',
             'Loss']
         flow_latency_header = [
-            'Max Latency',
+            'Min Latency',
             'Avg Latency',
-            'Min Latency'
+            'Max Latency'
         ]
         flow_timestamp_header = [
             'First Timestamp',
@@ -784,9 +784,9 @@ def print_stats(port_stats=None, flow_stats=None, clear_screen=None):
                 ]
                 if 'latency' in stat_fields:
                     latency_stat_values = [
-                        stat.latency.maximum_ns,
+                        stat.latency.minimum_ns,
                         stat.latency.average_ns,
-                        stat.latency.minimum_ns
+                        stat.latency.maximum_ns
                     ]
 
                 flow_stat_values.extend(latency_stat_values)
