@@ -5,6 +5,13 @@ Requirements:
 - Python requirements: `python3 -m pip install -r py/requirements.txt`
 ` 
 
+The ixia-c-tests directory containes 6 scripts that runs different tests:
+- unidirectional_test.sh
+- unidirectional_test_multiple_flows.sh
+- bidirectional_test.sh
+- bidirectional_test_multiple_flows.sh
+- rfc2544_test_multiple_flows.sh
+- rfc2544_test.sh
 
 ## Deployment steps     
 
