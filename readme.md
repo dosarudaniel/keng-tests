@@ -9,6 +9,8 @@ Optional: Change the second server VM hostname using:
 `sudo vi /etc/hostname`
 `reboot`
 
+Check your management IP address by executing `ip a sh` and looking at the eth0 interface.
+
 Requirements: on Ubuntu 22.04.02 Server
 - docker `sudo apt install docker.io`  
 - ifconfig `sudo apt install net-tools`  
