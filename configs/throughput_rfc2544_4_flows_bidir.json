@@ -64,16 +64,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -119,16 +119,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -174,16 +174,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -229,16 +229,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -284,16 +284,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -339,16 +339,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -394,16 +394,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
@@ -449,16 +449,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 64
             },
             "rate": {
-                "choice": "percentage",
-                "percentage": 3 
+                "choice": "pps",
+                "pps": 10000000
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 15
                 }
             },
             "packet": [
