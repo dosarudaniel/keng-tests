@@ -10,7 +10,7 @@ NO_STEPS                   = 13
 TRIAL_RUN_TIME             = 5  # seconds
 FINAL_RUN_TIME             = 60 # seconds
 TEST_GAP_TIME              = 1  # seconds
-RESULTS_FILE_PATH          = "./throughput_results_rfc2544_1_bidir.json"
+RESULTS_FILE_PATH          = "./throughput_results_rfc2544_4_bidir.json"
 
 
 
@@ -19,7 +19,7 @@ def test_throughput_rfc2544_multiple_flows(api):
     """
     RFC-2544 Throughput determination test for bidirectional traffic
     """
-    cfg = utils.load_test_config(api, 'throughtput_rfc2544_bidir.json', apply_settings=True)
+    cfg = utils.load_test_config(api, 'throughtput_rfc25444_flows_bidir.json', apply_settings=True)
 
     packet_sizes = [64, 512, 1518, 9000]
     #packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
