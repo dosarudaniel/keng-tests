@@ -24,7 +24,7 @@ sudo docker run --rm -d --net=host --privileged --cpuset-cpus "0,1,2" \
 -v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
 -v /sys/devices/system/node:/sys/devices/system/node \
 -v /dev:/dev \
-ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35
+ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
 
 
 # Deploy TE2 on port 5552. It uses PCI_ADDRESS2 and CPU cores 3,4,5
@@ -37,7 +37,7 @@ sudo docker run --rm -d --net=host --privileged --cpuset-cpus "3,4,5" \
 -v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
 -v /sys/devices/system/node:/sys/devices/system/node \
 -v /dev:/dev \
-ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35
+ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
 
 
 # Deploy TE3 on port 5553. It uses PCI_ADDRESS3 and CPU cores 6,7,8
@@ -50,7 +50,7 @@ sudo docker run --rm -d --net=host --privileged --cpuset-cpus "6,7,8" \
 -v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
 -v /sys/devices/system/node:/sys/devices/system/node \
 -v /dev:/dev \
-ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35
+ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
 
 # Deploy TE4 on port 5554. It uses PCI_ADDRESS4 and CPU cores 9,10,11
 sudo docker run --rm -d --net=host --privileged --cpuset-cpus "9,10,11" \
@@ -62,4 +62,4 @@ sudo docker run --rm -d --net=host --privileged --cpuset-cpus "9,10,11" \
 -v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
 -v /sys/devices/system/node:/sys/devices/system/node \
 -v /dev:/dev \
-ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35
+ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
