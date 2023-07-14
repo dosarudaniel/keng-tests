@@ -44,7 +44,7 @@ def test_throughput_rfc2544_multiple_flows(api):
         for flow in cfg.flows:
             flow.size.fixed = size
 
-        packet_loss = []
+        packet_loss_p = []
         left_pps    = []
         right_pps   = []
         rate_pps    = []
@@ -52,7 +52,7 @@ def test_throughput_rfc2544_multiple_flows(api):
         rcv_pkts = []
         sent_pkts = []
 
-        packet_loss = [0.0 for i in range(NUMBER_OF_FLOWS)]
+        packet_loss_p = [0.0 for i in range(NUMBER_OF_FLOWS)]
         left_pps = [1 for i in range(NUMBER_OF_FLOWS)]
         right_pps = [int(THEORETICAL_MAX_LINK_SPEED * 1000000000 / 8 / (size + 20) / len(cfg.flows) / 2) for i in range(NUMBER_OF_FLOWS)]
         rate_pps = [right_pps[i] for i in range(NUMBER_OF_FLOWS)]
@@ -68,7 +68,6 @@ def test_throughput_rfc2544_multiple_flows(api):
             print("")
             print("Step [{}B]: {}".format(size, step))
 
-            packet_loss_p = [0.0 for i in range(NUMBER_OF_FLOWS)]
 
             for i in range(NUMBER_OF_FLOWS):
                 rate_pps[i] = int((right_pps[i] + left_pps[i]) / 2)
@@ -115,8 +114,11 @@ def test_throughput_rfc2544_multiple_flows(api):
         max_mbps_str = [str(max_mbps[i]) + " Mbps"  for i in range(NUMBER_OF_FLOWS)]
 
         for i in range(NUMBER_OF_FLOWS):
-            print("- Flow {}: Determined total max RX rate for {}B packets is {}. Equivalent to {}.\n"
+            print("- Flow {}: Determined max RX rate for {}B packets is {}. Equivalent to {}.\n"
               .format(i, size, max_mpps_str[i], max_mbps_str[i]))
+
+        print("Determined TOTAL max RX rate for {}B packets is {}. Equivalent to {}.\n"
+              .format(i, size, sum([tput_mpps for tput_mpps in max_mpps]), sum([tput_mpps for tput_mbps in max_mbps]) ))
 
         time.sleep(TEST_GAP_TIME)
             
@@ -151,25 +153,36 @@ def test_throughput_rfc2544_multiple_flows(api):
 
                 if packet_loss_p[i] <= PACKET_LOSS_TOLERANCE:
                     test_passed[i] = True
-                    max_pps_for_low_loss = (int) (0.95 * max_pps_for_low_loss)
-                    break
+                    print("Flow {}: The {}s test with {}pps PASSED".format(i, FINAL_RUN_TIME, max_pps_for_low_loss[i]))
+                else 
+                    max_pps_for_low_loss[i] = (int) (0.95 * max_pps_for_low_loss[i])
+                    print("FLow {}: The {}s test with {}pps per flow did NOT pass, trying again with {} pps PER FLOW."
+                          .format(i, FINAL_RUN_TIME, max_pps_for_low_loss[i], (int) (0.95 * max_pps_for_low_loss[i])))
+                    
+            all_test_passed = True
+            for i in range(NUMBER_OF_FLOWS):
+                if test_passed[i] == False:
+                    all_test_passed = False
+
+            if all_test_passed == True:
+                break
             
-            if test_passed 
-            print("The {}s test with {}pps per flow did NOT pass, trying again with {} pps PER FLOW.".format(FINAL_RUN_TIME, max_pps_for_low_loss, (int) (0.95 * max_pps_for_low_loss)))
-            max_pps_for_low_loss = (int) (0.95 * max_pps_for_low_loss)
             time.sleep(TEST_GAP_TIME)
 
-        print("The {}s test with {}pps per flow PASSED".format(FINAL_RUN_TIME, max_pps_for_low_loss))
+        max_mpps = [round(max_pps_for_low_loss[i] * / 1000000 / len(cfg.flows) / 2, 3) for i in range(NUMBER_OF_FLOWS)] 
+        max_mbps = [round(max_pps_for_low_loss[i] * len(cfg.flows) / 2 * size * 8 / 1000000, 0) for i in range(NUMBER_OF_FLOWS)]
 
-        max_mpps = round(max_pps_for_low_loss * len(cfg.flows) / 1000000, 3)
-        max_mbps = round(max_pps_for_low_loss * len(cfg.flows) * size * 8 / 1000000, 0)
+        max_mpps_str = [str(max_mpps[i]) + " Mpps"  for i in range(NUMBER_OF_FLOWS)]
+        max_mbps_str = [str(max_mbps[i]) + " Mbps"  for i in range(NUMBER_OF_FLOWS)]
 
-        max_mpps_str = str(max_mpps) + " Mpps"
-        max_mbps_str = str(max_mbps) + " Mbps"
+        test_pkt_loss_p_str = [str(round(packet_loss_p[i], 5)) + " % loss" for i in range(NUMBER_OF_FLOWS)]
+        nr_packets_lost_str = [str(sent_pkts[i] - rcv_pkts[i]) + " packets lost" for i in range(NUMBER_OF_FLOWS)]
 
-        test_pkt_loss_p_str = str(round(packet_loss_percentage, 5)) + " % loss"
-        nr_packets_lost_str = str(sent_pkts - rcv_pkts) + " packets lost" 
-        results[str(size)] = [max_mpps_str, max_mbps_str, nr_packets_lost_str, test_pkt_loss_p_str]
+        result_for_frame_size = []
+        for i in range(NUMBER_OF_FLOWS):
+            result_for_frame_size[i] = [max_mpps_str[i], max_mbps_str[i], nr_packets_lost_str[i], test_pkt_loss_p_str[i]]
+            
+        results[str(size)] = result_for_frame_size
         print(results)
 
         time.sleep(TEST_GAP_TIME)
