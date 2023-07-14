@@ -12,7 +12,6 @@ FINAL_RUN_TIME             = 60 # seconds
 TEST_GAP_TIME              = 1  # seconds
 RESULTS_FILE_PATH          = "./throughput_results_rfc2544_1_bidir.json"
 
-NUMBER_OF_FLOWS            = 2   # should be an even number
 
 
 @pytest.mark.performance
@@ -29,8 +28,9 @@ def test_throughput_rfc2544_multiple_flows(api):
 
     results = {}
     
+    NUMBER_OF_FLOWS            = len(cfg.flows)   # should be an even number
     expected_runtime = len(packet_sizes) * ((NO_STEPS-1) * TEST_GAP_TIME + FINAL_RUN_TIME + 2 * TEST_GAP_TIME)
-    print("\n" +"-" * 50)
+    print("\n" + "-" * 50)
     print("This is a throughput test (based on RFC-2544 procedure). The expected runtime is minimum {}s.".format(expected_runtime))
     print("Frame sizes in the test: " + str(packet_sizes))
     print("Packet loss tolerance: " + str(PACKET_LOSS_TOLERANCE))
