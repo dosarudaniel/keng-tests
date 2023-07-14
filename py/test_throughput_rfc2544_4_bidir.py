@@ -19,7 +19,7 @@ def test_throughput_rfc2544_multiple_flows(api):
     """
     RFC-2544 Throughput determination test for bidirectional traffic
     """
-    cfg = utils.load_test_config(api, 'throughtput_rfc25444_4_flows_bidir.json', apply_settings=True)
+    cfg = utils.load_test_config(api, 'throughput_rfc2544_4_flows_bidir.json', apply_settings=True)
 
     packet_sizes = [64, 512, 1518, 9000]
     #packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
