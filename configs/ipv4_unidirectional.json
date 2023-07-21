@@ -5,32 +5,8 @@
             "location": "localhost:5551"
         },
         {
-            "name": "VM1-TE2",
-            "location": "localhost:5552"
-        },
-        {
-            "name": "VM1-TE3",
-            "location": "localhost:5553"
-        },
-        {
-            "name": "VM1-TE4",
-            "location": "localhost:5554"
-        },
-        {
             "name": "VM2-TE1",
             "location": "192.168.0.61:5551"
-        },
-        {
-            "name": "VM2-TE2",
-            "location": "192.168.0.61:5552"
-        },
-        {
-            "name": "VM2-TE3",
-            "location": "192.168.0.61:5553"
-        },
-        {
-            "name": "VM2-TE4",
-            "location": "192.168.0.61:5554"
         }
     ],
     "layer1": [
@@ -38,13 +14,7 @@
             "name": "l1",
             "port_names": [
                 "VM1-TE1",
-                "VM1-TE2",
-                "VM1-TE3",
-                "VM1-TE4",
-                "VM2-TE1",
-                "VM2-TE2",
-                "VM2-TE3",
-                "VM2-TE4"
+                "VM2-TE1"
             ],
             "speed": "speed_100_gbps"
         }
@@ -71,9 +41,9 @@
                 "percentage": 100 
             },
             "duration": {
-                "choice": "fixed_packets",
-                "fixed_packets": {
-                    "packets": 1000000
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 60
                 }
             },
             "packet": [
