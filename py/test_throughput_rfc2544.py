@@ -115,8 +115,8 @@ def test_throughput_rfc2544_multiple_flows(api):
 
         if max_line_percentage > 0:
             # Actual test: to confirm the result determined during trial tests
-            # We are running a FINAL_RUN_TIMEs test again, and check the packet loss percentage
-            print("\nTo confirm the results determined during trial tests we are running " + str(FINAL_RUN_TIME) +"s tests again, and check the packet loss percentage")
+            # We are running a FINAL_RUN_TIMEs test, and check the packet loss percentage
+            print("\nTo confirm the results determined during trial tests we are running " + str(FINAL_RUN_TIME) +"s tests and check the packet loss percentage")
             step = 0
             packet_loss_percentage = 100
             max_packets_received = 0
