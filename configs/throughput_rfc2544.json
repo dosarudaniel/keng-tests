@@ -5,10 +5,6 @@
             "location": "localhost:5551"
         },
         {
-<<<<<<< Updated upstream
-            "name": "VM2-TE1",
-            "location": "192.168.0.61:5551"
-=======
             "name": "VM2-TE2",
             "location": "localhost:5552"
         },
@@ -35,17 +31,12 @@
         {
             "name": "VM1-TE4",
             "location": "10.3.147.35:5554"
->>>>>>> Stashed changes
         }
     ],
     "layer1": [
         {
             "name": "l1",
             "port_names": [
-<<<<<<< Updated upstream
-                "VM1-TE1",
-                "VM2-TE1"
-=======
                 "VM2-TE1",
                 "VM2-TE2",
                 "VM2-TE3",
@@ -54,7 +45,6 @@
                 "VM1-TE2",
                 "VM1-TE3",
                 "VM1-TE4"
->>>>>>> Stashed changes
             ],
             "speed": "speed_100_gbps"
         }
@@ -92,11 +82,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-<<<<<<< Updated upstream
-                            "value": "00:15:5d:a4:08:3e"
-=======
                             "value": "00:15:5d:14:10:19"
->>>>>>> Stashed changes
                         },
                         "src": {
                             "choice": "value",
