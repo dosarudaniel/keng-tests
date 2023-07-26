@@ -23,7 +23,7 @@ def test_throughput_rfc2544_multiple_flows(api):
 
     # packet_sizes = [1518, 9000]
     # packet_sizes = [64, 128, 256, 512, 768, 1024, 1280, 1518, 9000]
-    packet_sizes = [64, 512, 1518, 9000]
+    packet_sizes = [64, 512, 1024, 1518, 9000]
     # packet_sizes = [1518]
 
     results = {}
@@ -52,7 +52,7 @@ def test_throughput_rfc2544_multiple_flows(api):
         max_packets_sent = 0
         max_packets_received = 0
         rcv_pkts = 0
-        sent_pkts = 1
+        sent_pkts = 0
         step = 1
 
         # Trial tests
