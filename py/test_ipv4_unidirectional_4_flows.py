@@ -20,11 +20,8 @@ def test_fixed_ports_ipv4(api):
         api, 'ipv4_unidirectional_4_flows.json', apply_settings=True
     )
 
-<<<<<<< Updated upstream
-    FRAME_SIZE = 1024
-=======
+
     FRAME_SIZE = 1518
->>>>>>> Stashed changes
     DURATION = 30
     LINE_RATE_PERCENTAGE = 25
 
@@ -34,10 +31,7 @@ def test_fixed_ports_ipv4(api):
         flow.rate.percentage = LINE_RATE_PERCENTAGE
 
     sizes = []
-<<<<<<< Updated upstream
-=======
     packets = 1 # sum([flow.duration.fixed_packets.packets for flow in cfg.flows])
->>>>>>> Stashed changes
 
     for flow in cfg.flows:
         sizes.append(flow.size.fixed)
