@@ -1,1 +1,4 @@
 configs/*
+py/__pycache__
+py/.pytest_cache
+py/utils/__pycache__/
