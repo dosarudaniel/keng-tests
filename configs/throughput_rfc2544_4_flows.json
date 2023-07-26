@@ -1,62 +1,62 @@
 {
     "ports": [
         {
-            "name": "VM1-TE1",
+            "name": "VM2-TE1",
             "location": "localhost:5551"
         },
         {
-            "name": "VM1-TE2",
+            "name": "VM2-TE2",
             "location": "localhost:5552"
         },
         {
-            "name": "VM1-TE3",
+            "name": "VM2-TE3",
             "location": "localhost:5553"
         },
         {
-            "name": "VM1-TE4",
+            "name": "VM2-TE4",
             "location": "localhost:5554"
         },
         {
-            "name": "VM2-TE1",
-            "location": "192.168.0.61:5551"
+            "name": "VM1-TE1",
+            "location": "10.3.147.35:5551"
         },
         {
-            "name": "VM2-TE2",
-            "location": "192.168.0.61:5552"
+            "name": "VM1-TE2",
+            "location": "10.3.147.35:5552"
         },
         {
-            "name": "VM2-TE3",
-            "location": "192.168.0.61:5553"
+            "name": "VM1-TE3",
+            "location": "10.3.147.35:5553"
         },
         {
-            "name": "VM2-TE4",
-            "location": "192.168.0.61:5554"
+            "name": "VM1-TE4",
+            "location": "10.3.147.35:5554"
         }
     ],
     "layer1": [
         {
             "name": "l1",
             "port_names": [
-                "VM1-TE1",
-                "VM1-TE2",
-                "VM1-TE3",
-                "VM1-TE4",
                 "VM2-TE1",
                 "VM2-TE2",
                 "VM2-TE3",
-                "VM2-TE4"
+                "VM2-TE4",
+                "VM1-TE1",
+                "VM1-TE2",
+                "VM1-TE3",
+                "VM1-TE4"
             ],
             "speed": "speed_100_gbps"
         }
     ],
     "flows": [
         {
-            "name": "f1 VM1-TE1 -> VM2-TE1",
+            "name": "f1 VM2-TE1 -> VM1-TE1",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE1",
-                    "rx_name": "VM2-TE1"
+                    "tx_name": "VM2-TE1",
+                    "rx_name": "VM1-TE1"
                 }
             },
             "metrics": {
@@ -64,16 +64,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 64
+                "fixed": 1518
             },
             "rate": {
-                "choice": "pps",
-                "pps": 10000000
+                "choice": "percentage",
+                "percentage": 100 
             },
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 15
+                    "seconds": 60
                 }
             },
             "packet": [
@@ -82,11 +82,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:3e"
+                            "value": "00:15:5d:14:10:19"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:25"
+                            "value": "00:15:5d:14:11:13"
                         }
                     }
                 },
@@ -106,12 +106,12 @@
             ]
         },
         {
-            "name": "f2 VM1-TE2 -> VM2-TE2",
+            "name": "f2 VM2-TE2 -> VM1-TE2",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE2",
-                    "rx_name": "VM2-TE2"
+                    "tx_name": "VM2-TE2",
+                    "rx_name": "VM1-TE2"
                 }
             },
             "metrics": {
@@ -119,16 +119,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 64
+                "fixed": 1518
             },
             "rate": {
-                "choice": "pps",
-                "pps": 10000000
+                "choice": "percentage",
+                "percentage": 100
             },
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 15
+                    "seconds": 60
                 }
             },
             "packet": [
@@ -137,11 +137,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:41"
+                            "value": "00:15:5d:14:10:1a"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:3a"
+                            "value": "00:15:5d:14:11:14"
                         }
                     }
                 },
@@ -161,12 +161,12 @@
             ]
         },
         {
-            "name": "f3 VM1-TE3 -> VM2-TE3",
+            "name": "f3 VM2-TE3 -> VM1-TE3",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE3",
-                    "rx_name": "VM2-TE3"
+                    "tx_name": "VM2-TE3",
+                    "rx_name": "VM1-TE3"
                 }
             },
             "metrics": {
@@ -174,16 +174,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 64
+                "fixed": 1518
             },
             "rate": {
-                "choice": "pps",
-                "pps": 10000000
+                "choice": "percentage",
+                "percentage": 100
             },
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 15
+                    "seconds": 60
                 }
             },
             "packet": [
@@ -192,11 +192,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:40"
+                            "value": "00:15:5d:14:10:1b"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:39"
+                            "value": "00:15:5d:14:11:15"
                         }
                     }
                 },
@@ -216,12 +216,12 @@
             ]
         },
         {
-            "name": "f4 VM1-TE4 -> VM2-TE4",
+            "name": "f4 VM2-TE4 -> VM1-TE4",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE4",
-                    "rx_name": "VM2-TE4"
+                    "tx_name": "VM2-TE4",
+                    "rx_name": "VM1-TE4"
                 }
             },
             "metrics": {
@@ -229,16 +229,16 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 64
+                "fixed": 1518
             },
             "rate": {
-                "choice": "pps",
-                "pps": 10000000
+                "choice": "percentage",
+                "percentage": 100
             },
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 15
+                    "seconds": 60
                 }
             },
             "packet": [
@@ -247,11 +247,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:3f"
+                            "value": "00:15:5d:14:10:1c"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:a4:08:37"
+                            "value": "00:15:5d:14:11:16"
                         }
                     }
                 },

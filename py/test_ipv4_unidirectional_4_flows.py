@@ -20,7 +20,11 @@ def test_fixed_ports_ipv4(api):
         api, 'ipv4_unidirectional_4_flows.json', apply_settings=True
     )
 
+<<<<<<< Updated upstream
     FRAME_SIZE = 1024
+=======
+    FRAME_SIZE = 1518
+>>>>>>> Stashed changes
     DURATION = 30
     LINE_RATE_PERCENTAGE = 25
 
@@ -30,6 +34,10 @@ def test_fixed_ports_ipv4(api):
         flow.rate.percentage = LINE_RATE_PERCENTAGE
 
     sizes = []
+<<<<<<< Updated upstream
+=======
+    packets = 1 # sum([flow.duration.fixed_packets.packets for flow in cfg.flows])
+>>>>>>> Stashed changes
 
     for flow in cfg.flows:
         sizes.append(flow.size.fixed)
@@ -41,6 +49,13 @@ def test_fixed_ports_ipv4(api):
         timeout_seconds=1000
     )
     utils.stop_traffic(api, cfg)
+
+    duration = DURATION
+    _, flow_results = utils.get_all_stats(api)
+    flows_total_tx = sum([flow_res.frames_tx for flow_res in flow_results])
+    flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
+    print("\n\nAverage total TX rate {} Gbps".format(round(flows_total_tx * FRAME_SIZE * 8 / duration / 1000000000, 3)))
+    print("Average total RX rate {} Gbps".format(round(flows_total_rx * FRAME_SIZE * 8 / duration / 1000000000, 3)))
 
 
     duration = cfg.flows[0].duration.fixed_seconds.seconds

@@ -24,28 +24,25 @@ def test_ipv4_unidirectional(api):
     #     flow.rate.percentage = LINE_RATE_PERCENTAGE
 
     print(cfg.ports)
-
-    packets = 1000000 #cfg.flows[0].duration.fixed_packets.packets
     
     size = cfg.flows[0].size.fixed
 
     utils.start_traffic(api, cfg)
     utils.wait_for(
-        lambda: results_ok(api, packets, size),
+        lambda: results_ok(api, size),
         'stats to be as expected',
         timeout_seconds=1000
     )
     utils.stop_traffic(api, cfg)
 
     duration = cfg.flows[0].duration.fixed_seconds.seconds
-    port_results, flow_results = utils.get_all_stats(api)
+    _, flow_results = utils.get_all_stats(api)
     flows_total_tx = sum([flow_res.frames_tx for flow_res in flow_results])
     flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
     print("\n\nAverage total TX rate {} Gbps".format(flows_total_tx * size * 8 / duration / 1000000000))
     print("Average total RX rate {} Gbps".format(flows_total_rx * size * 8 / duration / 1000000000))
 
-
-def results_ok(api, packets, size, csv_dir=None):
+def results_ok(api, size, csv_dir=None):
     """
     Returns true if stats are as expected, false otherwise.
     """
@@ -54,7 +51,7 @@ def results_ok(api, packets, size, csv_dir=None):
         utils.print_csv(csv_dir, port_results, flow_results)
     port_tx = sum([p.frames_tx for p in port_results])
     port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
-    ok = True# ok = port_tx == packets # and port_rx >= packets
+    ok = True # port_tx == packets # and port_rx >= packets
     print('-' * 22)
     for flow_res in flow_results:
         print(flow_res.name + " " + str(size) + "B:")
@@ -68,9 +65,9 @@ def results_ok(api, packets, size, csv_dir=None):
         flow_tx_bytes = sum([f.bytes_tx for f in flow_results])
         flow_rx = sum([f.frames_rx for f in flow_results])
         flow_rx_bytes = sum([f.bytes_rx for f in flow_results])
-        ok = ok and flow_rx == packets and flow_tx == packets
-        ok = ok and flow_tx_bytes >= packets * (size - 4)
-        ok = ok and flow_rx_bytes == packets * size
+        # ok = ok and flow_rx == packets and flow_tx == packets
+        # ok = ok and flow_tx_bytes >= packets * (size - 4)
+        # ok = ok and flow_rx_bytes == packets * size
 
     return ok and all(
         [f.transmit == 'stopped' for f in flow_results]

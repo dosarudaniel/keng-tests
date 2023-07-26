@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Get pci addresses
-PCI_ADDRESS1=$(lspci | grep Mellanox | awk 'NR==1{print $1}')
-PCI_ADDRESS2=$(lspci | grep Mellanox | awk 'NR==2{print $1}')
-PCI_ADDRESS3=$(lspci | grep Mellanox | awk 'NR==3{print $1}')
-PCI_ADDRESS4=$(lspci | grep Mellanox | awk 'NR==4{print $1}')
+PCI_ADDRESS1="30d5:00:02.0"
+PCI_ADDRESS2="ea49:00:02.0"
+PCI_ADDRESS3="aeca:00:02.0"
+PCI_ADDRESS4="5850:00:02.0"
 
 
 # Allocate hugepages
