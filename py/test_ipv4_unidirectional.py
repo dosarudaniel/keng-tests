@@ -1,8 +1,9 @@
 import utils
 import pytest
 import dpkt
+import time
 
-def test_ipv4_unidirectional(api):
+def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow):
     """
     Configure a single unidirectional IPV4 flow with,
     - 100,000,000 frames of 1518B size each
@@ -14,16 +15,46 @@ def test_ipv4_unidirectional(api):
         api, 'ipv4_unidirectional.json', apply_settings=True
     )
 
-    # FRAME_SIZE = 9000
-    # PACKETS = 1000000
-    # LINE_RATE_PERCENTAGE = 100
+    MAX_FRAME_SIZE = 9000
+    MIN_FRAME_SIZE = 64
 
-    # for flow in cfg.flows:
-    #     flow.duration.fixed_packets.packets = PACKETS
-    #     flow.size.fixed = FRAME_SIZE
-    #     flow.rate.percentage = LINE_RATE_PERCENTAGE
+    MAX_LINE_RATE_PER_FLOW = 100/len(cfg.flows)
 
-    print(cfg.ports)
+    MIN_DURATION = 1
+
+    if frame_size > MAX_FRAME_SIZE:
+        print("The frame size exceeds the maximum {}B size!".format(MAX_FRAME_SIZE))
+        print("\tThe frame size will be set at {}B.".format(MAX_FRAME_SIZE))
+        frame_size = MAX_FRAME_SIZE
+
+    if frame_size < MIN_FRAME_SIZE:
+        print("The frame size exceeds the minimum {}B size!".format(MIN_FRAME_SIZE))
+        print("\tThe frame size will be set at {}B.".format(MIN_FRAME_SIZE))
+        frame_size = MIN_FRAME_SIZE
+
+    if line_rate_per_flow > MAX_LINE_RATE_PER_FLOW:
+        print("The requested line rate per flow exceeds the total capacity!")
+        print("\tThe line rate per flow percentage will be set at {}%.".format(MAX_LINE_RATE_PER_FLOW))
+        line_rate_per_flow = MAX_LINE_RATE_PER_FLOW
+
+    if duration < MIN_DURATION:
+        print("The duration exceeds the minimum {}s !".format(MIN_DURATION))
+        print("\tThe duration will be set at {}s.".format(MIN_DURATION))
+        duration = MIN_DURATION 
+
+    print("\n\nConfiguring each flow with:\n" \
+            "   Frame size:           {}B\n" \
+            "   Duration:             {}s\n" \
+            "   Line rate percentage: {}%\n".format(frame_size, duration, line_rate_per_flow))
+    time.sleep(2)
+
+    for flow in cfg.flows:
+        flow.duration.fixed_seconds.seconds = duration
+        flow.size.fixed = frame_size
+        flow.rate.percentage = line_rate_per_flow
+
+
+    sizes = []
     
     size = cfg.flows[0].size.fixed
 
@@ -31,16 +62,18 @@ def test_ipv4_unidirectional(api):
     utils.wait_for(
         lambda: results_ok(api, size),
         'stats to be as expected',
-        timeout_seconds=1000
+        timeout_seconds=duration
     )
     utils.stop_traffic(api, cfg)
 
-    duration = cfg.flows[0].duration.fixed_seconds.seconds
     _, flow_results = utils.get_all_stats(api)
     flows_total_tx = sum([flow_res.frames_tx for flow_res in flow_results])
     flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
-    print("\n\nAverage total TX rate {} Gbps".format(flows_total_tx * size * 8 / duration / 1000000000))
-    print("Average total RX rate {} Gbps".format(flows_total_rx * size * 8 / duration / 1000000000))
+    print("\n\nFrame size: {}B".format(frame_size))
+    print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * size * 8 / duration / 1000000000, 3)))
+    print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * size * 8 / duration / 1000000000, 3)))
+    print("Total lost packets {}".format(flows_total_tx - flows_total_rx))
+    print("Total loss percentage {} %".format(round((flows_total_tx - flows_total_rx) * 100 / flows_total_tx, 3)))
 
 def results_ok(api, size, csv_dir=None):
     """

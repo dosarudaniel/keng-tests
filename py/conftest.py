@@ -50,6 +50,21 @@ def pytest_addoption(parser):
                      action="store",
                      default=1024)
 
+    parser.addoption("--frame_size",
+                     type=int,
+                     action="store",
+                     default='9000')
+
+    parser.addoption("--duration",
+                     type=int,
+                     action="store",
+                     default='10')
+
+    parser.addoption("--line_rate_per_flow",
+                     type=float,
+                     action="store",
+                     default='100')
+
     parser.addoption("--te_host_user",
                      type=str,
                      action="store",
@@ -79,6 +94,20 @@ def max_port_count(pytestconfig):
     max_port_count = pytestconfig.getoption("--max_port_count")
     return max_port_count
 
+@pytest.fixture(scope='session')
+def frame_size(pytestconfig):
+    frame_size = pytestconfig.getoption("--frame_size")
+    return frame_size
+
+@pytest.fixture(scope='session')
+def duration(pytestconfig):
+    duration = pytestconfig.getoption("--duration")
+    return duration
+
+@pytest.fixture(scope='session')
+def line_rate_per_flow(pytestconfig):
+    line_rate_per_flow = pytestconfig.getoption("--line_rate_per_flow")
+    return line_rate_per_flow
 
 @pytest.fixture(scope='session')
 def te_host_user(pytestconfig):

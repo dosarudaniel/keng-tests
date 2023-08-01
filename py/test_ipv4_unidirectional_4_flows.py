@@ -1,12 +1,14 @@
+
 import utils
 import pytest
 import dpkt
+import time
 
 @pytest.mark.uhd_regression
 @pytest.mark.sanity
 @pytest.mark.uhd_sanity
 @pytest.mark.hw
-def test_fixed_ports_ipv4(api):
+def test_fixed_ports_ipv4(api, duration, frame_size, line_rate_per_flow):
     """
     Configure a IPV4 flow with,
     - fixed src and dst ports
@@ -20,18 +22,46 @@ def test_fixed_ports_ipv4(api):
         api, 'ipv4_unidirectional_4_flows.json', apply_settings=True
     )
 
+    MAX_FRAME_SIZE = 9000
+    MIN_FRAME_SIZE = 64
 
-    FRAME_SIZE = 1518
-    DURATION = 30
-    LINE_RATE_PERCENTAGE = 25
+    MAX_LINE_RATE_PER_FLOW = 100/len(cfg.flows)
+
+    MIN_DURATION = 1
+
+    if frame_size > MAX_FRAME_SIZE:
+        print("The frame size exceeds the maximum {}B size!".format(MAX_FRAME_SIZE))
+        print("\tThe frame size will be set at {}B.".format(MAX_FRAME_SIZE))
+        frame_size = MAX_FRAME_SIZE
+
+    if frame_size < MIN_FRAME_SIZE:
+        print("The frame size exceeds the minimum {}B size!".format(MIN_FRAME_SIZE))
+        print("\tThe frame size will be set at {}B.".format(MIN_FRAME_SIZE))
+        frame_size = MIN_FRAME_SIZE
+
+    if line_rate_per_flow > MAX_LINE_RATE_PER_FLOW:
+        print("The requested line rate per flow exceeds the total capacity!")
+        print("\tThe line rate per flow percentage will be set at {}%.".format(MAX_LINE_RATE_PER_FLOW))
+        line_rate_per_flow = MAX_LINE_RATE_PER_FLOW
+
+    if duration < MIN_DURATION:
+        print("The duration exceeds the minimum {}s !".format(MIN_DURATION))
+        print("\tThe duration will be set at {}s.".format(MIN_DURATION))
+        duration = MIN_DURATION 
+
+    print("\n\nConfiguring each flow with:\n" \
+            "   Frame size:           {}B\n" \
+            "   Duration:             {}s\n" \
+            "   Line rate percentage: {}%\n".format(frame_size, duration, line_rate_per_flow))
+    time.sleep(5)
 
     for flow in cfg.flows:
-        flow.duration.fixed_seconds.seconds = DURATION
-        flow.size.fixed = FRAME_SIZE
-        flow.rate.percentage = LINE_RATE_PERCENTAGE
+        flow.duration.fixed_seconds.seconds = duration
+        flow.size.fixed = frame_size
+        flow.rate.percentage = line_rate_per_flow
+
 
     sizes = []
-    packets = 1 # sum([flow.duration.fixed_packets.packets for flow in cfg.flows])
 
     for flow in cfg.flows:
         sizes.append(flow.size.fixed)
@@ -40,25 +70,18 @@ def test_fixed_ports_ipv4(api):
     utils.wait_for(
         lambda: results_ok(api, sizes),
         'stats to be as expected',
-        timeout_seconds=1000
+        timeout_seconds=duration
     )
     utils.stop_traffic(api, cfg)
 
-    duration = DURATION
     _, flow_results = utils.get_all_stats(api)
     flows_total_tx = sum([flow_res.frames_tx for flow_res in flow_results])
     flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
-    print("\n\nAverage total TX rate {} Gbps".format(round(flows_total_tx * FRAME_SIZE * 8 / duration / 1000000000, 3)))
-    print("Average total RX rate {} Gbps".format(round(flows_total_rx * FRAME_SIZE * 8 / duration / 1000000000, 3)))
-
-
-    duration = cfg.flows[0].duration.fixed_seconds.seconds
-    port_results, flow_results = utils.get_all_stats(api)
-    flows_total_tx = sum([flow_res.frames_tx for flow_res in flow_results])
-    flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
-    print("\n\nAverage total TX rate {} Gbps".format(round(flows_total_tx * FRAME_SIZE * 8 / duration / 1000000000, 3)))
-    print("Average total RX rate {} Gbps".format(round(flows_total_rx * FRAME_SIZE * 8 / duration / 1000000000, 3)))
-
+    print("\n\nFrame size: {}B".format(frame_size))
+    print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * frame_size * 8 / duration / 1000000000, 3)))
+    print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * frame_size * 8 / duration / 1000000000, 3)))
+    print("Total lost packets {}".format(flows_total_tx - flows_total_rx))
+    print("Total loss percentage {} %".format(round((flows_total_tx - flows_total_rx) * 100 / flows_total_tx, 3)))
 
 def results_ok(api, sizes, csv_dir=None):
     """

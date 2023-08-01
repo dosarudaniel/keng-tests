@@ -1,62 +1,62 @@
 {
     "ports": [
         {
-            "name": "VM2-TE1",
+            "name": "VM1-TE1",
             "location": "localhost:5551"
         },
         {
-            "name": "VM2-TE2",
+            "name": "VM1-TE2",
             "location": "localhost:5552"
         },
         {
-            "name": "VM2-TE3",
+            "name": "VM1-TE3",
             "location": "localhost:5553"
         },
         {
-            "name": "VM2-TE4",
+            "name": "VM1-TE4",
             "location": "localhost:5554"
         },
         {
-            "name": "VM1-TE1",
-            "location": "10.3.147.35:5551"
+            "name": "VM2-TE1",
+            "location": "10.3.147.36:5551"
         },
         {
-            "name": "VM1-TE2",
-            "location": "10.3.147.35:5552"
+            "name": "VM2-TE2",
+            "location": "10.3.147.36:5552"
         },
         {
-            "name": "VM1-TE3",
-            "location": "10.3.147.35:5553"
+            "name": "VM2-TE3",
+            "location": "10.3.147.36:5553"
         },
         {
-            "name": "VM1-TE4",
-            "location": "10.3.147.35:5554"
+            "name": "VM2-TE4",
+            "location": "10.3.147.36:5554"
         }
     ],
     "layer1": [
         {
             "name": "l1",
             "port_names": [
-                "VM2-TE1",
-                "VM2-TE2",
-                "VM2-TE3",
-                "VM2-TE4",
                 "VM1-TE1",
                 "VM1-TE2",
                 "VM1-TE3",
-                "VM1-TE4"
+                "VM1-TE4",
+                "VM2-TE1",
+                "VM2-TE2",
+                "VM2-TE3",
+                "VM2-TE4"
             ],
             "speed": "speed_100_gbps"
         }
     ],
     "flows": [
         {
-            "name": "f1 VM2-TE1 -> VM1-TE1",
+            "name": "f1 VM1-TE1 -> VM2-TE1",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM2-TE1",
-                    "rx_name": "VM1-TE1"
+                    "tx_name": "VM1-TE1",
+                    "rx_name": "VM2-TE1"
                 }
             },
             "metrics": {
@@ -73,7 +73,7 @@
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 60
+                    "seconds": 30
                 }
             },
             "packet": [
@@ -82,7 +82,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:19"
+                            "value": "00:15:5d:14:11:25"
                         },
                         "src": {
                             "choice": "value",
@@ -106,12 +106,12 @@
             ]
         },
         {
-            "name": "f2 VM2-TE2 -> VM1-TE2",
+            "name": "f2 VM1-TE2 -> VM2-TE2",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM2-TE2",
-                    "rx_name": "VM1-TE2"
+                    "tx_name": "VM1-TE2",
+                    "rx_name": "VM2-TE2"
                 }
             },
             "metrics": {
@@ -128,7 +128,7 @@
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 60
+                    "seconds": 30
                 }
             },
             "packet": [
@@ -137,7 +137,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1a"
+                            "value": "00:15:5d:14:11:18"
                         },
                         "src": {
                             "choice": "value",
@@ -161,12 +161,12 @@
             ]
         },
         {
-            "name": "f3 VM2-TE3 -> VM1-TE3",
+            "name": "f3 VM1-TE3 -> VM2-TE3",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM2-TE3",
-                    "rx_name": "VM1-TE3"
+                    "tx_name": "VM1-TE3",
+                    "rx_name": "VM2-TE3"
                 }
             },
             "metrics": {
@@ -183,7 +183,7 @@
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 60
+                    "seconds": 30
                 }
             },
             "packet": [
@@ -192,7 +192,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1b"
+                            "value": "00:15:5d:14:11:1a"
                         },
                         "src": {
                             "choice": "value",
@@ -216,12 +216,12 @@
             ]
         },
         {
-            "name": "f4 VM2-TE4 -> VM1-TE4",
+            "name": "f4 VM1-TE4 -> VM2-TE4",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM2-TE4",
-                    "rx_name": "VM1-TE4"
+                    "tx_name": "VM1-TE4",
+                    "rx_name": "VM2-TE4"
                 }
             },
             "metrics": {
@@ -238,7 +238,7 @@
             "duration": {
                 "choice": "fixed_seconds",
                 "fixed_seconds": {
-                    "seconds": 60
+                    "seconds": 30
                 }
             },
             "packet": [
@@ -247,7 +247,7 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1c"
+                            "value": "00:15:5d:14:11:19"
                         },
                         "src": {
                             "choice": "value",
