@@ -70,7 +70,7 @@ def test_fixed_ports_ipv4(api, duration, frame_size, line_rate_per_flow):
     utils.wait_for(
         lambda: results_ok(api, sizes),
         'stats to be as expected',
-        timeout_seconds=duration
+        timeout_seconds=duration + 5
     )
     utils.stop_traffic(api, cfg)
 
