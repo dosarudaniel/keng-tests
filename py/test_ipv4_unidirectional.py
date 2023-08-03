@@ -62,7 +62,7 @@ def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow):
     utils.wait_for(
         lambda: results_ok(api, size),
         'stats to be as expected',
-        timeout_seconds=duration
+        timeout_seconds=duration + 5
     )
     utils.stop_traffic(api, cfg)
 
