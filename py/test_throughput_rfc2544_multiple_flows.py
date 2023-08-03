@@ -5,10 +5,10 @@ import json
 
 THEORETICAL_MAX_LINK_SPEED = 100   #  Gbps
 PACKET_LOSS_TOLERANCE      = 0.0   # percent
-NO_DETERMINATION_STEPS     = 10
+NO_DETERMINATION_STEPS     = 12
 NO_VALIDATION_STEPS        = 6
-TRIAL_RUN_TIME             = 3  # seconds
-FINAL_RUN_TIME             = 10 # seconds
+TRIAL_RUN_TIME             = 5  # seconds
+FINAL_RUN_TIME             = 60 # seconds
 TEST_GAP_TIME              = 1  # seconds
 VALIDATION_DECREASE_LINE_PERCENTAGE = 0.04
 RESULTS_FILE_PATH          = "./throughput_results_rfc2544_4_flows.json"
