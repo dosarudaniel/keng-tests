@@ -55,6 +55,11 @@ def pytest_addoption(parser):
                      action="store",
                      default='9000')
 
+    parser.addoption("--frame_sizes",
+                     type=str,
+                     action="store",
+                     default='768,1024,1518,9000')
+
     parser.addoption("--duration",
                      type=int,
                      action="store",
@@ -64,6 +69,11 @@ def pytest_addoption(parser):
                      type=float,
                      action="store",
                      default='100')
+    
+    parser.addoption("--direction",
+                     type=str,
+                     action="store",
+                     default='upstream')
 
     parser.addoption("--te_host_user",
                      type=str,
@@ -100,6 +110,11 @@ def frame_size(pytestconfig):
     return frame_size
 
 @pytest.fixture(scope='session')
+def frame_sizes(pytestconfig):
+    frame_sizes = pytestconfig.getoption("--frame_sizes")
+    return frame_sizes
+
+@pytest.fixture(scope='session')
 def duration(pytestconfig):
     duration = pytestconfig.getoption("--duration")
     return duration
@@ -108,6 +123,11 @@ def duration(pytestconfig):
 def line_rate_per_flow(pytestconfig):
     line_rate_per_flow = pytestconfig.getoption("--line_rate_per_flow")
     return line_rate_per_flow
+
+@pytest.fixture(scope='session')
+def direction(pytestconfig):
+    direction = pytestconfig.getoption("--direction")
+    return direction
 
 @pytest.fixture(scope='session')
 def te_host_user(pytestconfig):

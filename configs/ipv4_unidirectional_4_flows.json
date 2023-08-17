@@ -2,35 +2,35 @@
     "ports": [
         {
             "name": "VM1-TE1",
-            "location": "localhost:5551"
+            "location": ""
         },
         {
             "name": "VM1-TE2",
-            "location": "localhost:5552"
+            "location": ""
         },
         {
             "name": "VM1-TE3",
-            "location": "localhost:5553"
+            "location": ""
         },
         {
             "name": "VM1-TE4",
-            "location": "localhost:5554"
+            "location": ""
         },
         {
             "name": "VM2-TE1",
-            "location": "10.3.147.36:5551"
+            "location": ""
         },
         {
             "name": "VM2-TE2",
-            "location": "10.3.147.36:5552"
+            "location": ""
         },
         {
             "name": "VM2-TE3",
-            "location": "10.3.147.36:5553"
+            "location": ""
         },
         {
             "name": "VM2-TE4",
-            "location": "10.3.147.36:5554"
+            "location": ""
         }
     ],
     "layer1": [
@@ -51,7 +51,7 @@
     ],
     "flows": [
         {
-            "name": "f1 VM1-TE1 -> VM2-TE1",
+            "name": "f1",
             "tx_rx": {
                 "choice": "port",
                 "port": {
@@ -86,7 +86,7 @@
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:13"
+                            "value": "00:15:5d:14:10:19"
                         }
                     }
                 },
@@ -106,7 +106,7 @@
             ]
         },
         {
-            "name": "f2 VM1-TE2 -> VM2-TE2",
+            "name": "f2",
             "tx_rx": {
                 "choice": "port",
                 "port": {
@@ -141,7 +141,7 @@
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:14"
+                            "value": "00:15:5d:14:10:1c"
                         }
                     }
                 },
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "name": "f3 VM1-TE3 -> VM2-TE3",
+            "name": "f3",
             "tx_rx": {
                 "choice": "port",
                 "port": {
@@ -196,7 +196,7 @@
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:15"
+                            "value": "00:15:5d:14:10:1b"
                         }
                     }
                 },
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "f4 VM1-TE4 -> VM2-TE4",
+            "name": "f4",
             "tx_rx": {
                 "choice": "port",
                 "port": {
@@ -251,7 +251,7 @@
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:16"
+                            "value": "00:15:5d:14:10:1a"
                         }
                     }
                 },

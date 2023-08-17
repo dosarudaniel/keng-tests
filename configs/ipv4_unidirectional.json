@@ -51,7 +51,7 @@
     ],
     "flows": [
         {
-            "name": "f1 VM1-TE1 -> VM2-TE1",
+            "name": "f1",
             "tx_rx": {
                 "choice": "port",
                 "port": {
@@ -86,7 +86,7 @@
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:13"
+                            "value": "00:15:5d:14:10:19"
                         }
                     }
                 },

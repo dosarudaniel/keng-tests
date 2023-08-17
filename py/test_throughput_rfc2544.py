@@ -5,23 +5,29 @@ import json
 
 THEORETICAL_MAX_LINK_SPEED = 100   #  Gbps
 PACKET_LOSS_TOLERANCE      = 0.0   # percent
-NO_DETERMINATION_STEPS     = 10
+NO_DETERMINATION_STEPS     = 11
 NO_VALIDATION_STEPS        = 6
-TRIAL_RUN_TIME             = 2  # seconds
-FINAL_RUN_TIME             = 10 # seconds
+TRIAL_RUN_TIME             = 4  # seconds
+FINAL_RUN_TIME             = 30 # seconds
 TEST_GAP_TIME              = 1  # seconds
 VALIDATION_DECREASE_LINE_PERCENTAGE = 0.04
 RESULTS_FILE_PATH          = "./throughput_results_rfc2544_1_flow.json"
 
 
 @pytest.mark.performance
-def test_throughput_rfc2544_multiple_flows(api):
+def test_throughput_rfc2544_single_flow(api, direction, frame_sizes):
     """
     RFC-2544 Throughput determination test
     """
     cfg = utils.load_test_config(api, 'throughput_rfc2544.json', apply_settings=True)
 
-    packet_sizes = [1024, 1518, 9000]
+    packet_sizes = [int(frame_size) for frame_size in frame_sizes.split(',')]
+
+    for frame_size in packet_sizes:
+        if frame_size < 64 or frame_size > 9000:
+            print("Frame size: {} is out of supported interval: [64, 9000]. " \
+                "Resetting frame size array.".format(frame_size))
+            packet_sizes = [768, 1024, 1518, 9000]
 
     results = {}
     
@@ -33,6 +39,26 @@ def test_throughput_rfc2544_multiple_flows(api):
     print("Number of flows: " + str(len(cfg.flows)))
     print("-" * 50)
     print("")
+
+    test_settings = {}
+    test_settings["THEORETICAL_MAX_LINK_SPEED"] = str(THEORETICAL_MAX_LINK_SPEED) + " Gbps"
+    test_settings["PACKET_LOSS_TOLERANCE"] = str(round(PACKET_LOSS_TOLERANCE, 3)) + "%"
+    test_settings["NO_DETERMINATION_STEPS"] = NO_DETERMINATION_STEPS
+    test_settings["NO_VALIDATION_STEPS"] = NO_VALIDATION_STEPS
+
+    test_settings["TRIAL_RUN_TIME"] = str(TRIAL_RUN_TIME) + "s"
+    test_settings["FINAL_RUN_TIME"] = str(FINAL_RUN_TIME) + "s"
+    test_settings["VALIDATION_DECREASE_LINE_PERCENTAGE"] = str(round(VALIDATION_DECREASE_LINE_PERCENTAGE, 2)) + "%"
+    test_settings["NUMBER_OF_FLOWS"] = str(len(cfg.flows)) + " flows"
+    print(test_settings)
+    print("-" * 50)
+    print("")
+
+    if direction == "downstream":
+        for flow in cfg.flows:
+            # change direction
+            flow.tx_rx.port.rx_name, flow.tx_rx.port.tx_name = flow.tx_rx.port.tx_name, flow.tx_rx.port.rx_name
+            flow.packet[0].dst.value, flow.packet[0].src.value = flow.packet[0].src.value, flow.packet[0].dst.value 
 
     for size in packet_sizes:
         print("\n\n--- Determining throughput for {} B packets --- ".format(size))
@@ -183,6 +209,7 @@ def test_throughput_rfc2544_multiple_flows(api):
         nr_packets_lost_str = str(sent_pkts - rcv_pkts) + " packets lost"
         max_line_percentage_str = str(round(max_line_percentage, 2)) + " % per flow" 
         results[str(size)] = [max_mpps_str, max_mbps_str, max_line_percentage_str, nr_packets_lost_str, test_pkt_loss_p_str]
+        results["test_settings"] = test_settings
         print(results)
 
         time.sleep(TEST_GAP_TIME)

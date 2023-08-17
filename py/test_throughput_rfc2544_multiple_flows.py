@@ -6,33 +6,66 @@ import json
 THEORETICAL_MAX_LINK_SPEED = 100   #  Gbps
 PACKET_LOSS_TOLERANCE      = 0.0   # percent
 NO_DETERMINATION_STEPS     = 10
-NO_VALIDATION_STEPS        = 6
-TRIAL_RUN_TIME             = 3  # seconds
-FINAL_RUN_TIME             = 10 # seconds
+NO_VALIDATION_STEPS        = 5
+TRIAL_RUN_TIME             = 5  # seconds
+FINAL_RUN_TIME             = 30 # seconds
 TEST_GAP_TIME              = 1  # seconds
-VALIDATION_DECREASE_LINE_PERCENTAGE = 0.04
+VALIDATION_DECREASE_LINE_PERCENTAGE = 4
 RESULTS_FILE_PATH          = "./throughput_results_rfc2544_4_flows.json"
 
 
+def find_location_by_name(ports, name):
+    for port in ports:
+        if port.name == name:
+            return port.location
+    return None
+
 @pytest.mark.performance
-def test_throughput_rfc2544_multiple_flows(api):
+def test_throughput_rfc2544_multiple_flows(api, direction, frame_sizes):
     """
     RFC-2544 Throughput determination test
     """
     cfg = utils.load_test_config(api, 'throughput_rfc2544_4_flows.json', apply_settings=True)
 
-    packet_sizes = [768, 1024, 1518, 9000]
+    packet_sizes = [int(frame_size) for frame_size in frame_sizes.split(',')]
 
+    for frame_size in packet_sizes:
+        if frame_size < 64 or frame_size > 9000:
+            print("Frame size: {} is out of supported interval: [64, 9000]. " \
+                "Resetting frame size array.".format(frame_size))
+            packet_sizes = [768, 1024, 1518, 9000]
     results = {}
     
     expected_runtime = len(packet_sizes) * ((NO_DETERMINATION_STEPS-1) * TEST_GAP_TIME + FINAL_RUN_TIME + 2 * TEST_GAP_TIME)
     print("\n" +"-" * 50)
-    print("This is a throughput test (based on RFC-2544 procedure). The expected runtime is minimum {}s.".format(expected_runtime))
+    print("This is a throughput test (based on RFC-2544 procedure.")#. The expected runtime is minimum {}s.".format(expected_runtime))
     print("Frame sizes in the test: " + str(packet_sizes))
     print("Packet loss tolerance: " + str(PACKET_LOSS_TOLERANCE))
     print("Number of flows: " + str(len(cfg.flows)))
+    print("Direction: " + direction)
+    print("-" * 50)
+
+    test_settings = {}
+    test_settings["THEORETICAL_MAX_LINK_SPEED"] = str(THEORETICAL_MAX_LINK_SPEED) + " Gbps"
+    test_settings["PACKET_LOSS_TOLERANCE"] = str(round(PACKET_LOSS_TOLERANCE, 3)) + "%"
+    test_settings["NO_DETERMINATION_STEPS"] = NO_DETERMINATION_STEPS
+    test_settings["NO_VALIDATION_STEPS"] = NO_VALIDATION_STEPS
+
+    test_settings["TRIAL_RUN_TIME"] = str(TRIAL_RUN_TIME) + "s"
+    test_settings["FINAL_RUN_TIME"] = str(FINAL_RUN_TIME) + "s"
+    test_settings["VALIDATION_DECREASE_LINE_PERCENTAGE"] = str(round(VALIDATION_DECREASE_LINE_PERCENTAGE, 2)) + "%"
+    test_settings["NUMBER_OF_FLOWS"] = str(len(cfg.flows)) + " flows"
+    print(test_settings)
     print("-" * 50)
     print("")
+
+
+    if direction == "downstream":
+        for flow in cfg.flows:
+            # change direction
+            flow.tx_rx.port.rx_name, flow.tx_rx.port.tx_name = flow.tx_rx.port.tx_name, flow.tx_rx.port.rx_name
+            flow.packet[0].dst.value, flow.packet[0].src.value = flow.packet[0].src.value, flow.packet[0].dst.value 
+        
 
     for size in packet_sizes:
         print("\n\n--- Determining throughput for {} B packets --- ".format(size))
@@ -155,12 +188,12 @@ def test_throughput_rfc2544_multiple_flows(api):
                 .format(FINAL_RUN_TIME, size, round(sent_pkts / 1000000, 3), round(rcv_pkts / 1000000, 3), sent_pkts - rcv_pkts, round(packet_loss_percentage, 5)))
 
                 if packet_loss_percentage <= PACKET_LOSS_TOLERANCE:
-                    print("The {}s test with {}% per flow per flow PASSED".format(FINAL_RUN_TIME, max_line_percentage))
+                    print("The {}s test with {}% per flow per flow PASSED".format(FINAL_RUN_TIME, round(max_line_percentage, 3)))
                     break
                 
                 print("The {}s test with {} % line rate per flow did NOT pass, trying again with {} % line rate PER FLOW."
-                    .format(FINAL_RUN_TIME, max_line_percentage, round((1 - VALIDATION_DECREASE_LINE_PERCENTAGE) * max_line_percentage, 3)))
-                max_line_percentage = ((1 - VALIDATION_DECREASE_LINE_PERCENTAGE) * max_line_percentage)
+                    .format(FINAL_RUN_TIME, round(max_line_percentage, 3), round((1 - VALIDATION_DECREASE_LINE_PERCENTAGE/100) * max_line_percentage, 3)))
+                max_line_percentage = ((1 - VALIDATION_DECREASE_LINE_PERCENTAGE/100) * max_line_percentage)
                 time.sleep(TEST_GAP_TIME)
                 step += 1
 
@@ -187,5 +220,14 @@ def test_throughput_rfc2544_multiple_flows(api):
 
         time.sleep(TEST_GAP_TIME)
 
+    flows = {}
+
+    for flow in cfg.flows:
+        flows[flow.name] = find_location_by_name(cfg.ports, flow.tx_rx.port.tx_name) + \
+                             " -> " + \
+                           find_location_by_name(cfg.ports, flow.tx_rx.port.rx_name)
+
+    results["test_settings"] = test_settings
+    results["flows"] = flows
     with open(RESULTS_FILE_PATH, "w") as file:
         json.dump(results, file)
