@@ -3,6 +3,8 @@ import pytest
 import dpkt
 import time
 
+THEORETICAL_MAX_LINK_SPEED = 200
+
 def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
     """
     Configure a 4 bidirectional IPV4 flows
@@ -21,7 +23,7 @@ def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
     MAX_FRAME_SIZE = 9000
     MIN_FRAME_SIZE = 64
 
-    MAX_LINE_RATE_PER_FLOW = 100 / len(cfg.flows) * 2
+    MAX_LINE_RATE_PER_FLOW = THEORETICAL_MAX_LINK_SPEED / len(cfg.flows) * 2
 
     MIN_DURATION = 1
 
