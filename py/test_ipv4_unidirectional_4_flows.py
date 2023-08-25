@@ -3,6 +3,8 @@ import pytest
 import dpkt
 import time
 
+THEORETICAL_MAX_LINK_SPEED = 200
+
 def get_flow_src_and_dst(cfg, flow_name):
     for flow in cfg.flows:
         if flow.name == flow_name:
@@ -29,7 +31,7 @@ def test_fixed_ports_ipv4(api, duration, frame_size, line_rate_per_flow, directi
     TIMEOUT = 5
     MAX_FRAME_SIZE = 9000
     MIN_FRAME_SIZE = 64
-    MAX_LINE_RATE_PER_FLOW = 100/len(cfg.flows)
+    MAX_LINE_RATE_PER_FLOW = THEORETICAL_MAX_LINK_SPEED/len(cfg.flows)
     MIN_DURATION = 1
 
     if frame_size > MAX_FRAME_SIZE:
