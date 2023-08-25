@@ -3,7 +3,7 @@ import pytest
 import time
 import json
 
-THEORETICAL_MAX_LINK_SPEED = 100   #  Gbps
+THEORETICAL_MAX_LINK_SPEED = 200   #  Gbps
 PACKET_LOSS_TOLERANCE      = 0.0   # percent
 NO_DETERMINATION_STEPS     = 10
 NO_VALIDATION_STEPS        = 5
@@ -75,7 +75,7 @@ def test_throughput_rfc2544_multiple_flows(api, direction, frame_sizes):
 
         packet_loss = 0.0
         left_pps = 0.0
-        right_pps = 100.0 / len(cfg.flows) # int(THEORETICAL_MAX_LINK_SPEED * 1000000000 / 8 / (size + 20) / len(cfg.flows)) # max_pps_dict[size]
+        right_pps = THEORETICAL_MAX_LINK_SPEED / len(cfg.flows) # int(THEORETICAL_MAX_LINK_SPEED * 1000000000 / 8 / (size + 20) / len(cfg.flows)) # max_pps_dict[size]
         line_rate = right_pps
 
         max_line_percentage = 0
