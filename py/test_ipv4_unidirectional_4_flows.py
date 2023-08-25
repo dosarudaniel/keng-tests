@@ -55,7 +55,7 @@ def test_fixed_ports_ipv4(api, duration, frame_size, line_rate_per_flow, directi
         duration = MIN_DURATION 
 
 
-    line_rate_per_flow = 50 # tmp change
+    # line_rate_per_flow = 50 # tmp change
     print("\n\nConfiguring each flow with:\n" \
             "   Frame size:           {}B\n" \
             "   Duration:             {}s\n" \
