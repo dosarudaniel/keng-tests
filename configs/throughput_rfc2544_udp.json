@@ -1,1 +1,122 @@
-
+{
+    "ports": [
+        {
+            "name": "VM1-TE1",
+            "location": "localhost:5551"
+        },
+        {
+            "name": "VM1-TE2",
+            "location": "localhost:5552"
+        },
+        {
+            "name": "VM1-TE3",
+            "location": "localhost:5553"
+        },
+        {
+            "name": "VM1-TE4",
+            "location": "localhost:5554"
+        },
+        {
+            "name": "VM2-TE1",
+            "location": "10.3.147.36:5551"
+        },
+        {
+            "name": "VM2-TE2",
+            "location": "10.3.147.36:5552"
+        },
+        {
+            "name": "VM2-TE3",
+            "location": "10.3.147.36:5553"
+        },
+        {
+            "name": "VM2-TE4",
+            "location": "10.3.147.36:5554"
+        }
+    ],
+    "layer1": [
+        {
+            "name": "l1",
+            "port_names": [
+                "VM1-TE1",
+                "VM1-TE2",
+                "VM1-TE3",
+                "VM1-TE4",
+                "VM2-TE1",
+                "VM2-TE2",
+                "VM2-TE3",
+                "VM2-TE4"
+            ],
+            "speed": "speed_100_gbps"
+        }
+    ],
+    "flows": [
+        {
+            "name": "f1 VM1-TE1 -> VM2-TE1",
+            "tx_rx": {
+                "choice": "port",
+                "port": {
+                    "tx_name": "VM1-TE1",
+                    "rx_name": "VM2-TE1"
+                }
+            },
+            "metrics": {
+                "enable": true
+            },
+            "size": {
+                "choice": "fixed",
+                "fixed": 1518
+            },
+            "rate": {
+                "choice": "percentage",
+                "percentage": 100 
+            },
+            "duration": {
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 30
+                }
+            },
+            "packet": [
+                {
+                    "choice": "ethernet",
+                    "ethernet": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "00:15:5d:14:11:25"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "00:15:5d:14:11:13"
+                        }
+                    }
+                },
+                {
+                    "choice": "ipv4",
+                    "ipv4": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "1.1.1.1"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "1.1.1.2"
+                        }
+                    }
+                },
+                {
+                    "choice": "udp",
+                    "udp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 12345
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 12346
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
