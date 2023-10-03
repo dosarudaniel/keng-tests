@@ -43,19 +43,19 @@ echo "direction=$direction"
 
 cd /home/ixia/ixia-c-tests
 
-echo "" > throughput_results_rfc2544_4_flows.json  # clean old results
+echo "" > throughput_results_rfc2544_n_flows.json  # clean old results
 
 
-echo "Running test: python3 -m pytest ./py/test_throughput_rfc2544_multiple_flows.py \
+echo "Running test: python3 -m pytest ./py/test_throughput_rfc2544_n_flows.py \
  --frame_sizes $frame_sizes \
  --direction $direction"
 
-python3 -m pytest ./py/test_throughput_rfc2544_multiple_flows.py \
+python3 -m pytest ./py/test_throughput_rfc2544_n_flows.py \
  --frame_sizes $frame_sizes \
  --direction $direction
 
-cat throughput_results_rfc2544_4_flows.json  | jq
-cat throughput_results_rfc2544_4_flows.json  | jq > tmp.json
-cat tmp.json > throughput_results_rfc2544_4_flows.json
+cat throughput_results_rfc2544_n_flows.json  | jq
+cat throughput_results_rfc2544_n_flows.json  | jq > tmp.json
+cat tmp.json > throughput_results_rfc2544_n_flows.json
 rm tmp.json
 
