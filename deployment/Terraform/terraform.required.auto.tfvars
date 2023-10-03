@@ -1,0 +1,11 @@
+# AwsAccessCredentialsAccessKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# AwsAccessCredentialsSecretKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+# InboundIPv4CidrBlocks = [ "1.1.1.1/32" ]
+# KengContainerRegistry = ""
+# KengContainerRegistryUser = ""
+# KengContainerRegistryToken = ""
+# KengControllerImage = ""
+# KengTrafficEngineImage = ""
+# PackerUserName = "ubuntu"
+# UserEmailTag = "terraform@example.com"
+# UserLoginTag = "terraform"
