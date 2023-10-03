@@ -75,6 +75,11 @@ def pytest_addoption(parser):
                      action="store",
                      default='upstream')
 
+    parser.addoption("--loss_tolerance",
+                     type=float,
+                     action="store",
+                     default='0.0')
+
     parser.addoption("--te_host_user",
                      type=str,
                      action="store",
@@ -128,6 +133,11 @@ def line_rate_per_flow(pytestconfig):
 def direction(pytestconfig):
     direction = pytestconfig.getoption("--direction")
     return direction
+
+@pytest.fixture(scope='session')
+def loss_tolerance(pytestconfig):
+    loss_tolerance = pytestconfig.getoption("--loss_tolerance")
+    return loss_tolerance
 
 @pytest.fixture(scope='session')
 def te_host_user(pytestconfig):

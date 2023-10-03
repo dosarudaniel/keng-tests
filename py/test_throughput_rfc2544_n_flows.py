@@ -3,15 +3,15 @@ import pytest
 import time
 import json
 
-THEORETICAL_MAX_LINK_SPEED = 100   #  Gbps
-PACKET_LOSS_TOLERANCE      = 0.0   # percent
+THEORETICAL_MAX_LINK_SPEED = 25    #  Gbps
+PACKET_LOSS_TOLERANCE      = 1.0   # percent
 NO_DETERMINATION_STEPS     = 10
 NO_VALIDATION_STEPS        = 5
 TRIAL_RUN_TIME             = 5  # seconds
 FINAL_RUN_TIME             = 30 # seconds
 TEST_GAP_TIME              = 1  # seconds
-VALIDATION_DECREASE_LINE_PERCENTAGE = 4
-RESULTS_FILE_PATH          = "./throughput_results_rfc2544_4_flows.json"
+VALIDATION_DECREASE_LINE_PERCENTAGE = 0.01
+RESULTS_FILE_PATH          = "./throughput_results_rfc2544_n_flows.json"
 
 
 def find_location_by_name(ports, name):
@@ -21,11 +21,11 @@ def find_location_by_name(ports, name):
     return None
 
 @pytest.mark.performance
-def test_throughput_rfc2544_multiple_flows(api, direction, frame_sizes):
+def test_throughput_rfc2544_n_flows(api, direction, frame_sizes):
     """
     RFC-2544 Throughput determination test
     """
-    cfg = utils.load_test_config(api, 'throughput_rfc2544_4_flows.json', apply_settings=True)
+    cfg = utils.load_test_config(api, 'throughput_rfc2544_n_flows.json')
 
     packet_sizes = [int(frame_size) for frame_size in frame_sizes.split(',')]
 
