@@ -1,16 +1,14 @@
 variable "AgentInstanceType" {
-	default = "c5.9xlarge"
+	default = "c5.4xlarge"
 	description = "Instance type of Agent VM"
 	type = string
 	validation {
-		condition = contains([	"c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge",
-								"c5n.4xlarge", 
+		condition = contains([	"c5.xlarge", "c5.2xlarge", "c5.4xlarge",
 								"c4.8xlarge"
 							], var.AgentInstanceType)
 		error_message = <<EOF
 AgentInstanceType must be one of the following types:
-	c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge,
-	c5n.4xlarge,
+	c5.xlarge, c5.2xlarge, c5.4xlarge,
 	c4.8xlarge
 		EOF
 	}
