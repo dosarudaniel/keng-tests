@@ -4,11 +4,7 @@
   "grpc_server": "localhost:40051",
   "ports": [
     "localhost:5551",
-    "localhost:5552",
-    "localhost:5553",
-    "10.0.10.12:5551",
-    "10.0.10.12:5552",
-    "10.0.10.12:5553"
+    "10.0.10.12:5551"
   ],
   "soft_dut": "localhost:22",
   "speed": "speed_10_gbps",
