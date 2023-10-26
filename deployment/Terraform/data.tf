@@ -8,7 +8,6 @@ data "cloudinit_config" "init_cli" {
 	gzip = true
 	base64_encode = true
 	part {
-		filename = "part-001"
 		content_type = "text/cloud-config"
 		content = templatefile("cloud_init.yml", {
 			GitRepoName: local.GitRepoName
@@ -19,7 +18,7 @@ data "cloudinit_config" "init_cli" {
 		})
 	}	
 	part {
-		filename = "part-002"
+		filename = "script-001"
 		content_type = "text/x-shellscript"
 		content = templatefile("cloud-init.sh", {
 			Agent1Eth1PrivateIpAddresses: local.Agent1Eth1PrivateIpAddresses
