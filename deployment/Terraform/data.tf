@@ -17,7 +17,7 @@ data "cloudinit_config" "init_cli" {
 			KengContainerRegistryUser: local.KengContainerRegistryUser
 			KengControllerImage: local.KengControllerImage
 			KengTrafficEngineImage: local.KengTrafficEngineImage
-			PackerUserName: local.PackerUserName
+			UserName: local.AppTag
 		})
 	}	
 	part {
@@ -32,7 +32,7 @@ data "cloudinit_config" "init_cli" {
 			AwsMetadataServerUrl: local.AwsMetadataServerUrl
 			GitRepoName: local.GitRepoName
 			GitRepoUrl: local.GitRepoUrl
-			PackerUserName: local.PackerUserName
+			UserName: local.AppTag
 		})
 	}	
 }

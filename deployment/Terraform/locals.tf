@@ -20,7 +20,6 @@ locals {
 	KengContainerRegistryToken = var.KengContainerRegistryToken
 	KengControllerImage = var.KengControllerImage
 	KengTrafficEngineImage = var.KengTrafficEngineImage
-	PackerUserName = "ubuntu"
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
 	PlacementGroupStrategy = "cluster"
 	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.AppVersion}"
