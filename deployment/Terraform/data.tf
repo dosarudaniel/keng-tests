@@ -9,7 +9,7 @@ data "cloudinit_config" "init_cli" {
 	base64_encode = true
 	part {
 		content_type = "text/cloud-config"
-		content = templatefile("cloud_init.yml", {
+		content = templatefile("cloud-init.yml", {
 			GitRepoName: local.GitRepoName
 			GitRepoUrl: local.GitRepoUrl
 			KengControllerImage: local.KengControllerImage
