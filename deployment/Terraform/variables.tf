@@ -49,21 +49,6 @@ variable "InboundIPv4CidrBlocks" {
 	type = list(string)
 }
 
-variable "KengContainerRegistry" {
-	sensitive = true
-	type = string
-}
-
-variable "KengContainerRegistryUser" {
-	sensitive = true
-	type = string
-}
-
-variable "KengContainerRegistryToken" {
-	sensitive = true
-	type = string
-}
-
 variable "KengControllerImage" {
 	sensitive = true
 	type = string

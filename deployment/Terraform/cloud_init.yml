@@ -16,10 +16,8 @@ users:
     groups: docker
 runcmd:
   - sudo -H -u ${UserName} bash -c 'git clone ${GitRepoUrl} $HOME/${GitRepoName}'
-  - echo ${KengContainerRegistryToken} | docker login ${KengContainerRegistry} -u ${KengContainerRegistryUser} --password-stdin
   - docker pull ${KengControllerImage}
   - docker pull ${KengTrafficEngineImage}
-  - docker logout ${KengContainerRegistry}
   - docker images
   - sudo -H -u ${UserName} bash -c 'echo "alias python=python3" >> $HOME/.bashrc'
   - sudo -H -u ${UserName} bash -c 'echo "alias pip=pip3" >> $HOME/.bashrc'

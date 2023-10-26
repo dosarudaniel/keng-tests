@@ -12,9 +12,6 @@ data "cloudinit_config" "init_cli" {
 		content = templatefile("cloud_init.yml", {
 			GitRepoName: local.GitRepoName
 			GitRepoUrl: local.GitRepoUrl
-			KengContainerRegistry: local.KengContainerRegistry
-			KengContainerRegistryToken: local.KengContainerRegistryToken
-			KengContainerRegistryUser: local.KengContainerRegistryUser
 			KengControllerImage: local.KengControllerImage
 			KengTrafficEngineImage: local.KengTrafficEngineImage
 			UserName: local.AppTag

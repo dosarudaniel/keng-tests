@@ -15,9 +15,6 @@ locals {
 	GitRepoName = var.GitRepoName
 	GitRepoUrl = var.GitRepoUrl
 	InboundIPv4CidrBlocks = var.InboundIPv4CidrBlocks
-	KengContainerRegistry = var.KengContainerRegistry
-	KengContainerRegistryUser = var.KengContainerRegistryUser
-	KengContainerRegistryToken = var.KengContainerRegistryToken
 	KengControllerImage = var.KengControllerImage
 	KengTrafficEngineImage = var.KengTrafficEngineImage
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"

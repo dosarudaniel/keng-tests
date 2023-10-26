@@ -3,10 +3,7 @@
 # GitRepoName = ""
 # GitRepoUrl = ""
 # InboundIPv4CidrBlocks = [ "1.1.1.1/32" ]
-# KengContainerRegistry = ""
-# KengContainerRegistryToken = ""
-# KengContainerRegistryUser = ""
-# KengControllerImage = ""
-# KengTrafficEngineImage = ""
+# KengControllerImage = "ghcr.io/open-traffic-generator/keng-controller:0.1.0-3"
+# KengTrafficEngineImage = "ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.85"
 # UserEmailTag = "terraform@example.com"
 # UserLoginTag = "terraform"
