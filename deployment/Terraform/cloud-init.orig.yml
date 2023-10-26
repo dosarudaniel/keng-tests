@@ -16,14 +16,12 @@ groups:
   - docker
 users:
   - default
-  - name: ubuntu
+  - name: ${UserName}
     groups: docker
 runcmd:
   - sudo -H -u ${UserName} bash -c 'git clone ${GitRepoUrl} $HOME/${GitRepoName}'
-  - echo ${KengContainerRegistryToken} | docker login ${KengContainerRegistry} -u ${KengContainerRegistryUser} --password-stdin
   - docker pull ${KengControllerImage}
   - docker pull ${KengTrafficEngineImage}
-  - docker logout ${KengContainerRegistry}
   - docker images
   - sudo -H -u ${UserName} bash -c 'echo "alias python=python3" >> $HOME/.bashrc'
   - sudo -H -u ${UserName} bash -c 'echo "alias pip=pip3" >> $HOME/.bashrc'
@@ -39,10 +37,6 @@ runcmd:
   - systemctl status snap.amazon-ssm-agent.amazon-ssm-agent.service
   - AgentEth1LogicalName=$(lshw -C network -json | jq .[1].logicalname --raw-output)
   - AgentEth1BusInfo=$(lshw -C network -json | jq .[1].businfo --raw-output)
-  - AgentEth2LogicalName=$(lshw -C network -json | jq .[2].logicalname --raw-output)
-  - AgentEth2BusInfo=$(lshw -C network -json | jq .[2].businfo --raw-output)
-  - AgentEth3LogicalName=$(lshw -C network -json | jq .[3].logicalname --raw-output)
-  - AgentEth3BusInfo=$(lshw -C network -json | jq .[3].businfo --raw-output)
   - AgentInstanceType=$(curl -s ${AwsMetadataServerUrl}/instance-type)
   - AgentRegion=$(curl -s ${AwsMetadataServerUrl}/placement/region)
   - aws configure set region $AgentRegion
@@ -56,8 +50,6 @@ runcmd:
   - sed -i "s/speed_10_gbps/speed_AgentInstanceTypeSpeed_gbps/g" /home/${UserName}/${GitRepoName}/*.json
   - sed -i "s/AgentInstanceTypeSpeed/$AgentInstanceTypeSpeed/g" /home/${UserName}/${GitRepoName}/*.json
   - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/deployment/docker-compose.yaml
-  - sed -i "s/pci@eth2/$AgentEth2BusInfo/g" /home/${UserName}/${GitRepoName}/deployment/docker-compose.yaml
-  - sed -i "s/pci@eth3/$AgentEth3BusInfo/g" /home/${UserName}/${GitRepoName}/deployment/docker-compose.yaml
   - modprobe uio
   - modprobe igb_uio
   - sudo -H -u ${UserName} bash -c 'git clone https://github.com/DPDK/dpdk.git $HOME/dpdk'
@@ -68,4 +60,4 @@ runcmd:
   - chmod +x /home/${UserName}/${GitRepoName}/deployment/setup.sh
   - /home/${UserName}/${GitRepoName}/deployment/setup.sh
   - sudo -H -u ${UserName} bash -c 'docker-compose -f $HOME/${GitRepoName}/deployment/docker-compose.yaml up -d'
-  - sudo -H -u ${UserName} bash -c 'docker-compose -f $HOME/${GitRepoName}/deployment/docker-compose.yaml
+  - sudo -H -u ${UserName} bash -c 'docker-compose -f $HOME/${GitRepoName}/deployment/docker-compose.yaml ps'
