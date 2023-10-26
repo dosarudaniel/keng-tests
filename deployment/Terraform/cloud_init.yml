@@ -1,7 +1,6 @@
 #cloud-config
 package_upgrade: true
 packages:
-  - awscli
   - docker.io
   - docker-compose
   - dpdk-kmods-dkms
