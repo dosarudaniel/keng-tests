@@ -1,5 +1,5 @@
 #!/bin/bash
-snap install awscli --classic
+snap install aws-cli --classic
 printf "\nexport PUBLIC_HOSTNAME=\$(curl -s ${AwsMetadataServerUrl}/public-hostname)\n" >> /home/${UserName}/.profile
 printf "export PUBLIC_IPV4=\$(curl -s ${AwsMetadataServerUrl}/public-ipv4)\n" >> /home/${UserName}/.profile
 printf "echo \"env(PUBLIC_HOSTNAME) = \$PUBLIC_HOSTNAME\"\n" >> /home/${UserName}/.profile
