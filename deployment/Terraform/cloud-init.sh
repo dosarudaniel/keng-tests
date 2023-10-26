@@ -3,7 +3,6 @@ snap install aws-cli --classic
 printf "\nexport PUBLIC_HOSTNAME=\$(curl -s ${AwsMetadataServerUrl}/public-hostname)\n" >> /home/${UserName}/.profile
 printf "export PUBLIC_IPV4=\$(curl -s ${AwsMetadataServerUrl}/public-ipv4)\n" >> /home/${UserName}/.profile
 printf "echo \"env(PUBLIC_HOSTNAME) = \$PUBLIC_HOSTNAME\"\n" >> /home/${UserName}/.profile
-systemctl status snap.amazon-ssm-agent.amazon-ssm-agent.service
 printf "echo \"env(PUBLIC_IPV4) = \$PUBLIC_IPV4\"\n" >> /home/${UserName}/.profile
 AgentInstanceType=$(curl -s ${AwsMetadataServerUrl}/instance-type)
 AgentRegion=$(curl -s ${AwsMetadataServerUrl}/placement/region)
