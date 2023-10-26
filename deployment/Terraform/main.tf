@@ -5,12 +5,6 @@ module "Agent1" {
 	Eth1PrivateIpAddresses = local.Agent1Eth1PrivateIpAddresses
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
 	Eth1SubnetId = module.Vpc.PrivateSubnet.id
-	Eth2PrivateIpAddresses = local.Agent1Eth2PrivateIpAddresses
-	Eth2SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
-	Eth2SubnetId = module.Vpc.PrivateSubnet.id
-	Eth3PrivateIpAddresses = local.Agent1Eth3PrivateIpAddresses
-	Eth3SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
-	Eth3SubnetId = module.Vpc.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id
@@ -35,12 +29,6 @@ module "Agent2" {
 	Eth1PrivateIpAddresses = local.Agent2Eth1PrivateIpAddresses
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
 	Eth1SubnetId = module.Vpc.PrivateSubnet.id
-	Eth2PrivateIpAddresses = local.Agent2Eth2PrivateIpAddresses
-	Eth2SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
-	Eth2SubnetId = module.Vpc.PrivateSubnet.id
-	Eth3PrivateIpAddresses = local.Agent2Eth3PrivateIpAddresses
-	Eth3SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
-	Eth3SubnetId = module.Vpc.PrivateSubnet.id
 	InstanceId = local.Agent2InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id

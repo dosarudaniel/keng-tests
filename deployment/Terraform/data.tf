@@ -22,11 +22,7 @@ data "cloudinit_config" "init_cli" {
 		content_type = "text/x-shellscript"
 		content = templatefile("cloud-init.sh", {
 			Agent1Eth1PrivateIpAddresses: local.Agent1Eth1PrivateIpAddresses
-			Agent1Eth2PrivateIpAddresses: local.Agent1Eth2PrivateIpAddresses
-			Agent1Eth3PrivateIpAddresses: local.Agent1Eth3PrivateIpAddresses
 			Agent2Eth1PrivateIpAddresses: local.Agent2Eth1PrivateIpAddresses
-			Agent2Eth2PrivateIpAddresses: local.Agent2Eth2PrivateIpAddresses
-			Agent2Eth3PrivateIpAddresses: local.Agent2Eth3PrivateIpAddresses
 			AwsMetadataServerUrl: local.AwsMetadataServerUrl
 			GitRepoName: local.GitRepoName
 			GitRepoUrl: local.GitRepoUrl

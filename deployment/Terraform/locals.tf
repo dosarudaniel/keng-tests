@@ -2,12 +2,8 @@ locals {
 	AgentInstanceType = var.AgentInstanceType
 	Agent1InstanceId = "agent1"
 	Agent1Eth1PrivateIpAddresses = [ "10.0.2.12", "10.0.2.13" ]
-	Agent1Eth2PrivateIpAddresses = [ "10.0.2.32", "10.0.2.33" ]
-	Agent1Eth3PrivateIpAddresses = [ "10.0.2.52", "10.0.2.53" ]
 	Agent2Eth0PrivateIpAddress = "10.0.10.12"
 	Agent2Eth1PrivateIpAddresses = [ "10.0.2.22", "10.0.2.23" ]
-	Agent2Eth2PrivateIpAddresses = [ "10.0.2.42", "10.0.2.43" ]
-	Agent2Eth3PrivateIpAddresses = [ "10.0.2.62", "10.0.2.63" ]
 	Agent2InstanceId = "agent2"
 	AppTag = "ubuntu"
 	AppVersion = "2204-lts"
