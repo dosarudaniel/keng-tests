@@ -35,7 +35,7 @@ variable "AwsMetadataServerUrl" {
 }
 
 variable "GitRepoName" {
-	sensitive = true
+	default = "keng-python"
 	type = string
 }
 
@@ -50,12 +50,12 @@ variable "InboundIPv4CidrBlocks" {
 }
 
 variable "KengControllerImage" {
-	sensitive = true
+	default = "ghcr.io/open-traffic-generator/keng-controller:0.1.0-3"
 	type = string
 }
 
 variable "KengTrafficEngineImage" {
-	sensitive = true
+	default = "ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.85"
 	type = string
 }
 

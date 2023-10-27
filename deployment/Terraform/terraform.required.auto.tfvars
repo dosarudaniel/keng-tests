@@ -1,9 +1,6 @@
 # AwsAccessCredentialsAccessKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # AwsAccessCredentialsSecretKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-# GitRepoName = ""
-# GitRepoUrl = ""
+# GitRepoUrl = "-b aws https://github.com/dosarudaniel/ixia-c-tests.git"
 # InboundIPv4CidrBlocks = [ "1.1.1.1/32" ]
-# KengControllerImage = "ghcr.io/open-traffic-generator/keng-controller:0.1.0-3"
-# KengTrafficEngineImage = "ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.85"
 # UserEmailTag = "terraform@example.com"
 # UserLoginTag = "terraform"
