@@ -24,3 +24,8 @@ runcmd:
   - sed -i "s/AgentInstanceTypeSpeed/$AgentInstanceTypeSpeed/g" /home/${UserName}/${GitRepoName}/configs/*.json
   - sed -i "s/speed_10_gbps/speed_AgentInstanceTypeSpeed_gbps/g" /home/${UserName}/${GitRepoName}/*.json
   - sed -i "s/AgentInstanceTypeSpeed/$AgentInstanceTypeSpeed/g" /home/${UserName}/${GitRepoName}/*.json
+merge_how:
+ - name: list
+   settings: [append]
+ - name: dict
+   settings: [no_replace, recurse_list]

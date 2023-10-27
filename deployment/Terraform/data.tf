@@ -19,8 +19,8 @@ data "cloudinit_config" "init_cli" {
 	}	
 	part {
 		filename = "script-001"
-		content_type = "text/x-shellscript"
-		content = templatefile("cloud-init.sh", {
+		content_type = "text/cloud-config"
+		content = templatefile("cloud-init.aws.yml", {
 			Agent1Eth1PrivateIpAddresses: local.Agent1Eth1PrivateIpAddresses
 			Agent2Eth1PrivateIpAddresses: local.Agent2Eth1PrivateIpAddresses
 			AwsMetadataServerUrl: local.AwsMetadataServerUrl
