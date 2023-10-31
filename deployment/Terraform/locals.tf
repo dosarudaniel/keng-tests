@@ -8,6 +8,9 @@ locals {
 	AppTag = "ubuntu"
 	AppVersion = "2204-lts"
 	AwsMetadataServerUrl = var.AwsMetadataServerUrl
+	GitRepoConfigPath = "${local.GitRepoExecPath}/configs"
+	GitRepoExecPath = "cloud/ixia-c-dpdk-aws"
+	GitRepoDeployPath = "${local.GitRepoExecPath}/deployment/"
 	GitRepoName = var.GitRepoName
 	GitRepoUrl = var.GitRepoUrl
 	InboundIPv4CidrBlocks = var.InboundIPv4CidrBlocks
