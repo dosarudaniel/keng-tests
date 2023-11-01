@@ -9,10 +9,13 @@ locals {
 	AppVersion = "2204-lts"
 	ClientId = var.ClientId
 	ClientSecret = var.ClientSecret
+	DockerComposeServices = yamldecode(file("../docker-compose.yaml"))["services"]
 	GitRepoName = var.GitRepoName
 	GitRepoUrl = var.GitRepoUrl
-	KengControllerImage = var.KengControllerImage
-	KengTrafficEngineImage = var.KengTrafficEngineImage
+	KengControllerImage = local.KengControllerService["image"]
+	KengControllerService = local.DockerComposeServices["controller"]
+	KengTrafficEngineImage = local.KengTrafficEngineService["image"]
+	KengTrafficEngineService = local.DockerComposeServices["TE1-5551"]
 	Preamble = "${local.UserLoginTag}-${local.AppTag}-${local.AppVersion}"
 	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	ResourceGroupLocation = var.ResourceGroupLocation
