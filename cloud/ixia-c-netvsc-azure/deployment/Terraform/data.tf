@@ -8,6 +8,8 @@ data "cloudinit_config" "init_cli" {
 	part {
 		content_type = "text/cloud-config"
 		content = templatefile("cloud-init.yml", {
+			GitRepoDeployPath: local.GitRepoDeployPath
+			GitRepoExecPath: local.GitRepoExecPath
 			GitRepoName: local.GitRepoName
 			GitRepoUrl: local.GitRepoUrl
 			KengControllerImage: local.KengControllerImage
@@ -23,6 +25,8 @@ data "cloudinit_config" "init_cli" {
 			Agent2Eth1PrivateIpAddresses: local.Agent2Eth1IpAddresses
 			ClientId: local.ClientId
 			ClientSecret: local.ClientSecret
+			GitRepoConfigPath: local.GitRepoConfigPath
+			GitRepoExecPath: local.GitRepoExecPath
 			GitRepoName: local.GitRepoName
 			TenantId: local.TenantId
 			UserName: local.AppTag

@@ -10,6 +10,9 @@ locals {
 	ClientId = var.ClientId
 	ClientSecret = var.ClientSecret
 	DockerComposeServices = yamldecode(file("../docker-compose.yaml"))["services"]
+	GitRepoConfigPath = "${local.GitRepoExecPath}/configs"
+	GitRepoExecPath = "cloud/ixia-c-netvsc-azure"
+	GitRepoDeployPath = "${local.GitRepoExecPath}/deployment/"
 	GitRepoName = var.GitRepoName
 	GitRepoUrl = var.GitRepoUrl
 	KengControllerImage = local.KengControllerService["image"]
