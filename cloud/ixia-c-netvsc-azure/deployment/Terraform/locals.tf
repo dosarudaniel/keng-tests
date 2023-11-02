@@ -1,9 +1,9 @@
 locals {
 	AgentVmSize = var.AgentVmSize
 	Agent1InstanceId = "agent1"
-	Agent1Eth1IpAddresses = [ "10.0.2.12", "10.0.2.13" ]
+	Agent1Eth1IpAddresses = [ "10.0.2.12", "10.0.2.32" ]
 	Agent2Eth0IpAddress = "10.0.10.12"
-	Agent2Eth1IpAddresses = [ "10.0.2.22", "10.0.2.23" ]
+	Agent2Eth1IpAddresses = [ "10.0.2.22", "10.0.2.42" ]
 	Agent2InstanceId = "agent2"
 	AppTag = "ubuntu"
 	AppVersion = "2204-lts"
