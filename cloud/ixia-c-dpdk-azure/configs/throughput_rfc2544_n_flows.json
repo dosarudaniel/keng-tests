@@ -34,7 +34,7 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 9000
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
@@ -72,6 +72,19 @@
                             "value": "10.0.2.12"
                         }
                     }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 443
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 443
+                        }
+                    }
                 }
             ]
         },
@@ -89,7 +102,7 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 9000
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
@@ -125,6 +138,19 @@
                         "src": {
                             "choice": "value",
                             "value": "10.0.2.32"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 443
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 443
                         }
                     }
                 }

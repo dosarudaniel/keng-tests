@@ -1,6 +1,7 @@
 module "Agent1" {
 	source = "armdupre/module-ubuntu-linux-agent/azurerm"
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
+	Eth1IpAddresses = local.Agent1Eth1IpAddresses
 	Eth1SubnetId = module.Vnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
 	ResourceGroupLocation = azurerm_resource_group.ResourceGroup.location
