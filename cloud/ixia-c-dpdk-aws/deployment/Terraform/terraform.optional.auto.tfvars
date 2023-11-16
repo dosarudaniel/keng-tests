@@ -5,4 +5,5 @@
 # PrivateSubnetAvailabilityZone = "us-east-1a"
 # PublicSubnetAvailabilityZone = "us-east-1a"
 # Region = "us-east-1"
+# UserLoginTag = "terraform"
 # UserProjectTag = "cloud-ist"

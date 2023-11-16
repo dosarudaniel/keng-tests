@@ -74,6 +74,7 @@ variable "UserEmailTag" {
 }
 
 variable "UserLoginTag" {
+	default = "terraform"
 	description = "Login ID tag of user creating the deployment"
 	type = string
 	validation {
