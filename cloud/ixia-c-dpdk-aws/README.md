@@ -70,7 +70,7 @@ source ./venv/bin/activate
 ./rfc2544_test_n_flows.sh -s 9000
 ```
 
-![Results](./results.png)
+![Results](./images/results.png)
 
 ## Destroy the lab
 
