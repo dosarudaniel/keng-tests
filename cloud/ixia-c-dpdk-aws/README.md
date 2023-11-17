@@ -35,22 +35,31 @@ terraform apply -auto-approve
 ```
 terraform output Agent1Eth0ElasticIp
 ```
+
 ![Outputs](./images/outputs.png)
 
-
-4. Output the SSH key pair associated with the AWS instances and save the private_key_pem material for connecting with your ssh client.
+4. Output the SSH key pair associated with the AWS instances and save the **private_key_pem** material to a file.
 
 ```
 terraform output SshKey
 nano ~/.ssh/SshKey.pem
-ssh -i ~/.ssh/SshKey.pem ec2-1-1-1-1.compute-1.amazonaws.com
 ```
 
-3. Make sure you have application and traffic containers running:
+![Ssh](./images/ssh.png)
+
+5. Connect to AWS instance using ssh client 
+
+```
+ssh -i ~/.ssh/SshKey.pem ec2-44-220-16-252.compute-1.amazonaws.com
+```
+
+6. Make sure you have application and traffic containers running:
 
 ```
 docker ps
 ```
+
+![Docker](./images/docker.png)
 
 ## Execute Python test case to generate traffic between AWS instances
 
