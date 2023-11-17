@@ -1,4 +1,4 @@
-# Ixia-c traffic engine single test subnet setup on Amazon Web Services with DPDK
+# Ixia-c traffic engine deployment on Amazon Web Services with DPDK
 
 ## Overview
 This is a public cloud lab where [Ixia-c](https://github.com/open-traffic-generator/ixia-c) has two traffic ports connected within a single subnet of an AWS VPC.
@@ -12,7 +12,6 @@ Once the lab is up, a Python script is used to request Ixia-c to generate traffi
 
 * [Terraform](https://www.terraform.io/)
 
-
 ## Deploy Ixia-c lab using Terraform
 
 1. Uncomment all lines in the required variables file and replace values to match your particular environment.
@@ -22,6 +21,8 @@ cd ./deployment/Terraform
 nano terraform.required.auto.tfvars
 ```
 
+![Variables](./images/variables.png)
+
 2. Initialize Terraform environment and apply the execution plan.
  
 ```
@@ -29,18 +30,13 @@ terraform init
 terraform apply -auto-approve
 ```
 
-3. Make note of the 'public_dns' value for 'Agent1Eth0ElasticIp' in the 'Outputs:' section upon successful apply.
+3. Make note of the **public_dns** value for **Agent1Eth0ElasticIp** in Outputs: section upon successful apply.
 
 ```
-Apply complete! Resources: 42 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-Agent1Eth0ElasticIp = {
-  "public_dns" = "1-1-1-1-1.compute-1.amazonaws.com"
-  "public_ip" = "1.1.1.1"
-}
+terraform output Agent1Eth0ElasticIp
 ```
+![Outputs](./images/outputs.png)
+
 
 4. Output the SSH key pair associated with the AWS instances and save the private_key_pem material for connecting with your ssh client.
 
