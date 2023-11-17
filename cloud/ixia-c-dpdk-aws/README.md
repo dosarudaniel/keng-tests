@@ -70,10 +70,11 @@ source ./venv/bin/activate
 ./rfc2544_test_n_flows.sh -s 9000
 ```
 
+![Results](./results.png)
 
 ## Destroy the lab
 
-To destroy the lab, exit the ssh session and destroy the Terraform deployment
+1. To destroy the lab, exit the ssh session and destroy the Terraform deployment
 
 ```
 terraform destroy -auto-approve
