@@ -69,7 +69,7 @@ def test_fixed_ports_ipv4(api, duration, frame_size, line_rate_per_flow, directi
             flow.tx_rx.port.rx_name, flow.tx_rx.port.tx_name = flow.tx_rx.port.tx_name, flow.tx_rx.port.rx_name
             flow.packet[0].dst.value, flow.packet[0].src.value = flow.packet[0].src.value, flow.packet[0].dst.value 
         
-        flow_paths[flow.name] = flow.tx_rx.port.tx_name + " --> " + flow.tx_rx.port.rx_name
+        flow_paths[flow.name] = flow.tx_rx.port.tx_name + " --> " + flow.tx_rx.port.rx_names[0]
 
     sizes = []
 
