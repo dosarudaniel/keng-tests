@@ -36,6 +36,6 @@ services:
       - /sys/devices/system/node:/sys/devices/system/node
       - /dev:/dev
     environment:
-    - OPT_LISTEN_PORT=5551
+    - OPT_LISTEN_PORT=5552
     - ARG_IFACE_LIST=pci@eth2
     - ARG_CORE_LIST="3 4 5"
