@@ -155,6 +155,74 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "f3",
+            "tx_rx": {
+                "choice": "port",
+                "port": {
+                    "tx_name": "VM1-TE1",
+                    "rx_names": [ "VM2-TE1" ]
+                }
+            },
+            "metrics": {
+                "enable": true
+            },
+            "size": {
+                "choice": "fixed",
+                "fixed": 1500
+            },
+            "rate": {
+                "choice": "percentage",
+                "percentage": 50
+            },
+            "duration": {
+                "choice": "fixed_seconds",
+                "fixed_seconds": {
+                    "seconds": 30
+                }
+            },
+            "packet": [
+                {
+                    "choice": "ethernet",
+                    "ethernet": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "00:AA:00:00:02:00"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "00:AA:00:00:01:00"
+                        }
+                    }
+                },
+                {
+                    "choice": "ipv4",
+                    "ipv4": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "10.0.2.62"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "10.0.2.52"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 443
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 443
+                        }
+                    }
+                }
+            ]
         }
     ]
 }
