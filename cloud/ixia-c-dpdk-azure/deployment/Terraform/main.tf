@@ -1,5 +1,6 @@
 module "Agent1" {
 	source = "armdupre/module-ubuntu-linux-agent/azurerm"
+	version = "0.0.7"
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	Eth1IpAddresses = local.Agent1Eth1IpAddresses
 	Eth1SubnetId = module.Vnet.PrivateSubnet.id
@@ -19,6 +20,7 @@ module "Agent1" {
 
 module "Agent2" {
 	source = "armdupre/module-ubuntu-linux-agent/azurerm"
+	version = "0.0.7"
 	Eth0IpAddress = local.Agent2Eth0IpAddress
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	Eth1IpAddresses = local.Agent2Eth1IpAddresses
