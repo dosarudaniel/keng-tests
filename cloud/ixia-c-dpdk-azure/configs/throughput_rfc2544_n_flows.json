@@ -5,8 +5,16 @@
             "location": "localhost:5551"
         },
         {
+            "name": "VM1-TE2",
+            "location": "localhost:5552"
+        },
+        {
             "name": "VM2-TE1",
             "location": "10.0.10.12:5551"
+        },
+        {
+            "name": "VM2-TE2",
+            "location": "10.0.10.12:5552"
         }
     ],
     "layer1": [
@@ -14,9 +22,11 @@
             "name": "l1",
             "port_names": [
                 "VM1-TE1",
-                "VM2-TE1"
+                "VM1-TE2",
+                "VM2-TE1",
+                "VM2-TE2"
             ],
-            "speed": "speed_10_gbps"
+            "speed": "speed_25_gbps"
         }
     ],
     "flows": [
@@ -161,8 +171,8 @@
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE1",
-                    "rx_name": "VM2-TE1"
+                    "tx_name": "VM1-TE2",
+                    "rx_name": "VM2-TE2"
                 }
             },
             "metrics": {
@@ -188,11 +198,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:AA:00:00:02:00"
+                            "value": "00:AA:00:00:04:00"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:AA:00:00:01:00"
+                            "value": "00:AA:00:00:03:00"
                         }
                     }
                 },
@@ -201,11 +211,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "10.0.2.62"
+                            "value": "10.0.2.162"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "10.0.2.52"
+                            "value": "10.0.2.152"
                         }
                     }
                 },
