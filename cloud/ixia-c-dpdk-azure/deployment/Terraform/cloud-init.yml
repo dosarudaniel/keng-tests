@@ -25,8 +25,8 @@ runcmd:
   - pip3 --version
   - sudo -H -u ${UserName} bash -c 'python3 -m venv $HOME/venv'
   - sudo -H -u ${UserName} bash -c 'source $HOME/venv/bin/activate; pip install -r $HOME/${GitRepoName}/${GitRepoExecPath}/py/requirements.txt; deactivate'
-  - AgentEth1LogicalName=$(lshw -C network -json | jq .[1].logicalname --raw-output)
-  - AgentEth1BusInfo=$(lshw -C network -json | jq .[1].businfo --raw-output)
+  - AgentEth1LogicalName=$(lshw -C network -json | jq -r .[2].logicalname)
+  - AgentEth1BusInfo=$(lshw -C network -json | jq '.[] | select( .businfo != null)' | jq -r .businfo)
   - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - sudo -H -u ${UserName} bash -c 'git clone https://github.com/DPDK/dpdk.git $HOME/dpdk'
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoExecPath}/*.sh
