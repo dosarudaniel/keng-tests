@@ -1,8 +1,0 @@
-configs/*
-py/__pycache__
-py/.pytest_cache
-py/utils/__pycache__/
-throughput_results_rfc2544_1_flow.json
-throughput_results_rfc2544_4_flows.json
-throughput_results_rfc2544_1_bidir.json
-throughput_results_rfc2544_4_bidir.json
