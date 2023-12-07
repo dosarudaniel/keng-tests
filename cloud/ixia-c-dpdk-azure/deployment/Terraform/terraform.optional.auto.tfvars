@@ -1,3 +1,4 @@
-# AgentVmSize = "Standard_F8s_v2"
-# ResourceGroupLocation = "East US"
+# AgentVmSize = "Experimental_Boost8"
+# KengContainerRegistry = "ghcr.io"
+# ResourceGroupLocation = "South Central US"
 # UserProjectTag = "cloud-ist"

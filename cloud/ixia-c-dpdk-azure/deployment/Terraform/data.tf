@@ -12,7 +12,11 @@ data "cloudinit_config" "init_cli" {
 			GitRepoExecPath: local.GitRepoExecPath
 			GitRepoName: local.GitRepoName
 			GitRepoUrl: local.GitRepoUrl
+			KengContainerRegistry: local.KengContainerRegistry
+			KengContainerRegistryToken: local.KengContainerRegistryToken
+			KengContainerRegistryUser: local.KengContainerRegistryUser
 			KengControllerImage: local.KengControllerImage
+			KengLicenseImage: local.KengLicenseImage
 			KengTrafficEngineImage: local.KengTrafficEngineImage
 			UserName: local.AppTag
 		})

@@ -15,7 +15,9 @@ users:
     groups: docker
 runcmd:
   - sudo -H -u ${UserName} bash -c 'git clone ${GitRepoUrl} $HOME/${GitRepoName}'
+  - echo ${KengContainerRegistryToken} | docker login ${KengContainerRegistry} -u ${KengContainerRegistryUser} --password-stdin
   - docker pull ${KengControllerImage}
+  - docker pull ${KengLicenseImage}
   - docker pull ${KengTrafficEngineImage}
   - docker images
   - sudo -H -u ${UserName} bash -c 'echo "alias python=python3" >> $HOME/.bashrc'
@@ -25,8 +27,8 @@ runcmd:
   - pip3 --version
   - sudo -H -u ${UserName} bash -c 'python3 -m venv $HOME/venv'
   - sudo -H -u ${UserName} bash -c 'source $HOME/venv/bin/activate; pip install -r $HOME/${GitRepoName}/${GitRepoExecPath}/py/requirements.txt; deactivate'
-  - AgentEth1LogicalName=$(lshw -C network -json | jq -r .[2].logicalname)
-  - AgentEth1BusInfo=$(lshw -C network -json | jq '.[] | select( .businfo != null)' | jq -r .businfo)
+  - AgentBusInfoList=$(lshw -C network -json | jq '.[] | select( .businfo != null)' | jq -r .businfo)
+  - AgentEth1BusInfo=$(echo $AgentBusInfoList | awk '{print $1}')
   - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - sudo -H -u ${UserName} bash -c 'git clone https://github.com/DPDK/dpdk.git $HOME/dpdk'
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoExecPath}/*.sh
