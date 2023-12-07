@@ -2,14 +2,23 @@ version: '3'
 
 services:
 
+  KENG-License-Server:
+    image: ghcr.io/armdupre/keng-license-server:latest
+    container_name: keng-license-server
+    restart: always
+    ports:
+      - "7443:7443"
+      - "9443:9443"
+    command: --accept-eula
+
   controller:
     image: ghcr.io/open-traffic-generator/keng-controller:0.1.0-3
-    command: --accept-eula --http-port 8443
+    command: --accept-eula --http-port 8443  --license-servers=localhost
     network_mode: "host"
     restart: always
 
   TE1-5551:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.85
+    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana2 
     network_mode: "host"
     privileged: true
     restart: "no"
@@ -23,19 +32,3 @@ services:
     - OPT_LISTEN_PORT=5551
     - ARG_IFACE_LIST=pci@eth1
     - ARG_CORE_LIST="0 1 2"
-
-  TE1-5552:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.85
-    network_mode: "host"
-    privileged: true
-    restart: "no"
-    volumes:
-      - /mnt/huge:/mnt/huge
-      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
-      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
-      - /sys/devices/system/node:/sys/devices/system/node
-      - /dev:/dev
-    environment:
-    - OPT_LISTEN_PORT=5552
-    - ARG_IFACE_LIST=pci@eth2
-    - ARG_CORE_LIST="3 4 5"
