@@ -30,10 +30,10 @@ terraform init
 terraform apply -auto-approve
 ```
 
-3. Make note of the **public_dns** value for **Agent1Eth0ElasticIp** in Outputs: section upon successful apply.
+3. Make note of the **fqdn** value for **Agent1Eth0PublicIpAddress** in Outputs: section upon successful apply.
 
 ```
-terraform output Agent1Eth0ElasticIp
+terraform output Agent1Eth0PublicIpAddress
 ```
 
 ![Outputs](./images/outputs.png)
