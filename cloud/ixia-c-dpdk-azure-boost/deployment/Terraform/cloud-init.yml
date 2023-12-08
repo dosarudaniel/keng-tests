@@ -6,6 +6,7 @@ packages:
   - jq
   - python3-pip
   - python3.10-venv
+  - linux-modules-extra-azure
 groups:
   - docker
 users:
@@ -32,6 +33,7 @@ runcmd:
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoExecPath}/*.sh
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
   - /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
+  - modprobe mana_ib
   - sudo -H -u ${UserName} bash -c 'docker-compose -f $HOME/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml up -d'
   - sudo -H -u ${UserName} bash -c 'docker-compose -f $HOME/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml ps'
 merge_how:

@@ -1,7 +1,6 @@
 #cloud-config
 package_upgrade: true
 packages:
-  - linux-modules-extra-azure
   - emacs
   - iperf
   - iperf3
@@ -13,7 +12,6 @@ runcmd:
   - Agent2Eth1MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth1PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - sed -i "s/00:AA:00:00:01:00/$Agent1Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
   - sed -i "s/00:AA:00:00:02:00/$Agent2Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
-  - modprobe mana_ib
 merge_how:
  - name: list
    settings: [append]

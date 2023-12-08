@@ -1,4 +1,4 @@
-# Ixia-c traffic engine deployment on Amazon Web Services with DPDK
+# Ixia-c traffic engine deployment on Microsoft Azure Boost with DPDK
 
 ## Overview
 This is a public cloud lab where [Ixia-c](https://github.com/open-traffic-generator/ixia-c) has two traffic ports connected within a single subnet of an AWS VPC.
@@ -40,6 +40,8 @@ terraform output Agent1Eth0ElasticIp
 
 4. Output the SSH key pair associated with the AWS instances and save the **private_key_pem** material to a file.
 
+5. Remove excess whitespace when copying key from output to avoid parse errors later on.
+
 ```
 terraform output SshKey
 nano ~/.ssh/SshKey.pem
@@ -47,13 +49,13 @@ nano ~/.ssh/SshKey.pem
 
 ![Ssh](./images/ssh.png)
 
-5. Connect to AWS instance using ssh client 
+6. Connect to AWS instance using ssh client 
 
 ```
-ssh -i ~/.ssh/SshKey.pem ec2-44-220-16-252.compute-1.amazonaws.com
+ssh -i ~/.ssh/SshKey.pem ubuntu@terraform-module-ubuntu-2204-lts-agent1-dns.southcentralus.cloudapp.azure.com
 ```
 
-6. Make sure you have application and traffic containers running:
+7. Make sure you have application and traffic containers running:
 
 ```
 docker ps
@@ -72,8 +74,8 @@ source ./venv/bin/activate
 2. Run flows via snappi script, reporting flow metrics
 
 ```
-cd ./keng-python/cloud/ixia-c-dpdk-aws/
-./rfc2544_test_n_flows.sh -s 9000
+cd ./keng-python/cloud/ixia-c-dpdk-azure-boost/
+./rfc2544_test_n_flows.sh -s 4000
 ```
 
 ![Results](./images/results.png)
