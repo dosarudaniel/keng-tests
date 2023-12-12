@@ -18,7 +18,7 @@ services:
     restart: always
 
   TE1-5551:
-    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana2 
+    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana4 
     network_mode: "host"
     privileged: true
     restart: "no"
@@ -30,11 +30,13 @@ services:
       - /dev:/dev
     environment:
     - OPT_LISTEN_PORT=5551
-    - ARG_IFACE_LIST=pci@eth1
+    - ARG_IFACE_LIST=pci@7870:00:00.0
+    - BUS_INFO=7870:00:00.0
+    - MANA_MAC=00:0d:3a:73:34:a2
     - ARG_CORE_LIST="0 1 2"
 
   TE1-5552:
-    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana2 
+    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana4 
     network_mode: "host"
     privileged: true
     restart: "no"
@@ -46,5 +48,7 @@ services:
       - /dev:/dev
     environment:
     - OPT_LISTEN_PORT=5552
-    - ARG_IFACE_LIST=pci@eth2
+    - BUS_INFO=7870:00:00.0
+    - MANA_MAC=00:0d:3a:73:3f:5e
+    - ARG_IFACE_LIST=pci@7870:00:00.0
     - ARG_CORE_LIST="3 4 5"
