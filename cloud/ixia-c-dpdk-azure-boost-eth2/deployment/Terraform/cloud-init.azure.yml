@@ -9,9 +9,13 @@ runcmd:
   - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
   - az login --service-principal --username ${ClientId} --password ${ClientSecret} --tenant ${TenantId}
   - Agent1Eth1MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent1Eth1PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
+  - Agent1Eth2MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent1Eth2PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - Agent2Eth1MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth1PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
+  - Agent2Eth2MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth2PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - sed -i "s/00:AA:00:00:01:00/$Agent1Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/00:AA:00:00:03:00/$Agent1Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
   - sed -i "s/00:AA:00:00:02:00/$Agent2Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/00:AA:00:00:04:00/$Agent2Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
 merge_how:
  - name: list
    settings: [append]

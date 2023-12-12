@@ -29,7 +29,9 @@ runcmd:
   - sudo -H -u ${UserName} bash -c 'source $HOME/venv/bin/activate; pip install -r $HOME/${GitRepoName}/${GitRepoExecPath}/py/requirements.txt; deactivate'
   - AgentBusInfoList=$(lshw -C network -json | jq '.[] | select( .businfo != null)' | jq -r .businfo)
   - AgentEth1BusInfo=$(echo $AgentBusInfoList | awk '{print $1}')
+  - AgentEth2BusInfo=$(echo $AgentBusInfoList | awk '{print $2}')
   - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - sed -i "s/pci@eth2/$AgentEth2BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoExecPath}/*.sh
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
   - /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh

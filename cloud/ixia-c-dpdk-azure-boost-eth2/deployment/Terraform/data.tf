@@ -26,7 +26,9 @@ data "cloudinit_config" "init_cli" {
 		content_type = "text/cloud-config"
 		content = templatefile("cloud-init.azure.yml", {
 			Agent1Eth1PrivateIpAddresses: local.Agent1Eth1IpAddresses
+			Agent1Eth2PrivateIpAddresses: local.Agent1Eth2IpAddresses	
 			Agent2Eth1PrivateIpAddresses: local.Agent2Eth1IpAddresses
+			Agent2Eth2PrivateIpAddresses: local.Agent2Eth2IpAddresses
 			ClientId: local.ClientId
 			ClientSecret: local.ClientSecret
 			GitRepoConfigPath: local.GitRepoConfigPath
