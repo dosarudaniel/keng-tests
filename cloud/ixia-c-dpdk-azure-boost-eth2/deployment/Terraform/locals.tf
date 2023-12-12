@@ -13,7 +13,7 @@ locals {
 	ClientSecret = var.ClientSecret
 	DockerComposeServices = yamldecode(file("../docker-compose.yaml"))["services"]
 	GitRepoConfigPath = "${local.GitRepoExecPath}/configs"
-	GitRepoExecPath = "cloud/ixia-c-dpdk-azure-boost"
+	GitRepoExecPath = "cloud/ixia-c-dpdk-azure-boost-eth2"
 	GitRepoDeployPath = "${local.GitRepoExecPath}/deployment/"
 	GitRepoName = var.GitRepoName
 	GitRepoUrl = var.GitRepoUrl
