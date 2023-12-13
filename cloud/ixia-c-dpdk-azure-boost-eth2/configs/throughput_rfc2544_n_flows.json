@@ -62,11 +62,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:AA:00:00:02:00"
+                            "value": "Agent2Eth1MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:AA:00:00:01:00"
+                            "value": "Agent1Eth1MacAddress"
                         }
                     }
                 },
@@ -130,11 +130,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:AA:00:00:04:00"
+                            "value": "Agent2Eth2MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:AA:00:00:03:00"
+                            "value": "Agent1Eth2MacAddress"
                         }
                     }
                 },
