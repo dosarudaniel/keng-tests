@@ -18,7 +18,7 @@ services:
     restart: always
 
   TE1-5551:
-    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana4
+    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana7
     network_mode: "host"
     privileged: true
     restart: "no"
@@ -36,7 +36,7 @@ services:
     - ARG_CORE_LIST="0 1 2"
 
   TE1-5552:
-    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana4
+    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana7
     network_mode: "host"
     privileged: true
     restart: "no"
