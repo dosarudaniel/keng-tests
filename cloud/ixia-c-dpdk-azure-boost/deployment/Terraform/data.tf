@@ -30,6 +30,7 @@ data "cloudinit_config" "init_cli" {
 			ClientId: local.ClientId
 			ClientSecret: local.ClientSecret
 			GitRepoConfigPath: local.GitRepoConfigPath
+			GitRepoDeployPath: local.GitRepoDeployPath
 			GitRepoExecPath: local.GitRepoExecPath
 			GitRepoName: local.GitRepoName
 			TenantId: local.TenantId
