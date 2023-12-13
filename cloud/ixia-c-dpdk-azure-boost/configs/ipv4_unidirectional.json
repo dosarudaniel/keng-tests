@@ -5,32 +5,8 @@
             "location": "localhost:5551"
         },
         {
-            "name": "VM1-TE2",
-            "location": "localhost:5552"
-        },
-        {
-            "name": "VM1-TE3",
-            "location": "localhost:5553"
-        },
-        {
-            "name": "VM1-TE4",
-            "location": "localhost:5554"
-        },
-        {
             "name": "VM2-TE1",
-            "location": "10.3.147.36:5551"
-        },
-        {
-            "name": "VM2-TE2",
-            "location": "10.3.147.36:5552"
-        },
-        {
-            "name": "VM2-TE3",
-            "location": "10.3.147.36:5553"
-        },
-        {
-            "name": "VM2-TE4",
-            "location": "10.3.147.36:5554"
+            "location": "10.0.10.12:5551"
         }
     ],
     "layer1": [
@@ -38,15 +14,9 @@
             "name": "l1",
             "port_names": [
                 "VM1-TE1",
-                "VM1-TE2",
-                "VM1-TE3",
-                "VM1-TE4",
-                "VM2-TE1",
-                "VM2-TE2",
-                "VM2-TE3",
-                "VM2-TE4"
+                "VM2-TE1"
             ],
-            "speed": "speed_100_gbps"
+            "speed": "speed_200_gbps"
         }
     ],
     "flows": [
@@ -56,7 +26,7 @@
                 "choice": "port",
                 "port": {
                     "tx_name": "VM1-TE1",
-                    "rx_name": "VM2-TE1"
+                    "rx_names": ["VM2-TE1"]
                 }
             },
             "metrics": {
@@ -64,7 +34,7 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 9000
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
@@ -82,11 +52,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:25"
+                            "value": "Agent2Eth1MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:19"
+                            "value": "Agent1Eth1MacAddress"
                         }
                     }
                 },
@@ -95,11 +65,24 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "1.1.1.1"
+                            "value": "10.0.2.22"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "1.1.1.2"
+                            "value": "10.0.2.12"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 443
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 443
                         }
                     }
                 }
