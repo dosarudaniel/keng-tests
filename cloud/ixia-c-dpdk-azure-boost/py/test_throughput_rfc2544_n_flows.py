@@ -3,7 +3,7 @@ import pytest
 import time
 import json
 
-THEORETICAL_MAX_LINK_SPEED = 100    #  Gbps
+THEORETICAL_MAX_LINK_SPEED = 200    #  Gbps
 PACKET_LOSS_TOLERANCE      = 1.0   # percent
 NO_DETERMINATION_STEPS     = 10
 NO_VALIDATION_STEPS        = 5
