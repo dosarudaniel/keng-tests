@@ -1,5 +1,5 @@
 # Enable 2MB hugepages.
-echo 1024 | tee /sys/devices/system/node/node*/hugepages/hugepages-2048kB/nr_hugepages
+echo 2048 | tee /sys/devices/system/node/node*/hugepages/hugepages-2048kB/nr_hugepages
 
 # Assuming use of eth1 for DPDK in this demo
 PRIMARY="eth1"
