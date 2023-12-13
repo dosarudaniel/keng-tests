@@ -7,7 +7,7 @@
     "10.0.10.12:5551"
   ],
   "soft_dut": "localhost:22",
-  "speed": "speed_200_gbps",
+  "speed": "speed_100_gbps",
   "line_rate": 100,
   "mtu": 1500,
   "promiscuous": true,
