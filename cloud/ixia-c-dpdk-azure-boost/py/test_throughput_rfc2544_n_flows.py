@@ -223,7 +223,7 @@ def test_throughput_rfc2544_n_flows(api, direction, frame_sizes):
     flows = {}
 
     for flow in cfg.flows:
-        flows[flow.name] = find_location_by_name(cfg.ports, flow.tx_rx.port.rx_names[0]) + \
+        flows[flow.name] = find_location_by_name(cfg.ports, flow.tx_rx.port.tx_name) + \
                              " -> " + \
                            find_location_by_name(cfg.ports, flow.tx_rx.port.rx_names[0])
 
