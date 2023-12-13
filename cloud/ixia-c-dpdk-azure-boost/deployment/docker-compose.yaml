@@ -18,7 +18,7 @@ services:
     restart: always
 
   TE1-5551:
-    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana2 
+    image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.101-msft-mana4
     network_mode: "host"
     privileged: true
     restart: "no"
@@ -31,4 +31,6 @@ services:
     environment:
     - OPT_LISTEN_PORT=5551
     - ARG_IFACE_LIST=pci@eth1
+    - BUS_INFO=bus@eth1
+    - MANA_MAC=mac@eth1
     - ARG_CORE_LIST="0 1 2"
