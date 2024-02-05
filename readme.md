@@ -62,9 +62,9 @@ sudo bash -x setup4.sh eth1 eth2 eth3 eth4 10.3.147.211
 sudo docker-compose -f docker-compose_4TE.yaml up -d
 ```
 
-On the second VM you should deploy the (RX) traffic engines, run as a root:
+On the second VM you should deploy the (TX) traffic engines, controller and license server:
 ```
-ssh ixia@10.3.147.212
+ssh ixia@10.3.147.211
 cd ixia-c-tests/deployment/
 ip a sh # check the interface names - usually we bind eth1, eth2, eth3 and eth4
 sudo bash -x setup4.sh eth1 eth2 eth3 eth4 10.3.147.211  
@@ -89,27 +89,22 @@ You should see 4 Traffic Engines and 1 controller.
 On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip address of the second VM in the ports array - here is an example (snippet from `/home/ixia/ixia-c-tests/settings.json`). We have 4 ports per VM:
 ```
   "ports": [
-    "localhost:5551",
-    "localhost:5552",
-    "localhost:5553",
-    "localhost:5554",
-    "192.168.0.56:5551",
-    "192.168.0.56:5552",
-    "192.168.0.56:5553",
-    "192.168.0.56:5554"
+    "10.3.147.211:5551",
+    "10.3.147.211:5552",
+    "10.3.147.211:5553",
+    "10.3.147.211:5554",
+    "10.3.147.212:5551",
+    "10.3.147.212:5552",
+    "10.3.147.212:5553",
+    "10.3.147.212:5554"
   ],
-```
-
-For multiple flows tests you can easily change the frame size, number of packet to be sent for all the flow from the `./py/test_ipv4_unidirectional_4_flows.py` file by changing these variables:
-``` 
-FRAME_SIZE = 4100
 ```
 
 ## Running tests
 
 ### 4 flows tests:
-To start testing on the controller VM:
-`/home/ixia/ixia-c-test/unidirectional_test_4_flows.sh`
+To start testing on the controller VM check the help menu:
+`./unidirectional_test_4_flows.sh -h` 
 
 
 ## Further optimizations
