@@ -1,0 +1,94 @@
+version: '3'
+
+services:
+
+  #  KENG-License-Server:
+  #   image: docker-local-athena.artifactory.it.keysight.com/keng-license-server:latest
+  #  container_name: keng-license-server
+  #  restart: always
+  #  ports:
+  #    - "7443:7443"
+  #    - "9443:9443"
+  #  command: --accept-eula
+
+  #controller:
+  #  image: ghcr.io/open-traffic-generator/keng-controller:0.1.0-3
+  #  command: --accept-eula --http-port 8443  --license-servers=localhost
+  #  network_mode: "host"
+  #  restart: always
+
+  TE1-5551:
+    image: docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana10
+    network_mode: "host"
+    # command: sleep infinity
+    privileged: true
+    restart: "no"
+    volumes:
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment:
+    - OPT_LISTEN_PORT=5551
+    - ARG_IFACE_LIST=pci@${BUS_INFO1}
+    - BUS_INFO=${BUS_INFO1}
+    - MANA_MAC=${MANA_MAC1}
+    - ARG_CORE_LIST="0 1 2"
+
+  TE2-5552:
+    image: docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana10
+    network_mode: "host"
+    command: bash -c "sleep 3 && ./entrypoint.sh"
+    privileged: true
+    restart: "no"
+    volumes:
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment:
+    - OPT_LISTEN_PORT=5552
+    - ARG_IFACE_LIST=pci@${BUS_INFO2}
+    - BUS_INFO=${BUS_INFO2}
+    - MANA_MAC=${MANA_MAC2}
+    - ARG_CORE_LIST="3 4 5"
+
+  TE3-5553:
+    image: docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana10
+    network_mode: "host"
+    command: bash -c "sleep 6 && ./entrypoint.sh"
+    privileged: true
+    restart: "no"
+    volumes:
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment:
+    - OPT_LISTEN_PORT=5553
+    - ARG_IFACE_LIST=pci@${BUS_INFO3}
+    - BUS_INFO=${BUS_INFO3}
+    - MANA_MAC=${MANA_MAC3}
+    - ARG_CORE_LIST="6 7 8"
+
+  TE4-5554:
+    image: docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana10
+    network_mode: "host"
+    command: bash -c "sleep 9 && ./entrypoint.sh"
+    privileged: true
+    restart: "no"
+    volumes:
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment:
+    - OPT_LISTEN_PORT=5554
+    - ARG_IFACE_LIST=pci@${BUS_INFO4}
+    - BUS_INFO=${BUS_INFO4}
+    - MANA_MAC=${MANA_MAC4}
+    - ARG_CORE_LIST="9 10 11"
