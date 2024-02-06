@@ -71,7 +71,7 @@ sudo bash -x setup4.sh eth1 eth2 eth3 eth4 10.3.147.211
 sudo docker-compose -f docker-compose_4TE.yaml up -d
 cd ..
 ./fill_config.sh
-./unidirectional_test_4_flows.sh -s 1500
+./unidirectional_test.sh -s 1500
 ```
 
 To validate that the deployment was succesful, run on VM1 :
