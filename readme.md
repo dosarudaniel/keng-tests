@@ -56,55 +56,46 @@ Before running the above tests we need to deploy the Keysight Elastic Network Ge
 On the first VM we should deploy the traffic engines and the controller. To do that execute as a root the following:
 ```
 ssh ixia@10.3.147.212
-cd ixia-c-tests/deployment/
-ip a sh    # check the interface names - usually we bind eth1, eth2, eth3 and eth4
-sudo bash -x setup4.sh eth1 eth2 eth3 eth4 10.3.147.211  
-sudo docker-compose -f docker-compose_4TE.yaml up -d
+cd
+ip a sh        # check the interface names - usually we bind eth1, eth2, eth3 and eth4, but you can choose 1,2 or 4 interfaces
+sudo CONTROLLER_IP=10.3.147.3 bash -x setup.sh eth1 eth2 eth3 eth4        # this will also start the docker containers
 ```
 
 On the second VM you should deploy the (TX) traffic engines, controller and license server:
 ```
 ssh ixia@10.3.147.211
-cd ixia-c-tests/deployment/
-ip a sh # check the interface names - usually we bind eth1, eth2, eth3 and eth4
-sudo bash -x setup4.sh eth1 eth2 eth3 eth4 10.3.147.211  
-sudo docker-compose -f docker-compose_4TE.yaml up -d
+cd
+ip a sh       # check the interface names - usually we bind eth1, eth2, eth3 and eth4, but you can choose 1,2 or 4 interfaces
+sudo CONTROLLER_IP=10.3.147.3 bash -x setup4.sh eth1 eth2 eth3 eth4        # this will also start the docker containers
+```
+
+On the controller VM:
+```
+ssh ixia@10.3.147.3
+cd ixia-c-tests
+cd deployment 
+sudo docker-compose up -d 
 cd ..
-./fill_config.sh
+./configure.sh
+./unidirectional_test.sh -h  # Check the help menu to see how to use the test script
 ./unidirectional_test.sh -s 1500
 ```
 
 To validate that the deployment was succesful, run on VM1 :
 ```
 CONTAINER ID   IMAGE                                                                                              COMMAND                  CREATED             STATUS             PORTS                                                                                  NAMES
-03a120e73861   ghcr.io/open-traffic-generator/keng-controller:0.1.0-3                                             "./bin/controller --…"   About an hour ago   Up About an hour                                                                                          deployment_controller_1
 26154ca8599a   docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana11   "bash -c 'sleep 3 &&…"   About an hour ago   Up About an hour                                                                                          deployment_TE2-5552_1
 55ac37fe9c0a   docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana11   "./entrypoint.sh"        About an hour ago   Up About an hour                                                                                          deployment_TE1-5551_1
 11f348a452a3   docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana11   "bash -c 'sleep 9 &&…"   About an hour ago   Up About an hour                                                                                          deployment_TE4-5554_1
 b87aa23c567d   docker-local-ixvm-lbj.artifactorylbj.it.keysight.com/athena-traffic-engine:1.6.0.101-msft-mana11   "bash -c 'sleep 6 &&…"   About an hour ago   Up About an hour                                                                                          deployment_TE3-5553_1
-fe2fa8a19c23   docker-local-athena.artifactory.it.keysight.com/keng-license-server:latest                         "./bin/licenseserver…"   About an hour ago   Up About an hour   0.0.0.0:7443->7443/tcp, :::7443->7443/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   keng-license-server
 ```
-You should see 4 Traffic Engines and 1 controller.
-
-On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip address of the second VM in the ports array - here is an example (snippet from `/home/ixia/ixia-c-tests/settings.json`). We have 4 ports per VM:
-```
-  "ports": [
-    "10.3.147.211:5551",
-    "10.3.147.211:5552",
-    "10.3.147.211:5553",
-    "10.3.147.211:5554",
-    "10.3.147.212:5551",
-    "10.3.147.212:5552",
-    "10.3.147.212:5553",
-    "10.3.147.212:5554"
-  ],
-```
+You should see 4 Traffic Engines.
 
 ## Running tests
 
 ### 4 flows tests:
 To start testing on the controller VM check the help menu:
-`./unidirectional_test_4_flows.sh -h` 
+`./unidirectional_test.sh -h` 
 
 
 ## Further optimizations
