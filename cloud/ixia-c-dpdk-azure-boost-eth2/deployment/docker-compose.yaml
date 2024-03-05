@@ -34,7 +34,7 @@ services:
     - ARG_IFACE_LIST=pci@eth1
     - MAC_LIST=mac@eth1
     - ARG_CORE_LIST="0 1 2"
-    - VMBUS_LIST=f8615163-0002-1000-2000-000d3a72246a  
+    - VMBUS_LIST=f8615163-0002-1000-2000-000d3a72246a
 
   TE1-5552:
     image: ghcr.io/armdupre/athena-traffic-engine:1.6.0.102
