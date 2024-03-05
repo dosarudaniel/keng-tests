@@ -1,6 +1,7 @@
 #cloud-config
 package_upgrade: true
 packages:
+  - linux-modules-extra-azure
   - emacs
   - iperf
   - iperf3
@@ -12,10 +13,14 @@ runcmd:
   - Agent1Eth2MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent1Eth2PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - Agent2Eth1MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth1PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - Agent2Eth2MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth2PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
-  - sed -i "s/00:AA:00:00:01:00/$Agent1Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
-  - sed -i "s/00:AA:00:00:03:00/$Agent1Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
-  - sed -i "s/00:AA:00:00:02:00/$Agent2Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
-  - sed -i "s/00:AA:00:00:04:00/$Agent2Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent1Eth1MacAddress/$Agent1Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent2Eth1MacAddress/$Agent2Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - modprobe mana_ib
+  - AgentEth1MacAddress=$(cat /sys/class/net/eth1/address)
+  - sed -i "s/mac@eth1/$AgentEth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
+  - sudo -H -u ${UserName} bash -c 'docker-compose -f /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml up -d'
+  - sudo -H -u ${UserName} bash -c 'docker-compose -f /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml ps'
 merge_how:
  - name: list
    settings: [append]

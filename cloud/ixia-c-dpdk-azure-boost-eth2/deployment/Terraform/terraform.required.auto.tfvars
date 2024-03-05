@@ -4,7 +4,7 @@
 # KengContainerRegistryToken = "ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 # KengContainerRegistryUser = "terraform"
 # PublicSecurityRuleSourceIpPrefixes = [ "1.1.1.1/32" ]
-# ResourceGroupName = "azure-ubuntu-linux-2-agents"
+# ResourceGroupName = "azure-boost-ubuntu-linux-2-agents-2-eth"
 # SubscriptionId = "00000000-0000-0000-0000-000000000000"
 # TenantId = "00000000-0000-0000-0000-000000000000"
 # UserEmailTag = "terraform@example.com"
