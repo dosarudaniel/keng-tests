@@ -2,35 +2,19 @@
     "ports": [
         {
             "name": "VM1-TE1",
-            "location": ""
+            "location": "localhost:5551"
         },
         {
             "name": "VM1-TE2",
-            "location": ""
-        },
-        {
-            "name": "VM1-TE3",
-            "location": ""
-        },
-        {
-            "name": "VM1-TE4",
-            "location": ""
+            "location": "localhost:5552"
         },
         {
             "name": "VM2-TE1",
-            "location": ""
+            "location": "10.0.10.12:5551"
         },
         {
             "name": "VM2-TE2",
-            "location": ""
-        },
-        {
-            "name": "VM2-TE3",
-            "location": ""
-        },
-        {
-            "name": "VM2-TE4",
-            "location": ""
+            "location": "10.0.10.12:5552"
         }
     ],
     "layer1": [
@@ -39,14 +23,10 @@
             "port_names": [
                 "VM1-TE1",
                 "VM1-TE2",
-                "VM1-TE3",
-                "VM1-TE4",
                 "VM2-TE1",
-                "VM2-TE2",
-                "VM2-TE3",
-                "VM2-TE4"
+                "VM2-TE2"
             ],
-            "speed": "speed_100_gbps"
+            "speed": "speed_200_gbps"
         }
     ],
     "flows": [
@@ -64,11 +44,11 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 100 
+                "percentage": 50
             },
             "duration": {
                 "choice": "fixed_seconds",
@@ -82,11 +62,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:25"
+                            "value": "00:0d:3a:63:66:b5"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:19"
+                            "value": "00:0d:3a:63:66:e7"
                         }
                     }
                 },
@@ -95,11 +75,24 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "1.1.1.1"
+                            "value": "10.0.2.22"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "1.1.1.2"
+                            "value": "10.0.2.12"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 643
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 543
                         }
                     }
                 }
@@ -119,11 +112,11 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 100
+                "percentage": 50
             },
             "duration": {
                 "choice": "fixed_seconds",
@@ -137,11 +130,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:18"
+                            "value": "00:0d:3a:63:69:f7"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1c"
+                            "value": "00:0d:3a:63:65:a6"
                         }
                     }
                 },
@@ -150,23 +143,36 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "1.1.1.1"
+                            "value": "10.0.2.122"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "1.1.1.2"
+                            "value": "10.0.2.112"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 443
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 445
                         }
                     }
                 }
             ]
         },
         {
-            "name": "f3",
+            "name": "f1-b",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE3",
-                    "rx_names": ["VM2-TE3"]
+                    "tx_name": "VM2-TE1",
+                    "rx_names": ["VM1-TE1"]
                 }
             },
             "metrics": {
@@ -174,11 +180,11 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 100
+                "percentage": 50
             },
             "duration": {
                 "choice": "fixed_seconds",
@@ -192,11 +198,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:1a"
+                            "value": "00:0d:3a:63:66:e7"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1b"
+                            "value": "00:0d:3a:63:66:b5"
                         }
                     }
                 },
@@ -205,23 +211,36 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "1.1.1.1"
+                            "value": "10.0.2.12"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "1.1.1.2"
+                            "value": "10.0.2.22"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 543
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 643
                         }
                     }
                 }
             ]
         },
         {
-            "name": "f4",
+            "name": "f2-b",
             "tx_rx": {
                 "choice": "port",
                 "port": {
-                    "tx_name": "VM1-TE4",
-                    "rx_names": ["VM2-TE4"]
+                    "tx_name": "VM2-TE2",
+                    "rx_names": ["VM1-TE2"]
                 }
             },
             "metrics": {
@@ -229,11 +248,11 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1518
+                "fixed": 1500
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 100
+                "percentage": 50
             },
             "duration": {
                 "choice": "fixed_seconds",
@@ -247,11 +266,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:19"
+                            "value": "00:0d:3a:63:65:a6"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1a"
+                            "value": "00:0d:3a:63:69:f7"
                         }
                     }
                 },
@@ -260,11 +279,24 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "1.1.1.1"
+                            "value": "10.0.2.112"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "1.1.1.2"
+                            "value": "10.0.2.122"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 445
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 443
                         }
                     }
                 }

@@ -60,15 +60,13 @@ echo "duration=$duration"
 echo "line_rate_per_flow=$line_rate_per_flow"
 echo "direction=$direction"
 
-cd /home/ixia/ixia-c-tests
-
-echo "Running test: python3 -m pytest ./py/test_ipv4_unidirectional_4_flows.py \
+echo "Running test: python3 -m pytest ./py/test_ipv4_unidirectionals.py \
  --frame_size $frame_size \
  --duration $duration \
  --line_rate_per_flow $line_rate_per_flow \
  --direction $direction"
 
-python3 -m pytest ./py/test_ipv4_unidirectional_4_flows.py \
+python3 -m pytest ./py/test_ipv4_unidirectional.py \
  --frame_size $frame_size \
  --duration $duration \
  --line_rate_per_flow $line_rate_per_flow \

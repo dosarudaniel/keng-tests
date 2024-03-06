@@ -3,27 +3,25 @@ import pytest
 import dpkt
 import time
 
-def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow, direction):
+def test_ipv4_bidirectional(api, duration, frame_size, line_rate_per_flow):
     """
-    Configure a single unidirectional IPV4 flow
+    Configure a single bidirectional IPV4 flow
     """
     cfg = utils.load_test_config(
-        api, 'throughput_rfc2544_n_flows.json', apply_settings=True
+        api, 'tcp_bidir_2TEs.json', apply_settings=True
     )
 
-    if direction == "downstream":
-        # change direction
-        for flow in cfg.flows:
-            flow.tx_rx.port.rx_names[0], flow.tx_rx.port.tx_name = flow.tx_rx.port.tx_name, flow.tx_rx.port.rx_names[0]
-            flow.packet[0].dst.value, flow.packet[0].src.value = flow.packet[0].src.value, flow.packet[0].dst.value 
-            #print(flow.packet[0])
+    assert len(cfg.flows) % 2 == 0,  \
+        "This is a bidirectional traffic test. " \
+        "The config file should have an even number of flows"
 
     TIMEOUT = 5
+    ROW_SIZE = 40
 
     MAX_FRAME_SIZE = 9000
     MIN_FRAME_SIZE = 64
 
-    MAX_LINE_RATE_PER_FLOW = 200/len(cfg.flows)
+    MAX_LINE_RATE_PER_FLOW = 200 / len(cfg.flows) * 2
 
     MIN_DURATION = 1
 
@@ -49,9 +47,8 @@ def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow, dire
 
     print("\n\nConfiguring each flow with:\n" \
             "   Frame size:           {}B\n" \
-            "   Direction:            {}\n" \
             "   Duration:             {}s\n" \
-            "   Line rate percentage: {}%\n".format(frame_size, direction, duration, line_rate_per_flow))
+            "   Line rate percentage: {}%\n".format(frame_size, duration, line_rate_per_flow))
     time.sleep(2)
 
     for flow in cfg.flows:
@@ -67,15 +64,46 @@ def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow, dire
     utils.wait_for(
         lambda: results_ok(api, size),
         'stats to be as expected',
-        timeout_seconds=duration + TIMEOUT
+        timeout_seconds = duration + TIMEOUT
     )
     utils.stop_traffic(api, cfg)
 
     _, flow_results = utils.get_all_stats(api)
+
+    middle_index = (int) (len(flow_results) / 2)
+    s1_flows_results = flow_results[:middle_index]
+    s2_flows_results = flow_results[middle_index:]
+    
+    # for flow_res in s1_flows_results:
+    #     print(flow_res.name)
+    #     print(flow_res.frames_tx)
+    #     print(flow_res.frames_rx)
+
+    # print('')
+    # for flow_res in s2_flows_results:
+    #     print(flow_res.name)
+    #     print(flow_res.frames_tx)
+    #     print(flow_res.frames_rx)
+
+    frames_s1_to_s2_tx = sum([flow_res.frames_tx for flow_res in s1_flows_results])
+    frames_s2_to_s1_tx = sum([flow_res.frames_tx for flow_res in s2_flows_results])
+    
+    frames_s1_to_s2_rx = sum([flow_res.frames_rx for flow_res in s1_flows_results])
+    frames_s2_to_s1_rx = sum([flow_res.frames_rx for flow_res in s2_flows_results])
+
     flows_total_tx = sum([flow_res.frames_tx for flow_res in flow_results])
     flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
-    print("\n\nDirection {}".format(direction))
-    print("Frame size: {}B".format(frame_size))
+    print("\n\nFrame size: {}B".format(frame_size))
+    print("Average s1 --> s2 TX L2 rate {} Gbps".format(round(frames_s1_to_s2_tx * frame_size * 8 / duration / 1000000000, 3)))
+    print("Average s1 --> s2 RX L2 rate {} Gbps".format(round(frames_s1_to_s2_rx * frame_size * 8 / duration / 1000000000, 3)))
+    
+    print("Average s2 --> s1 TX L2 rate {} Gbps".format(round(frames_s2_to_s1_tx * frame_size * 8 / duration / 1000000000, 3)))
+    print("Average s2 --> s1 RX L2 rate {} Gbps".format(round(frames_s2_to_s1_rx * frame_size * 8 / duration / 1000000000, 3)))
+    
+    print("Total s1 --> s2 lost packets {}".format(frames_s1_to_s2_tx - frames_s1_to_s2_rx))
+    print("Total s2 --> s1 lost packets {}\n".format(frames_s2_to_s1_tx - frames_s2_to_s1_rx))
+
+    print("-" * ROW_SIZE)
     print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * size * 8 / duration / 1000000000, 3)))
     print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * size * 8 / duration / 1000000000, 3)))
     print("Total lost packets {}".format(flows_total_tx - flows_total_rx))
@@ -111,4 +139,3 @@ def results_ok(api, size, csv_dir=None):
     return ok and all(
         [f.transmit == 'stopped' for f in flow_results]
     )
-

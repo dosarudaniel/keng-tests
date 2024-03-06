@@ -3,14 +3,13 @@
 help()
 {
     echo "Usage:"
-    echo " $0 [-s <frame_size>] [-t <test_time>] [-l <line_rate_per_flow>] [-d direction]"
+    echo " $0 [-s <frame_size>] [-t <test_time>] [-l <line_rate_per_flow>]"
     echo "   -s <frame_size>          --- int - bytes, e.g. 9000"
     echo "   -t <test_time>           --- int - seconds, e.g. 10"
     echo "   -l <line_rate_per_flow>  --- float - percentage, e.g. 23.5"
-    echo "   -d <direction>           --- string - upstream or downstream"
 }
 
-while getopts "hs:t:l:d:" option; do
+while getopts "hs:t:l:" option; do
     case $option in
         h) # display Help
             help
@@ -26,11 +25,7 @@ while getopts "hs:t:l:d:" option; do
         l) #line_rate_per_flow
             echo $OPTARG
             line_rate_per_flow=$OPTARG 
-            ;;
-        d) #direction
-            echo $OPTARG
-            direction=$OPTARG 
-            ;; 
+            ;;  
     esac
 done
 
@@ -50,26 +45,16 @@ then
    line_rate_per_flow=100
 fi
 
-if [ -z "$direction" ]
-then
-   direction="upstream"
-fi
-
 echo "frame_size=$frame_size"
 echo "duration=$duration"
 echo "line_rate_per_flow=$line_rate_per_flow"
-echo "direction=$direction"
 
-cd /home/ixia/ixia-c-tests
-
-echo "Running test: python3 -m pytest ./py/test_ipv4_unidirectionals.py \
+echo "Running test: python3 -m pytest ./py/test_ipv4_bidirectional.py \
  --frame_size $frame_size \
  --duration $duration \
- --line_rate_per_flow $line_rate_per_flow \
- --direction $direction"
+ --line_rate_per_flow $line_rate_per_flow"
 
-python3 -m pytest ./py/test_ipv4_unidirectional.py \
+python3 -m pytest ./py/test_bidirectional.py \
  --frame_size $frame_size \
  --duration $duration \
- --line_rate_per_flow $line_rate_per_flow \
- --direction $direction
+ --line_rate_per_flow $line_rate_per_flow
