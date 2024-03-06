@@ -17,6 +17,16 @@ runcmd:
   - sed -i "s/Agent1Eth2MacAddress/$Agent1Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json    
   - sed -i "s/Agent2Eth1MacAddress/$Agent2Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
   - sed -i "s/Agent2Eth2MacAddress/$Agent2Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - Agent1Eth1IpAddress=${Agent1Eth1PrivateIpAddresses[0]}
+  - Agent1Eth2IpAddress=${Agent1Eth2PrivateIpAddresses[0]}
+  - Agent2Eth0IpAddress=${Agent2Eth0IpAddress}
+  - Agent2Eth1IpAddress=${Agent2Eth1PrivateIpAddresses[0]}
+  - Agent2Eth2IpAddress=${Agent2Eth2PrivateIpAddresses[0]}
+  - sed -i "s/Agent1Eth1IpAddress/$Agent1Eth1IpAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent1Eth2IpAddress/$Agent1Eth2IpAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json    
+  - sed -i "s/Agent2Eth0IpAddress/$Agent2Eth0IpAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent2Eth1IpAddress/$Agent2Eth1IpAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent2Eth2IpAddress/$Agent2Eth2IpAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
   - modprobe mana_ib
   - AgentEth1MacAddress=$(cat /sys/class/net/eth1/address)
   - AgentEth2MacAddress=$(cat /sys/class/net/eth2/address)

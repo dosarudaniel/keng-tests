@@ -10,11 +10,11 @@
         },
         {
             "name": "VM2-TE1",
-            "location": "10.0.10.12:5551"
+            "location": "Agent2Eth0IpAddress:5551"
         },
         {
             "name": "VM2-TE2",
-            "location": "10.0.10.12:5552"
+            "location": "Agent2Eth0IpAddress:5552"
         }
     ],
     "layer1": [
@@ -62,11 +62,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:66:b5"
+                            "value": "Agent2Eth1MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:66:e7"
+                            "value": "Agent1Eth1MacAddress"
                         }
                     }
                 },
@@ -75,11 +75,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "10.0.2.22"
+                            "value": "Agent2Eth1IpAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "10.0.2.12"
+                            "value": "Agent1Eth1IpAddress"
                         }
                     }
                 },
@@ -130,11 +130,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:69:f7"
+                            "value": "Agent2Eth2MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:65:a6"
+                            "value": "Agent1Eth2MacAddress"
                         }
                     }
                 },
@@ -143,11 +143,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "10.0.2.122"
+                            "value": "Agent2Eth2IpAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "10.0.2.112"
+                            "value": "Agent1Eth2IpAddress"
                         }
                     }
                 },
@@ -198,11 +198,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:66:e7"
+                            "value": "Agent1Eth1MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:66:b5"
+                            "value": "Agent2Eth1MacAddress"
                         }
                     }
                 },
@@ -211,11 +211,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "10.0.2.12"
+                            "value": "Agent1Eth1IpAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "10.0.2.22"
+                            "value": "Agent2Eth1IpAddress"
                         }
                     }
                 },
@@ -266,11 +266,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:65:a6"
+                            "value": "Agent1Eth2MacAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:0d:3a:63:69:f7"
+                            "value": "Agent2Eth2MacAddress"
                         }
                     }
                 },
@@ -279,11 +279,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "10.0.2.112"
+                            "value": "Agent1Eth2IpAddress"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "10.0.2.122"
+                            "value": "Agent2Eth2IpAddress"
                         }
                     }
                 },
