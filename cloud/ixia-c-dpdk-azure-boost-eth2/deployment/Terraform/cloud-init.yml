@@ -31,8 +31,8 @@ runcmd:
   - AgentEth2BusInfo=$(echo $AgentBusInfoList | awk '{print $2}')
   - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - sed -i "s/pci@eth2/$AgentEth2BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
-  - AgentEth1VmBus=$(cat /sys/class/uio/uio0/device/device_id | sed 's/{\([^}]*\)}/\1/')
-  - AgentEth2VmBus=$(cat /sys/class/uio/uio1/device/device_id | sed 's/{\([^}]*\)}/\1/')
+  - AgentEth1VmBus=$(readlink /sys/class/net/eth1/device | xargs basename)
+  - AgentEth2VmBus=$(readlink /sys/class/net/eth2/device | xargs basename)
   - sed -i "s/vmbus@eth1/$AgentEth1VmBus/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - sed -i "s/vmbus@eth2/$AgentEth2VmBus/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoExecPath}/*.sh
