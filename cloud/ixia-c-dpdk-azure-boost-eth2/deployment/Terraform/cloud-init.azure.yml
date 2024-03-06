@@ -14,10 +14,18 @@ runcmd:
   - Agent2Eth1MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth1PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - Agent2Eth2MacAddress=$(az network nic list --query "[].{Name:name, IP:ipConfigurations[0].privateIPAddress, MAC:macAddress}[?IP=='${Agent2Eth2PrivateIpAddresses[0]}']" --output json | jq .[0].MAC --raw-output | tr '-' ':')
   - sed -i "s/Agent1Eth1MacAddress/$Agent1Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent1Eth2MacAddress/$Agent1Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json    
   - sed -i "s/Agent2Eth1MacAddress/$Agent2Eth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
+  - sed -i "s/Agent2Eth2MacAddress/$Agent2Eth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoConfigPath}/*.json
   - modprobe mana_ib
   - AgentEth1MacAddress=$(cat /sys/class/net/eth1/address)
+  - AgentEth2MacAddress=$(cat /sys/class/net/eth2/address)
   - sed -i "s/mac@eth1/$AgentEth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - sed -i "s/mac@eth2/$AgentEth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - AgentEth1VmBus=$(cat /sys/class/uio/uio0/device/device_id | sed 's/{\([^}]*\)}/\1/')
+  - AgentEth2VmBus=$(cat /sys/class/uio/uio1/device/device_id | sed 's/{\([^}]*\)}/\1/')
+  - sed -i "s/vmbus@eth1/$AgentEth1VmBus/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - sed -i "s/vmbus@eth2/$AgentEth2VmBus/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
   - sudo -H -u ${UserName} bash -c 'docker-compose -f /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml up -d'
   - sudo -H -u ${UserName} bash -c 'docker-compose -f /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml ps'

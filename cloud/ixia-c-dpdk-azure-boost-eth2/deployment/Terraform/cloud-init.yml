@@ -29,9 +29,7 @@ runcmd:
   - AgentBusInfoList=$(lshw -C network -json | jq '.[] | select( .businfo != null)' | jq -r .businfo)
   - AgentEth1BusInfo=$(echo $AgentBusInfoList | awk '{print $1}')
   - AgentEth2BusInfo=$(echo $AgentBusInfoList | awk '{print $2}')
-  - AgentEth1BusNum=$(echo $AgentEth1BusInfo | cut -d "@" -f 2)
   - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
-  - sed -i "s/bus@eth1/$AgentEth1BusNum/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - sed -i "s/pci@eth2/$AgentEth2BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoExecPath}/*.sh
   - chmod +x /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
