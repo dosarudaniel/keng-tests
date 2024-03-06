@@ -32,6 +32,15 @@ runcmd:
   - AgentEth2MacAddress=$(cat /sys/class/net/eth2/address)
   - sed -i "s/mac@eth1/$AgentEth1MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - sed -i "s/mac@eth2/$AgentEth2MacAddress/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - AgentBusInfoList=$(lshw -C network -json | jq '.[] | select( .businfo != null)' | jq -r .businfo)
+  - AgentEth1BusInfo=$(echo $AgentBusInfoList | awk '{print $1}')
+  - AgentEth2BusInfo=$(echo $AgentBusInfoList | awk '{print $2}')
+  - sed -i "s/pci@eth1/$AgentEth1BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - sed -i "s/pci@eth2/$AgentEth2BusInfo/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - AgentEth1VmBus=$(readlink /sys/class/net/eth1/device | xargs basename)
+  - AgentEth2VmBus=$(readlink /sys/class/net/eth2/device | xargs basename)
+  - sed -i "s/vmbus@eth1/$AgentEth1VmBus/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
+  - sed -i "s/vmbus@eth2/$AgentEth2VmBus/g" /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml
   - /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/setup.sh
   - sudo -H -u ${UserName} bash -c 'docker-compose -f /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml up -d'
   - sudo -H -u ${UserName} bash -c 'docker-compose -f /home/${UserName}/${GitRepoName}/${GitRepoDeployPath}/docker-compose.yaml ps'
