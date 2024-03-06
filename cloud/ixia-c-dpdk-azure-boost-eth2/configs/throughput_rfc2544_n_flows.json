@@ -143,11 +143,11 @@
                     "ipv4": {
                         "dst": {
                             "choice": "value",
-                            "value": "10.0.2.42"
+                            "value": "10.0.2.122"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "10.0.2.32"
+                            "value": "10.0.2.112"
                         }
                     }
                 },
