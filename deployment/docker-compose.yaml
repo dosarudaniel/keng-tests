@@ -3,13 +3,13 @@ version: '3'
 services:
 
   controller:
-    image: ghcr.io/open-traffic-generator/licensed/ixia-c-controller:latest
+    image: ghcr.io/open-traffic-generator/ixia-c-controller:latest
     command: --accept-eula --http-port 8443
     network_mode: "host"
     restart: always
 
   TE1-5551:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:latest
       #restart: always
     network_mode: "host"
     privileged: true
@@ -26,7 +26,7 @@ services:
     - ARG_CORE_LIST="0 1 2"
 
   TE2-5552:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:latest
       #restart: always
     network_mode: "host"
     privileged: true
@@ -43,7 +43,7 @@ services:
     - ARG_CORE_LIST="3 4 5"
 
   TE3-5553:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:latest
       #restart: always
     network_mode: "host"
     privileged: true
@@ -60,7 +60,7 @@ services:
     - ARG_CORE_LIST="6 7 8"
 
   TE4-5554:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.6.0.35-v2
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:latest
       #restart: always
     network_mode: "host"
     privileged: true
