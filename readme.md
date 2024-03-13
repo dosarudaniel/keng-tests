@@ -19,7 +19,8 @@ Check your management IP address by executing `ip a sh` and looking at the manag
 
 ### Requirements: 
 On Ubuntu 22.04.02 Server VM we should already have docker, net-tools, pip3, jq and python requirements
-- docker `sudo apt install docker.io`  
+- docker `sudo apt install -y docker.io`
+- docker-compose `sudo apt install -y docker-compose`  
 - ifconfig `sudo apt install net-tools`  
 - pip3   `sudo apt install python3-pip`    
 - jq     `sudo apt install jq`
