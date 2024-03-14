@@ -3,7 +3,6 @@ import pytest
 import time
 import json
 
-THEORETICAL_MAX_LINK_SPEED = 200    #  Gbps
 PACKET_LOSS_TOLERANCE      = 1.0   # percent
 NO_DETERMINATION_STEPS     = 10
 NO_VALIDATION_STEPS        = 5
@@ -27,6 +26,7 @@ def test_throughput_rfc2544_n_flows(api, direction, frame_sizes):
     """
     cfg = utils.load_test_config(api, 'throughput_rfc2544_n_flows.json')
 
+    THEORETICAL_MAX_LINK_SPEED = utils.get_current_speed_g() # 200    #  Gbps
     packet_sizes = [int(frame_size) for frame_size in frame_sizes.split(',')]
 
     for frame_size in packet_sizes:
@@ -222,10 +222,10 @@ def test_throughput_rfc2544_n_flows(api, direction, frame_sizes):
 
     flows = {}
 
-    for flow in cfg.flows:
-        flows[flow.name] = find_location_by_name(cfg.ports, flow.tx_rx.port.tx_name) + \
-                             " -> " + \
-                           find_location_by_name(cfg.ports, flow.tx_rx.port.rx_names[0])
+    # for flow in cfg.flows:
+    #     flows[flow.name] = find_location_by_name(cfg.ports, flow.tx_rx.port.tx_name) + \
+    #                          " -> " + \
+    #                        find_location_by_name(cfg.ports, flow.tx_rx.port.rx_names[0])
 
     results["test_settings"] = test_settings
     results["flows"] = flows
