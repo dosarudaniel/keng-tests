@@ -91,9 +91,9 @@ On VM1, edit the `/home/ixia/ixia-c-tests/settings.json` to match the Ip address
 
 For each test, we need to also edit the config files associated with it:
 ```
-cd /home/ixia/ixia-c-tests/config
+cd ~/keng-tests/config
 ```
-For the unidirectional test, edit the `/home/ixia/ixia-c-tests/config/ipv4_unidirectional.json` file:
+For the unidirectional test, edit the `~/keng-tests//config/throughput_rfc2544_n_flows.json` file:
 - Port location: edit the "VM2-TE*" ports locations to match the IP address written in settings.json (as mentioned above).
 - MAC addresses: edit the source and destination MAC addresses of the packets.
 To get the source MAC address run `ifconfig` on VM1 and look at the first `enP*` interface:
