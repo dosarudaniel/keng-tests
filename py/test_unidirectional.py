@@ -24,7 +24,8 @@ def test_unidirectional(api, duration, frame_size, line_rate_per_flow, direction
     MIN_FRAME_SIZE = 64
 
     CURRENT_SET_SPEED = utils.get_current_speed_g()
-    MAX_LINE_RATE_PER_FLOW = CURRENT_SET_SPEED/len(cfg.flows)
+    
+    MAX_LINE_RATE_PER_FLOW = 100
 
     MIN_DURATION = 1
 
