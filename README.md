@@ -50,16 +50,17 @@ Before running the above tests we need to deploy the Keysight Elastic Network Ge
 On the first VM we should deploy the traffic engines and the controller. To do that execute as a root the following:
 ```
 sudo su
-cd /home/ixia/ixia-c-test/deployment
-./te_deploy.sh
-./controller_deploy.sh
+cd ~/keng-tests/deployment
+./setup.sh
+docker-compose up -d
 ```
 
 On the second VM you should deploy the (RX) traffic engines, run as a root:
 ```
 sudo su
-cd /home/ixia/ixia-c-test/deployment
-./te_deploy.sh
+cd ~/keng-tests/deployment
+./setup.sh
+docker-compose up -d
 ```
 
 To validate that the deployment was succesful, run on VM1 :
