@@ -3,7 +3,7 @@ version: '3'
 services:
 
   controller:
-    image: ghcr.io/open-traffic-generator/ixia-c-controller:0.1.0-3
+    image: ghcr.io/open-traffic-generator/keng-controller:0.1.0-3
     command: --accept-eula --http-port 8443
     network_mode: "host"
     restart: always
