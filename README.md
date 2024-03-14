@@ -127,12 +127,13 @@ PACKETS = 1000000
 ```
 
 ## Running tests
-The ixia-c-tests repository contains 6 scripts:
-- `unidirectional_test.sh` - runs single flow unidirectional traffic
-- `unidirectional_test_multiple_flows.sh`
+The ixia-c-tests repository contains 3 scripts:
+- `unidirectional.sh` - runs single flow unidirectional traffic
+- `bidirectional.sh` - runs single flow bidirectional traffic
+- 
 Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
-- `rfc2544_test_multiple_flows.sh`
-- `rfc2544_test.sh`
+  
+- `rfc2544.sh`
 
 ### Single flow tests:
 To start testing on the first VM:
