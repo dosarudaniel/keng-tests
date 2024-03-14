@@ -6,14 +6,7 @@ git pull
 ```
 
 ## VM settings
-Before starting make sure that your VM has the following settings: 4 SR-IOV Mellanox Network adapters, 1 management interface, at least 16 CPU cores, 16GB of memory as it can be seen in the below image:    
-![Topology](/configs/Keng-Agent%20VM%20settings.png "")    
-    
-Optional: Change the hostname of the VM on the second server executing:
-```
-sudo vi /etc/hostname
-reboot
-```
+
 
 Check your management IP address by executing `ip a sh` and looking at the management interface.
 
@@ -24,7 +17,7 @@ On Ubuntu 22.04.02 Server VM we should already have docker, net-tools, pip3, jq 
 - ifconfig `sudo apt install net-tools`  
 - pip3   `sudo apt install python3-pip`    
 - jq     `sudo apt install jq`
-- python requirements: `python3 -m pip install -r /home/ixia/ixia-x-tests/py/requirements.txt`
+- python requirements: `python3 -m pip install -r ~/keng-tests/py/requirements.txt`
 
 Check if SR-IOV is enabled on the VM by running: `ip a sh` to get the interface name and `ethtool -i <interface name>` to get information about interface driver.     
 For example:    
