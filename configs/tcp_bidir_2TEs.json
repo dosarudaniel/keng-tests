@@ -16,7 +16,7 @@
                 "VM1-TE1",
                 "VM2-TE1"
             ],
-            "speed": "speed_200_gbps"
+            "speed": "speed_10_gbps"
         }
     ],
     "flows": [

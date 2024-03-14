@@ -2,11 +2,11 @@
     "ports": [
         {
             "name": "VM1-TE1",
-            "location": ""
+            "location": "10.0.10.11:5551"
         },
         {
             "name": "VM2-TE1",
-            "location": ""
+            "location": "10.0.10.12:5551"
         }
     ],
     "layer1": [
@@ -16,7 +16,7 @@
                 "VM1-TE1",
                 "VM2-TE1"
             ],
-            "speed": "speed_200_gbps"
+            "speed": "speed_10_gbps"
         }
     ],
     "flows": [
