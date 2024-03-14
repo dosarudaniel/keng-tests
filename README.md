@@ -137,28 +137,13 @@ Computes the maximum throughput for 0 packet loss using the RFC2544 procedure.
 
 ### Single flow tests:
 To start testing on the first VM:
-`/home/ixia/ixia-c-test/unidirectional_test.sh`
-To change the frame size, edit this file `/home/ixia/ixia-c-test/config/ipv4_unidirectional.json`
+`~/keng-test/unidirectional.sh -s 1500`
+To change the frame size, edit this file `~/keng-test/config/throughput_rfc2544_n_flows.json`
 
-`/home/ixia/ixia-c-test/rfc2544_test.sh`
-To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `/home/ixia/ixia-c-test/py/test_throughput_rfc2544.py`
+`~/keng-test/rfc2544.sh -s 1500`
+To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `~/keng-test/py/test_throughput_rfc2544.py`
 
-### Multiple flows tests:
-To start testing on the first VM:
-`/home/ixia/ixia-c-testunidirectional_test_multiple_flows.sh`
-To change the frame size, edit this file `/home/ixia/ixia-c-test/py/test_ipv4_unidirectional_4_flows.py``
-
-`/home/ixia/ixia-c-test/rfc2544_test_multiple_flows.sh`
-To change the PACKET_LOSS_TOLERANCE or the tested frame sizes (the `packet_sizes` array) edit the python test: `/home/ixia/ixia-c-test/py/test_throughput_rfc2544_multiple_flows.py`
-
-
-## Further optimizations
-Higher performance and lower loss can be further achieved if the Hyper-V is fully optimized:
-- CPU affinity (isolate the used CPU cores)
-- Having the NIC card in the same NUMA node as the CPU cores used by the VM
-- Disable hyperthreading
-- BIOS settings, Hypervisor settings, Guest OS optimizations, NIC settings mentioned in this document:
-https://fast.dpdk.org/doc/perf/DPDK_22_07_NVIDIA_Mellanox_NIC_performance_report.pdf 
+ 
 
 
 
