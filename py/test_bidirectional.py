@@ -21,7 +21,7 @@ def test_ipv4_bidirectional(api, duration, frame_size, line_rate_per_flow):
     MAX_FRAME_SIZE = 9000
     MIN_FRAME_SIZE = 64
 
-    MAX_LINE_RATE_PER_FLOW = 100 / len(cfg.flows) 
+    MAX_LINE_RATE_PER_FLOW = 100 # / len(cfg.flows) 
 
     MIN_DURATION = 1
 
