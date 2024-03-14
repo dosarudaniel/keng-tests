@@ -41,8 +41,6 @@ fi
 echo "frame_sizes=$frame_sizes"
 echo "direction=$direction"
 
-cd /home/ixia/ixia-c-tests
-
 echo "" > throughput_results_rfc2544_n_flows.json  # clean old results
 
 
