@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NO_HUGEPAGES=4536
+NO_HUGEPAGES=1024
 
 mkdir -p /mnt/huge
 mount -t hugetlbfs nodev /mnt/huge

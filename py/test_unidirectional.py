@@ -3,18 +3,18 @@ import pytest
 import dpkt
 import time
 
-def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow, direction):
+def test_unidirectional(api, duration, frame_size, line_rate_per_flow, direction):
     """
-    Configure a single unidirectional IPV4 flow
+    Configure a single unidirectional flow
     """
     cfg = utils.load_test_config(
-        api, 'ipv4_unidirectional.json', apply_settings=True
+        api, 'throughput_rfc2544_n_flows.json', apply_settings=True
     )
 
     if direction == "downstream":
         # change direction
         for flow in cfg.flows:
-            flow.tx_rx.port.rx_name, flow.tx_rx.port.tx_name = flow.tx_rx.port.tx_name, flow.tx_rx.port.rx_name
+            flow.tx_rx.port.rx_names[0], flow.tx_rx.port.tx_name = flow.tx_rx.port.tx_name, flow.tx_rx.port.rx_names[0]
             flow.packet[0].dst.value, flow.packet[0].src.value = flow.packet[0].src.value, flow.packet[0].dst.value 
             #print(flow.packet[0])
 
@@ -23,7 +23,8 @@ def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow, dire
     MAX_FRAME_SIZE = 9000
     MIN_FRAME_SIZE = 64
 
-    MAX_LINE_RATE_PER_FLOW = 100/len(cfg.flows)
+    CURRENT_SET_SPEED = utils.get_current_speed_g()
+    MAX_LINE_RATE_PER_FLOW = CURRENT_SET_SPEED/len(cfg.flows)
 
     MIN_DURATION = 1
 

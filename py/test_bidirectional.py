@@ -3,12 +3,12 @@ import pytest
 import dpkt
 import time
 
-def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
+def test_ipv4_bidirectional(api, duration, frame_size, line_rate_per_flow):
     """
-    Configure a 4 bidirectional IPV4 flows
+    Configure a single bidirectional IPV4 flow
     """
     cfg = utils.load_test_config(
-        api, 'ipv4_bidirectional_4_flows.json', apply_settings=True
+        api, 'tcp_bidir_2TEs.json', apply_settings=True
     )
 
     assert len(cfg.flows) % 2 == 0,  \
@@ -21,7 +21,8 @@ def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
     MAX_FRAME_SIZE = 9000
     MIN_FRAME_SIZE = 64
 
-    MAX_LINE_RATE_PER_FLOW = 100 / len(cfg.flows) * 2
+    CURRENT_SET_SPEED = utils.get_current_speed_g()
+    MAX_LINE_RATE_PER_FLOW = CURRENT_SET_SPEED / len(cfg.flows) * 2
 
     MIN_DURATION = 1
 
@@ -57,10 +58,12 @@ def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
         flow.rate.percentage = line_rate_per_flow
 
     sizes = []
+    
+    size = cfg.flows[0].size.fixed
 
     utils.start_traffic(api, cfg)
     utils.wait_for(
-        lambda: results_ok(api, frame_size),
+        lambda: results_ok(api, size),
         'stats to be as expected',
         timeout_seconds = duration + TIMEOUT
     )
@@ -72,7 +75,6 @@ def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
     s1_flows_results = flow_results[:middle_index]
     s2_flows_results = flow_results[middle_index:]
     
-    # # Debug prints
     # for flow_res in s1_flows_results:
     #     print(flow_res.name)
     #     print(flow_res.frames_tx)
@@ -103,8 +105,8 @@ def test_ipv4_bidirectional_4TE(api, duration, frame_size, line_rate_per_flow):
     print("Total s2 --> s1 lost packets {}\n".format(frames_s2_to_s1_tx - frames_s2_to_s1_rx))
 
     print("-" * ROW_SIZE)
-    print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * frame_size * 8 / duration / 1000000000, 3)))
-    print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * frame_size * 8 / duration / 1000000000, 3)))
+    print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * size * 8 / duration / 1000000000, 3)))
+    print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * size * 8 / duration / 1000000000, 3)))
     print("Total lost packets {}".format(flows_total_tx - flows_total_rx))
     print("Average loss percentage {} %".format(round((flows_total_tx - flows_total_rx) * 100 / flows_total_tx, 3)))
 
@@ -113,37 +115,18 @@ def results_ok(api, size, csv_dir=None):
     Returns true if stats are as expected, false otherwise.
     """
     port_results, flow_results = utils.get_all_stats(api)
-
     if csv_dir is not None:
         utils.print_csv(csv_dir, port_results, flow_results)
-    port_tx_packets = sum([p.frames_tx for p in port_results])
-    port_rx_packets = sum([p.frames_rx for p in port_results])
-    ok = True # port_tx_packets == packets # and port_rx_packets >= packets
-    
-    total_tx_rate = 0
-    total_rx_rate = 0
-    total_tx_bps = 0
-    total_rx_bps = 0
-
+    port_tx = sum([p.frames_tx for p in port_results])
+    port_rx = sum([p.frames_rx for p in port_results if p.name == 'rx'])
+    ok = True # port_tx == packets # and port_rx >= packets
     print('-' * 22)
     for flow_res in flow_results:
-        print(flow_res.name + " " + str(size) + "B ")
-        
+        print(flow_res.name + " " + str(size) + "B:")
         print("TX Rate " + str(round(flow_res.frames_tx_rate * size * 8 / 1000000000, 3)) + " Gbps")
-        total_tx_rate += flow_res.frames_tx_rate
-        total_tx_bps += flow_res.frames_tx_rate * size * 8
-        
         print("RX Rate " + str(round(flow_res.frames_rx_rate * size * 8 / 1000000000, 3)) + " Gbps")
-        total_rx_rate += flow_res.frames_rx_rate
-        total_rx_bps += flow_res.frames_rx_rate * size * 8
-        print("")
-
-    print("Totals")
-    print("TX Rate " + str(round(total_tx_bps/1000000000, 3)) + " Gbps")
-    print("RX Rate " + str(round(total_rx_bps/1000000000, 3)) + " Gbps")
     print('-' * 22)
-    
-    print("\n\n\n\n\n\n")
+    print('\n\n\n\n\n')
     
     if utils.flow_metric_validation_enabled():
         flow_tx = sum([f.frames_tx for f in flow_results])
