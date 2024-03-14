@@ -1,7 +1,7 @@
 ## Document version  
 Make sure you have the latest version of this readme file by executing:
 ```
-cd /home/ixia/ixia-c-tests
+cd /home/ixia/keng-tests
 git pull
 ```
 
