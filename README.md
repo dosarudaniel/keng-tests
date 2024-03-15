@@ -27,12 +27,12 @@ On Ubuntu 22.04.02 Server VM we should already have docker, net-tools, pip3, jq 
 Check if SR-IOV is enabled on the VM by running: `ip a sh` to get the interface name and `ethtool -i <interface name>` to get information about interface driver.     
 For example:    
 ```
-root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i eth1
+root@keng-agent:/home/ixia/keng-tests# ethtool -i eth1
 driver: hv_netvsc  
 ```
 and the actual interface used by the Keng Agent traffic engine should have mlx5_core driver:
 ```
-root@keng-agent:/home/ixia/ixia-c-tests# ethtool -i enP12501s2
+root@keng-agent:/home/ixia/keng-tests# ethtool -i enP12501s2
 driver: mlx5_core
 version: 5.15.0-76-generic
 ```
