@@ -76,6 +76,7 @@ def test_ipv4_unidirectional(api, duration, frame_size, line_rate_per_flow, dire
     flows_total_rx = sum([flow_res.frames_rx for flow_res in flow_results])
     print("\n\nDirection {}".format(direction))
     print("Frame size: {}B".format(frame_size))
+    print("Line rate per flow: {}B".format(line_rate_per_flow))
     print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * size * 8 / duration / 1000000000, 3)))
     print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * size * 8 / duration / 1000000000, 3)))
     print("Total lost packets {}".format(flows_total_tx - flows_total_rx))
