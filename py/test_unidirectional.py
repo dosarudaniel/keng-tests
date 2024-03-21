@@ -3,6 +3,8 @@ import pytest
 import dpkt
 import time
 
+custom_round = lambda value: value if value < 0.001 else round(value, 3)
+
 def test_unidirectional(api, duration, frame_size, line_rate_per_flow, direction):
     """
     Configure a single unidirectional flow
@@ -82,7 +84,7 @@ def test_unidirectional(api, duration, frame_size, line_rate_per_flow, direction
     print("Average total TX L2 rate {} Gbps".format(round(flows_total_tx * size * 8 / duration / 1000000000, 3)))
     print("Average total RX L2 rate {} Gbps".format(round(flows_total_rx * size * 8 / duration / 1000000000, 3)))
     print("Total lost packets {}".format(flows_total_tx - flows_total_rx))
-    print("Average loss percentage {} %".format(round((flows_total_tx - flows_total_rx) * 100 / flows_total_tx, 3)))
+    print("Average loss percentage {} %".format(custom_round((flows_total_tx - flows_total_rx) * 100 / flows_total_tx)))
 
 def results_ok(api, size, csv_dir=None):
     """
