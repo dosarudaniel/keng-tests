@@ -4,18 +4,85 @@ name1=TE1-5551
 name2=TE2-5552
 
 keng_name=KENG-controller
+keng_license_server_name=keng-license-server
+
+# Default values for frame_size, duration, line_rate_per_flow and direction
+
+duration=''
+frame_size=''
+line_rate_per_flow=''
+direction=''
+
+arguments=""
+
+help() {
+	echo "-s <frame_size> -- int - seconds"
+	echo "-t <duration> -- int - bytes"
+	echo "-l <line_rate_per_flow> -- float - percentage"
+	echo "-d <direction> -- upstream/downstream"
+}
+
+while getopts "hs:t:l:d:" option; do
+    case $option in
+        h) # display Help
+            help
+            exit;;
+        s) #frame size
+            echo "Frame size: $OPTARG"
+            frame_size=$OPTARG
+            ;;
+        t) #duration
+            echo "Duration: $OPTARG"
+            duration=$OPTARG
+            ;;
+        l) #line_rate_per_flow
+            echo "Line rate per flow: $OPTARG"
+            line_rate_per_flow=$OPTARG 
+            ;;
+        d) #direction
+            echo "Direction: $OPTARG"
+            direction=$OPTARG 
+            ;; 
+    esac
+done
+
+
+build_arguments() {
+	if [ ! -z "$frame_size" ]
+	then
+		arguments+=" -s $frame_size" 
+	fi
+
+	if [ ! -z "$duration" ]
+	then
+		arguments+=" -t $duration"
+	fi
+
+	if [ ! -z "$line_rate_per_flow" ]
+	then
+		arguments+=" -l $line_rate_per_flow"
+	fi
+
+	if [ ! -z "$direction" ]
+	then
+		arguments+=" -d $direction"
+	fi
+}
 
 setup()
 {
 	keng_controller_path=ghcr.io/open-traffic-generator/keng-controller:1.6.2-1
-
+	keng_license_server_path=ghcr.io/open-traffic-generator/keng-license-server
 	te_path=ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.12 
 
 	echo "Stopping old instances"
-	docker stop $name1 $name2 $keng_name
+	docker stop $name1 $name2 $keng_name $keng_license_server_name
 
 	echo "Removing old instances"
-	docker rm $name1 $name2 $keng_name
+	docker rm $name1 $name2 $keng_name $keng_license_server_name
+
+	echo "Creating KENG license server"
+	docker run -d --name keng-license-server --restart always -p 7443:7443 -p 9443:9443 $keng_license_server_path --accept-eula
 
 	echo "Creating KENG controller"
 	# Start the KENG controller 
@@ -60,15 +127,9 @@ clean_files() {
 	rmdir temp
 }
 
-main() {
-	if [ ! "$(docker ps -a | grep $name1)" ] | [ ! "$(docker ps -a | grep $name2)" ] | [ ! "$(docker ps -a | grep $keng_name)" ]; then
-		setup
-	fi
-	
-	cd ..
-	mkdir temp
-	./unidirectional.sh > temp/unidirectional.out
-	./bidirectional.sh > temp/bidirectional.out
+unidirectional_run() {
+	echo "unidirectional.sh $arguments"
+	bash unidirectional.sh $arguments > temp/unidirectional.out
 
 	average_uni_tx=$(cat temp/unidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_uni_tx=( $average_uni_tx)
@@ -78,8 +139,13 @@ main() {
 	average_uni_rx=$(cat temp/unidirectional.out | grep "Average total RX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_uni_rx=( $average_uni_rx)
 	average_uni_rx=${average_uni_rx[1]}
-	echo $average_uni_rx
 
+	echo $average_uni_rx
+}
+
+bidirectional_run() {
+	bash bidirectional.sh $arguments > temp/bidirectional.out
+	
 	average_bi_tx=$(cat temp/bidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_bi_tx=( $average_bi_tx)
 	average_bi_tx=${average_bi_tx[1]}
@@ -88,9 +154,26 @@ main() {
 	average_bi_rx=$(cat temp/bidirectional.out | grep "Average total RX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_bi_rx=( $average_bi_rx)
 	average_bi_rx=${average_bi_rx[1]}
-	echo $average_bi_rx
 
+	echo $average_bi_rx
+}
+
+main() {
+	if [ ! "$(docker ps -a | grep $name1)" ] || [ ! "$(docker ps -a | grep $name2)" ] || [ ! "$(docker ps -a | grep $keng_name)" ] || [ ! "$(docker ps -a | grep $keng_license_server_name)" ]; then
+		echo "Creating instances"
+		setup
+	fi
+	
+	cd ..
+	mkdir temp
+	
+	build_arguments
+
+	unidirectional_run
+	bidirectional_run
+	
 	clean_files
+
 }
 
 main "${@}"
