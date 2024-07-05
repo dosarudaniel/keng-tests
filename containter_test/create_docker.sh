@@ -13,7 +13,11 @@ frame_size=''
 line_rate_per_flow=''
 direction=''
 
+all_value=0
+
 arguments=""
+
+frame_sizes=(64 128 256 512 1024 1518 4096 9000)
 
 help() {
 	echo "-s <frame_size> -- int - seconds"
@@ -22,7 +26,7 @@ help() {
 	echo "-d <direction> -- upstream/downstream"
 }
 
-while getopts "hs:t:l:d:" option; do
+while getopts "hs:t:l:d:a:" option; do
     case $option in
         h) # display Help
             help
@@ -42,12 +46,17 @@ while getopts "hs:t:l:d:" option; do
         d) #direction
             echo "Direction: $OPTARG"
             direction=$OPTARG 
-            ;; 
+            ;;
+		a) #all frame sizes
+			echo "All frame sizes $OPTARG"
+			all_value=1
+			;;
     esac
 done
 
 
 build_arguments() {
+	arguments=""
 	if [ ! -z "$frame_size" ]
 	then
 		arguments+=" -s $frame_size" 
@@ -128,6 +137,7 @@ clean_files() {
 }
 
 unidirectional_run() {
+	build_arguments
 	echo "unidirectional.sh $arguments"
 	bash unidirectional.sh $arguments > temp/unidirectional.out
 
@@ -144,6 +154,8 @@ unidirectional_run() {
 }
 
 bidirectional_run() {
+	build_arguments
+	echo "bidirectional.sh $arguments"
 	bash bidirectional.sh $arguments > temp/bidirectional.out
 	
 	average_bi_tx=$(cat temp/bidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
@@ -166,14 +178,29 @@ main() {
 	
 	cd ..
 	mkdir temp
-	
-	build_arguments
 
-	unidirectional_run
-	bidirectional_run
+	if [ $all_value -eq 1 ]; then
+		for val in ${frame_sizes[@]}; do
+			frame_size=$val
+			unidirectional_run
+		done
+	else
+		unidirectional_run
+	fi
+
+	echo "Sleep"
+	sleep 1
+
+	if [ $all_value -eq 1 ]; then
+		for val in ${frame_sizes[@]}; do
+			frame_size=$val
+			bidirectional_run
+		done
+	else
+		bidirectional_run
+	fi
 	
 	clean_files
-
 }
 
 main "${@}"
