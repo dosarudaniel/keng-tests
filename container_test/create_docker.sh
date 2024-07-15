@@ -110,9 +110,9 @@ setup()
 		-v /sys/devices/system/node:/sys/devices/system/node \
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5551 \
-		-e ARG_IFACE_LIST=pci@0000:86:00.0 \
+		-e ARG_IFACE_LIST=pci@0000:07:00.0 \
 		-e ARG_CORE_LIST="0 1 2" \
-		$te_path #sleep infinity
+		$te_path # sleep infinity
 
 	echo "Creating TE2"
 	# Create TE2 with port 5552
@@ -126,9 +126,9 @@ setup()
 		-v /sys/devices/system/node:/sys/devices/system/node \
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5552 \
-		-e ARG_IFACE_LIST=pci@0000:86:00.1 \
+		-e ARG_IFACE_LIST=pci@0000:08:00.0 \
 		-e ARG_CORE_LIST="3 4 5" \
-		$te_path #sleep infinity
+		$te_path # sleep infinity
 }
 
 clean_files() {
@@ -144,13 +144,16 @@ unidirectional_run() {
 	average_uni_tx=$(cat temp/unidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_uni_tx=( $average_uni_tx)
 	average_uni_tx=${average_uni_tx[1]}
-	echo $average_uni_tx
+	# echo $average_uni_tx
 
 	average_uni_rx=$(cat temp/unidirectional.out | grep "Average total RX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_uni_rx=( $average_uni_rx)
 	average_uni_rx=${average_uni_rx[1]}
 
-	echo $average_uni_rx
+
+	echo "$frame_size,$average_uni_tx,$average_uni_rx" >> ./container_test/uni.csv
+	
+	echo "$frame_size,$average_uni_tx,$average_uni_rx"
 }
 
 bidirectional_run() {
@@ -161,13 +164,15 @@ bidirectional_run() {
 	average_bi_tx=$(cat temp/bidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_bi_tx=( $average_bi_tx)
 	average_bi_tx=${average_bi_tx[1]}
-	echo $average_bi_tx
+	# echo $average_bi_tx
 
 	average_bi_rx=$(cat temp/bidirectional.out | grep "Average total RX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_bi_rx=( $average_bi_rx)
 	average_bi_rx=${average_bi_rx[1]}
 
-	echo $average_bi_rx
+	echo "$frame_size,$average_bi_tx,$average_bi_rx" >> ./container_test/bi.csv
+
+	echo "$frame_size,$average_bi_tx,$average_bi_rx"
 }
 
 main() {
@@ -175,7 +180,17 @@ main() {
 		echo "Creating instances"
 		setup
 	fi
+	if ! test -f ./uni.csv; then
+		touch uni.csv
+		echo "FrameSize,TX,RX" > uni.csv
+	fi
+
+	if ! test -f ./bi.csv; then
+		touch bi.csv
+		echo "FrameSize,TX,RX" > bi.csv
+	fi
 	
+
 	cd ..
 	mkdir temp
 
@@ -204,3 +219,4 @@ main() {
 }
 
 main "${@}"
+
