@@ -110,7 +110,7 @@ setup()
 		-v /sys/devices/system/node:/sys/devices/system/node \
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5551 \
-		-e ARG_IFACE_LIST=pci@0000:07:00.0 \
+		-e ARG_IFACE_LIST=pci@0000:86:00.0 \
 		-e ARG_CORE_LIST="0 1 2" \
 		$te_path # sleep infinity
 
@@ -126,7 +126,7 @@ setup()
 		-v /sys/devices/system/node:/sys/devices/system/node \
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5552 \
-		-e ARG_IFACE_LIST=pci@0000:08:00.0 \
+		-e ARG_IFACE_LIST=pci@0000:86:00.1 \
 		-e ARG_CORE_LIST="3 4 5" \
 		$te_path # sleep infinity
 }
@@ -144,7 +144,6 @@ unidirectional_run() {
 	average_uni_tx=$(cat temp/unidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_uni_tx=( $average_uni_tx)
 	average_uni_tx=${average_uni_tx[1]}
-	# echo $average_uni_tx
 
 	average_uni_rx=$(cat temp/unidirectional.out | grep "Average total RX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_uni_rx=( $average_uni_rx)
@@ -164,7 +163,6 @@ bidirectional_run() {
 	average_bi_tx=$(cat temp/bidirectional.out | grep "Average total TX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_bi_tx=( $average_bi_tx)
 	average_bi_tx=${average_bi_tx[1]}
-	# echo $average_bi_tx
 
 	average_bi_rx=$(cat temp/bidirectional.out | grep "Average total RX L2 rate" | grep -o -E '[-+]?[0-9]*\.[0-9]+|[0-9]+' | cut -d' ' -f1)
 	average_bi_rx=( $average_bi_rx)
@@ -176,10 +174,13 @@ bidirectional_run() {
 }
 
 main() {
-	if [ ! "$(docker ps -a | grep $name1)" ] || [ ! "$(docker ps -a | grep $name2)" ] || [ ! "$(docker ps -a | grep $keng_name)" ] || [ ! "$(docker ps -a | grep $keng_license_server_name)" ]; then
+	sudo ../deployment/setup.sh
+
+	if [ ! "$(docker ps | grep $name1)" ] || [ ! "$(docker ps | grep $name2)" ] || [ ! "$(docker ps | grep $keng_name)" ] || [ ! "$(docker ps | grep $keng_license_server_name)" ]; then
 		echo "Creating instances"
 		setup
 	fi
+
 	if ! test -f ./uni.csv; then
 		touch uni.csv
 		echo "FrameSize,TX,RX" > uni.csv
