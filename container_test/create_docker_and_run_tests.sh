@@ -19,6 +19,9 @@ arguments=""
 
 frame_sizes=(64 128 256 512 1024 1518 4096 9000)
 
+pci1="0000:86:00.0"
+pci2="0000:86:00.1"
+
 help() {
 	echo "-s <frame_size> -- int - seconds"
 	echo "-t <duration> -- int - bytes"
@@ -110,7 +113,7 @@ setup()
 		-v /sys/devices/system/node:/sys/devices/system/node \
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5551 \
-		-e ARG_IFACE_LIST=pci@0000:86:00.0 \
+		-e ARG_IFACE_LIST=pci@$pci1 \
 		-e ARG_CORE_LIST="0 1 2" \
 		$te_path # sleep infinity
 
@@ -126,7 +129,7 @@ setup()
 		-v /sys/devices/system/node:/sys/devices/system/node \
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5552 \
-		-e ARG_IFACE_LIST=pci@0000:86:00.1 \
+		-e ARG_IFACE_LIST=pci@$pci2 \
 		-e ARG_CORE_LIST="3 4 5" \
 		$te_path # sleep infinity
 }
@@ -176,6 +179,15 @@ bidirectional_run() {
 main() {
 	sudo ../deployment/setup.sh
 
+	cpu_model=$(lscpu | grep "Model name")
+	cpu_model="${cpu_model:20}"
+
+	nic=$(lspci | grep ${pci1:5})
+	nic=${nic:8}
+
+	os=$(lsb_release -a | grep "Description")
+	os="${os:13}"
+
 	if [ ! "$(docker ps | grep $name1)" ] || [ ! "$(docker ps | grep $name2)" ] || [ ! "$(docker ps | grep $keng_name)" ] || [ ! "$(docker ps | grep $keng_license_server_name)" ]; then
 		echo "Creating instances"
 		setup
@@ -183,14 +195,19 @@ main() {
 
 	if ! test -f ./uni.csv; then
 		touch uni.csv
-		echo "FrameSize,TX,RX" > uni.csv
+		echo $cpu_model > uni.csv
+		echo $os >> uni.csv
+		echo $nic >> uni.csv
+		echo "FrameSize,TX,RX" >> uni.csv
 	fi
 
 	if ! test -f ./bi.csv; then
 		touch bi.csv
-		echo "FrameSize,TX,RX" > bi.csv
+		echo $cpu_model > bi.csv
+		echo $os >> bi.csv
+		echo $nic >> bi.csv
+		echo "FrameSize,TX,RX" >> bi.csv
 	fi
-	
 
 	cd ..
 	mkdir temp
