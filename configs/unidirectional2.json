@@ -26,7 +26,7 @@
                 "VM2-TE1",
                 "VM2-TE2"
             ],
-            "speed": "speed_10_gbps"
+            "speed": "speed_100_gbps"
         }
     ],
     "flows": [
@@ -36,7 +36,7 @@
                 "choice": "port",
                 "port": {
                     "tx_name": "VM1-TE1",
-                    "rx_names": ["VM2-TE1"]
+                    "rx_name": "VM2-TE1"
                 }
             },
             "metrics": {
@@ -44,11 +44,11 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1500
+                "fixed": 1518
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 50
+                "percentage": 100 
             },
             "duration": {
                 "choice": "fixed_seconds",
@@ -62,11 +62,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "94:6d:ae:38:7d:67"
+                            "value": "00:0c:29:d1:52:3d"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "94:6d:ae:38:7d:66"
+                            "value": "00:0c:29:d1:52:39"
                         }
                     }
                 }
@@ -78,7 +78,7 @@
                 "choice": "port",
                 "port": {
                     "tx_name": "VM1-TE2",
-                    "rx_names": ["VM2-TE2"]
+                    "rx_name": "VM2-TE2"
                 }
             },
             "metrics": {
@@ -86,11 +86,11 @@
             },
             "size": {
                 "choice": "fixed",
-                "fixed": 1500
+                "fixed": 1518
             },
             "rate": {
                 "choice": "percentage",
-                "percentage": 50
+                "percentage": 100
             },
             "duration": {
                 "choice": "fixed_seconds",
@@ -104,11 +104,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "94:6d:ae:38:7d:68"
+                            "value": "00:0c:29:d1:52:3e"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "94:6d:ae:38:7d:69"
+                            "value": "00:0c:29:d1:52:3a"
                         }
                     }
                 }
