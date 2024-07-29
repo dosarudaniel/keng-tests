@@ -52,37 +52,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "Agent2Eth1MacAddress"
+                            "value": "00:0c:29:d1:52:3d"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "Agent1Eth1MacAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "ipv4",
-                    "ipv4": {
-                        "dst": {
-                            "choice": "value",
-                            "value": "Agent2Eth1IpAddress"
-                        },
-                        "src": {
-                            "choice": "value",
-                            "value": "Agent1Eth1IpAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "tcp",
-                    "tcp": {
-                        "src_port": {
-                            "choice": "value",
-                            "value": 643
-                        },
-                        "dst_port": {
-                            "choice": "value",
-                            "value": 543
+                            "value": "00:0c:29:d1:52:39"
                         }
                     }
                 }
@@ -120,37 +94,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "Agent1Eth1MacAddress"
+                            "value": "00:0c:29:d1:52:39"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "Agent2Eth1MacAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "ipv4",
-                    "ipv4": {
-                        "dst": {
-                            "choice": "value",
-                            "value": "Agent1Eth1IpAddress"
-                        },
-                        "src": {
-                            "choice": "value",
-                            "value": "Agent2Eth1IpAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "tcp",
-                    "tcp": {
-                        "src_port": {
-                            "choice": "value",
-                            "value": 644
-                        },
-                        "dst_port": {
-                            "choice": "value",
-                            "value": 544
+                            "value": "00:0c:29:d1:52:3d"
                         }
                     }
                 }
