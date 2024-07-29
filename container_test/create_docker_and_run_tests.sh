@@ -2,6 +2,8 @@
 
 name1=TE1-5551
 name2=TE2-5552
+#name3=TE3-5553
+#name4=TE4-5554
 
 keng_name=KENG-controller
 keng_license_server_name=keng-license-server
@@ -21,6 +23,8 @@ frame_sizes=(64 128 256 512 1024 1518 4096 9000)
 
 pci1="0000:86:00.0"
 pci2="0000:86:00.1"
+pci3="" # todo
+pci4="" # todo
 
 help() {
 	echo "-s <frame_size> -- int - seconds"
@@ -145,7 +149,7 @@ setup()
 	#	-v /sys/devices/system/node:/sys/devices/system/node \
 	#	-v /dev:/dev \
 	#	-e OPT_LISTEN_PORT=5553 \
-	#	-e ARG_IFACE_LIST=pci@$pci2 \
+	#	-e ARG_IFACE_LIST=pci@$pci3 \
 	#	-e ARG_CORE_LIST="6 7 8" \
 	#	$te_path # sleep infinity
 
@@ -161,7 +165,7 @@ setup()
 	#	-v /sys/devices/system/node:/sys/devices/system/node \
 	#	-v /dev:/dev \
 	#	-e OPT_LISTEN_PORT=5554 \
-	#	-e ARG_IFACE_LIST=pci@$pci2 \
+	#	-e ARG_IFACE_LIST=pci@$pci4 \
 	#	-e ARG_CORE_LIST="9 10 11" \
 	#	$te_path # sleep infinity
 }
