@@ -132,6 +132,38 @@ setup()
 		-e ARG_IFACE_LIST=pci@$pci2 \
 		-e ARG_CORE_LIST="3 4 5" \
 		$te_path # sleep infinity
+
+  	# echo "Creating TE3"
+	# # Create TE3 with port 5553
+  	# docker run -d \
+	#	--name TE3-5553 \
+	#	--network host \
+	#	--privileged \
+	#	-v /mnt/huge:/mnt/huge \
+	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+	#	-v /sys/devices/system/node:/sys/devices/system/node \
+	#	-v /dev:/dev \
+	#	-e OPT_LISTEN_PORT=5553 \
+	#	-e ARG_IFACE_LIST=pci@$pci2 \
+	#	-e ARG_CORE_LIST="6 7 8" \
+	#	$te_path # sleep infinity
+
+  	# echo "Creating TE4"
+	# # Create TE4 with port 5554
+  	# docker run -d \
+	#	--name TE4-5554 \
+	#	--network host \
+	#	--privileged \
+	#	-v /mnt/huge:/mnt/huge \
+	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+	#	-v /sys/devices/system/node:/sys/devices/system/node \
+	#	-v /dev:/dev \
+	#	-e OPT_LISTEN_PORT=5554 \
+	#	-e ARG_IFACE_LIST=pci@$pci2 \
+	#	-e ARG_CORE_LIST="9 10 11" \
+	#	$te_path # sleep infinity
 }
 
 clean_files() {
