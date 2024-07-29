@@ -2,8 +2,12 @@
 
 name1=TE1-5551
 name2=TE2-5552
-#name3=TE3-5553
-#name4=TE4-5554
+name3=TE3-5553
+name4=TE4-5554
+name5=TE5-5555
+name6=TE6-5556
+name7=TE7-5557
+name8=TE8-5558
 
 keng_name=KENG-controller
 keng_license_server_name=keng-license-server
@@ -21,10 +25,14 @@ arguments=""
 
 frame_sizes=(64 128 256 512 1024 1518 4096 9000)
 
-pci1="0000:86:00.0"
-pci2="0000:86:00.1"
-pci3="" # todo
-pci4="" # todo
+pci1="0000:03:00.0"
+pci2="0000:03:01.0"
+pci3="0000:03:02.0"
+pci4="0000:03:03.0"
+pci5="0000:04:00.0"
+pci6="0000:04:01.0"
+pci7="0000:04:02.0"
+pci8="0000:04:03.0"
 
 help() {
 	echo "-s <frame_size> -- int - seconds"
@@ -167,6 +175,70 @@ setup()
 	#	-e OPT_LISTEN_PORT=5554 \
 	#	-e ARG_IFACE_LIST=pci@$pci4 \
 	#	-e ARG_CORE_LIST="9 10 11" \
+	#	$te_path # sleep infinity
+
+   	# echo "Creating TE5"
+	# # Create TE5 with port 5555
+  	# docker run -d \
+	#	--name $name5 \
+	#	--network host \
+	#	--privileged \
+	#	-v /mnt/huge:/mnt/huge \
+	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+	#	-v /sys/devices/system/node:/sys/devices/system/node \
+	#	-v /dev:/dev \
+	#	-e OPT_LISTEN_PORT=5555 \
+	#	-e ARG_IFACE_LIST=pci@$pci5 \
+	#	-e ARG_CORE_LIST="12 13 14" \
+	#	$te_path # sleep infinity
+
+    	# echo "Creating TE6"
+	# # Create TE6 with port 5556
+  	# docker run -d \
+	#	--name $name6 \
+	#	--network host \
+	#	--privileged \
+	#	-v /mnt/huge:/mnt/huge \
+	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+	#	-v /sys/devices/system/node:/sys/devices/system/node \
+	#	-v /dev:/dev \
+	#	-e OPT_LISTEN_PORT=5556 \
+	#	-e ARG_IFACE_LIST=pci@$pci6 \
+	#	-e ARG_CORE_LIST="15 16 17" \
+	#	$te_path # sleep infinity
+
+     	# echo "Creating TE7"
+	# # Create TE7 with port 5557
+  	# docker run -d \
+	#	--name $name7 \
+	#	--network host \
+	#	--privileged \
+	#	-v /mnt/huge:/mnt/huge \
+	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+	#	-v /sys/devices/system/node:/sys/devices/system/node \
+	#	-v /dev:/dev \
+	#	-e OPT_LISTEN_PORT=5557 \
+	#	-e ARG_IFACE_LIST=pci@$pci7 \
+	#	-e ARG_CORE_LIST="18 19 20" \
+	#	$te_path # sleep infinity
+
+     	# echo "Creating TE8"
+	# # Create TE8 with port 5558
+  	# docker run -d \
+	#	--name $name8 \
+	#	--network host \
+	#	--privileged \
+	#	-v /mnt/huge:/mnt/huge \
+	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+	#	-v /sys/devices/system/node:/sys/devices/system/node \
+	#	-v /dev:/dev \
+	#	-e OPT_LISTEN_PORT=5558 \
+	#	-e ARG_IFACE_LIST=pci@$pci8 \
+	#	-e ARG_CORE_LIST="21 22 23" \
 	#	$te_path # sleep infinity
 }
 
