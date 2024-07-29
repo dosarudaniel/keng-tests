@@ -190,7 +190,7 @@ setup()
 		-v /dev:/dev \
 		-e OPT_LISTEN_PORT=5555 \
 		-e ARG_IFACE_LIST=pci@$pci5 \
-		-e ARG_CORE_LIST="12 13 14" \
+		-e ARG_CORE_LIST="8 9 10" \
 		$te_path # sleep infinity
 
     	# echo "Creating TE6"
