@@ -82,11 +82,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:25"
+                            "value": "00:0c:29:d1:52:3d"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:19"
+                            "value": "00:0c:29:d1:52:39"
                         }
                     }
                 }
@@ -124,11 +124,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:18"
+                            "value": "00:0c:29:d1:52:3e"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1c"
+                            "value": "00:0c:29:d1:52:3a"
                         }
                     }
                 }
@@ -166,11 +166,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:1a"
+                            "value": "00:0c:29:d1:52:3f"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1b"
+                            "value": "00:0c:29:d1:52:3b"
                         }
                     }
                 }
@@ -208,11 +208,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "00:15:5d:14:11:19"
+                            "value": "00:0c:29:d1:52:40"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "00:15:5d:14:10:1a"
+                            "value": "00:0c:29:d1:52:3c"
                         }
                     }
                 }
