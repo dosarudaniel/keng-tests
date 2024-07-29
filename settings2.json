@@ -5,8 +5,8 @@
   "ports": [
     "localhost:5551",
     "localhost:5552",
-    "localhost:5553",
-    "localhost:5554"
+    "localhost:5555",
+    "localhost:5556"
   ],
   "soft_dut": "localhost:22",
   "speed": "speed_400_gbps",
