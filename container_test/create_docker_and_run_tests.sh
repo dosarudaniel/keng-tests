@@ -129,21 +129,21 @@ setup()
 		-e ARG_CORE_LIST="0 1 2" \
 		$te_path # sleep infinity
 
-	# echo "Creating TE2"
-	# # Create TE2 with port 5552
- #  	docker run -d \
-	# 	--name TE2-5552 \
-	# 	--network host \
-	# 	--privileged \
-	# 	-v /mnt/huge:/mnt/huge \
-	# 	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
-	# 	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
-	# 	-v /sys/devices/system/node:/sys/devices/system/node \
-	# 	-v /dev:/dev \
-	# 	-e OPT_LISTEN_PORT=5552 \
-	# 	-e ARG_IFACE_LIST=pci@$pci2 \
-	# 	-e ARG_CORE_LIST="3 4 5" \
-	# 	$te_path # sleep infinity
+	echo "Creating TE2"
+	# Create TE2 with port 5552
+  	docker run -d \
+		--name TE2-5552 \
+		--network host \
+		--privileged \
+		-v /mnt/huge:/mnt/huge \
+		-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+		-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+		-v /sys/devices/system/node:/sys/devices/system/node \
+		-v /dev:/dev \
+		-e OPT_LISTEN_PORT=5552 \
+		-e ARG_IFACE_LIST=pci@$pci2 \
+		-e ARG_CORE_LIST="3 4 5" \
+		$te_path # sleep infinity
 
   	# echo "Creating TE3"
 	# # Create TE3 with port 5553
@@ -193,21 +193,21 @@ setup()
 		-e ARG_CORE_LIST="8 9 10" \
 		$te_path # sleep infinity
 
-    	# echo "Creating TE6"
-	# # Create TE6 with port 5556
-  	# docker run -d \
-	#	--name $name6 \
-	#	--network host \
-	#	--privileged \
-	#	-v /mnt/huge:/mnt/huge \
-	#	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
-	#	-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
-	#	-v /sys/devices/system/node:/sys/devices/system/node \
-	#	-v /dev:/dev \
-	#	-e OPT_LISTEN_PORT=5556 \
-	#	-e ARG_IFACE_LIST=pci@$pci6 \
-	#	-e ARG_CORE_LIST="15 16 17" \
-	#	$te_path # sleep infinity
+    	echo "Creating TE6"
+	# Create TE6 with port 5556
+  	docker run -d \
+		--name $name6 \
+		--network host \
+		--privileged \
+		-v /mnt/huge:/mnt/huge \
+		-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+		-v /sys/bus/pci/drivers:/sys/bus/pci/drivers \
+		-v /sys/devices/system/node:/sys/devices/system/node \
+		-v /dev:/dev \
+		-e OPT_LISTEN_PORT=5556 \
+		-e ARG_IFACE_LIST=pci@$pci6 \
+		-e ARG_CORE_LIST="11 12 13" \
+		$te_path # sleep infinity
 
      	# echo "Creating TE7"
 	# # Create TE7 with port 5557
