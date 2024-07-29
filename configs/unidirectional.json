@@ -52,11 +52,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "94:6d:ae:38:7d:67"
+                            "value": "00:0c:29:d1:52:3d"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "94:6d:ae:38:7d:66"
+                            "value": "00:0c:29:d1:52:39"
                         }
                     }
                 }
