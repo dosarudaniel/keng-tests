@@ -2,11 +2,11 @@
     "ports": [
         {
             "name": "VM1-TE1",
-            "location": "10.0.10.11:5551"
+            "location": ""
         },
         {
             "name": "VM2-TE1",
-            "location": "10.0.10.12:5551"
+            "location": ""
         }
     ],
     "layer1": [
@@ -52,37 +52,11 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "Agent2Eth1MacAddress"
+                            "value": "0c:42:a1:4a:77:25"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "Agent1Eth1MacAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "ipv4",
-                    "ipv4": {
-                        "dst": {
-                            "choice": "value",
-                            "value": "Agent2Eth1IpAddress"
-                        },
-                        "src": {
-                            "choice": "value",
-                            "value": "Agent1Eth1IpAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "tcp",
-                    "tcp": {
-                        "src_port": {
-                            "choice": "value",
-                            "value": 643
-                        },
-                        "dst_port": {
-                            "choice": "value",
-                            "value": 543
+                            "value": "0c:42:a1:4a:77:24"
                         }
                     }
                 }
