@@ -3,14 +3,13 @@ version: '3'
 services:
 
   controller:
-    image: ghcr.io/open-traffic-generator/keng-controller:1.6.2-1
+    image: ghcr.io/open-traffic-generator/keng-controller:1.6.2-13
     command: --accept-eula --http-port 8443
     network_mode: "host"
     restart: always
 
   TE1-5551:
     image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.12
-      #restart: always
     network_mode: "host"
     privileged: true
     volumes: 
@@ -21,6 +20,22 @@ services:
       - /dev:/dev
     environment: 
     - OPT_LISTEN_PORT=5551
-    - ARG_IFACE_LIST=pci@30d5:00:02.0
+    - ARG_IFACE_LIST=pci@0000:03:00.0
     - ARG_CORE_LIST="0 1 2"
+
+
+  TE2-5552:
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.12
+    network_mode: "host"
+    privileged: true
+    volumes: 
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment: 
+    - OPT_LISTEN_PORT=5552
+    - ARG_IFACE_LIST=pci@0000:03:00.1
+    - ARG_CORE_LIST="3 4 5"
 
