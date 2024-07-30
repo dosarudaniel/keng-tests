@@ -31,6 +31,7 @@ services:
     - OPT_LISTEN_PORT=5551
     - ARG_IFACE_LIST=pci@0000:03:00.0
     - ARG_CORE_LIST="0 1 2"
+    - DBG_RX_SLEEPY=""
 
 
   TE2-5552:
@@ -47,4 +48,5 @@ services:
     - OPT_LISTEN_PORT=5552
     - ARG_IFACE_LIST=pci@0000:03:00.1
     - ARG_CORE_LIST="3 4 5"
+    - DBG_RX_SLEEPY=""
 
