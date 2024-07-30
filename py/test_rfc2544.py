@@ -24,7 +24,9 @@ def test_throughput_rfc2544_n_flows(api, direction, frame_sizes):
     """
     RFC-2544 Throughput determination test
     """
-    cfg = utils.load_test_config(api, 'throughput_rfc2544_n_flows.json')
+    cfg = utils.load_test_config(
+        api, 'unidirectional.json', apply_settings=True
+    )
 
     THEORETICAL_MAX_LINK_SPEED = utils.get_current_speed_g() # 200    #  Gbps
     packet_sizes = [int(frame_size) for frame_size in frame_sizes.split(',')]
