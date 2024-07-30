@@ -59,32 +59,6 @@
                             "value": "Agent1Eth1MacAddress"
                         }
                     }
-                },
-                {
-                    "choice": "ipv4",
-                    "ipv4": {
-                        "dst": {
-                            "choice": "value",
-                            "value": "Agent2Eth1IpAddress"
-                        },
-                        "src": {
-                            "choice": "value",
-                            "value": "Agent1Eth1IpAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "tcp",
-                    "tcp": {
-                        "src_port": {
-                            "choice": "value",
-                            "value": 643
-                        },
-                        "dst_port": {
-                            "choice": "value",
-                            "value": 543
-                        }
-                    }
                 }
             ]
         },
@@ -125,32 +99,6 @@
                         "src": {
                             "choice": "value",
                             "value": "Agent2Eth1MacAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "ipv4",
-                    "ipv4": {
-                        "dst": {
-                            "choice": "value",
-                            "value": "Agent1Eth1IpAddress"
-                        },
-                        "src": {
-                            "choice": "value",
-                            "value": "Agent2Eth1IpAddress"
-                        }
-                    }
-                },
-                {
-                    "choice": "tcp",
-                    "tcp": {
-                        "src_port": {
-                            "choice": "value",
-                            "value": 644
-                        },
-                        "dst_port": {
-                            "choice": "value",
-                            "value": 544
                         }
                     }
                 }
