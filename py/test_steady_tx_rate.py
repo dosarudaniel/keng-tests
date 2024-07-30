@@ -30,9 +30,9 @@ def test_throughput_from_ixia_c_stat(api,
     pps_decrease = 500
     pass_percent = 85
 
-    while True:
-        total_pass = 0
-        for size in sizes:
+    for size in sizes:
+        while True:
+            total_pass = 0
             cfg = new_config(api, settings, size, rate_in_pps)
             utils.start_traffic(api, cfg)
     
