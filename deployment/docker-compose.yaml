@@ -4,8 +4,13 @@ services:
 
   controller:
     image: ghcr.io/open-traffic-generator/keng-controller:1.6.2-13
-    command: --accept-eula --http-port 8443
+    command: --accept-eula --http-port 8443 --license-servers=localhost
     network_mode: "host"
+    restart: always
+
+  license-server:
+    image: ghcr.io/open-traffic-generator/keng-license-server
+    command: --accept-eula -p 7443:7443 -p 9443:9443
     restart: always
 
   TE1-5551:
