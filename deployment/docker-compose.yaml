@@ -10,8 +10,12 @@ services:
 
   license-server:
     image: ghcr.io/open-traffic-generator/keng-license-server
-    command: --accept-eula -p 7443:7443 -p 9443:9443
     restart: always
+    ports:
+      - "7443:7443"
+      - "9443:9443"
+    command:
+      - "--accept-eula"
 
   TE1-5551:
     image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.12
