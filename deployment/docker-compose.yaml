@@ -45,6 +45,6 @@ services:
       - /dev:/dev
     environment: 
     - OPT_LISTEN_PORT=5552
-    - ARG_IFACE_LIST=pci@0000:03:00.1
+    - ARG_IFACE_LIST=pci@0000:13:00.0
     - ARG_CORE_LIST="3 4 5"
 
