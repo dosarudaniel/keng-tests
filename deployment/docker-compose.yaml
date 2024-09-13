@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+   KENG-License-Server:
+    image: docker-local-athena.artifactory.it.keysight.com/keng-license-server:latest
+   container_name: keng-license-server
+   restart: always
+   ports:
+     - "7443:7443"
+     - "9443:9443"
+   command: --accept-eula
+
+  controller:
+   image: ghcr.io/open-traffic-generator/keng-controller:1.13.0-1
+   command: --accept-eula --http-port 8443  --license-servers=localhost
+   network_mode: "host"
+   restart: always
+
+  TE1-5551:
+    image: docker pull ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.25
+    network_mode: "host"
+    # command: sleep infinity
+    privileged: true
+    restart: "no"
+    volumes:
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment:
+    - OPT_LISTEN_PORT=5551
+    - ARG_IFACE_LIST=pci@${BUS_INFO1}
+    - BUS_INFO=${BUS_INFO1}
+    - MANA_MAC=${MANA_MAC1}
+    - ARG_CORE_LIST="0 1 2"
+    - DBG_DISABLE_L4_CHECKSUM=""
