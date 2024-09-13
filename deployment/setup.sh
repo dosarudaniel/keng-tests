@@ -4,9 +4,6 @@ echo 1024 | tee /sys/devices/system/node/node*/hugepages/hugepages-2048kB/nr_hug
 
 # Assuming use of eth1,eth2,eth3,eth4 for DPDK in this demo
 PRIMARY1="${1:-eth1}"
-PRIMARY2="${2:-eth2}"
-PRIMARY3="${3:-eth3}"
-PRIMARY4="${4:-eth4}"
 
 # controller VM management IP:
 CONTROLLER_IP="${5:-10.3.147.211}"
