@@ -8,7 +8,7 @@ def test_ipv4_bidirectional(api, duration, frame_size, line_rate_per_flow):
     Configure a single bidirectional IPV4 flow
     """
     cfg = utils.load_test_config(
-        api, 'tcp_bidir_2TEs.json', apply_settings=True
+        api, 'bidirectional.json', apply_settings=True
     )
 
     assert len(cfg.flows) % 2 == 0,  \
