@@ -24,6 +24,9 @@ ip link set $SECONDARY down
 
 ## Move synthetic channel to user mode and allow it to be used by NETVSC PMD in DPDK
 DEV_UUID=$(basename $(readlink /sys/class/net/$PRIMARY/device))
+echo $DEV_UUID
+echo $BUS_INFO
+echo $MANA_MAC
 NET_UUID="f8615163-df3e-46c5-913f-f2d2f965ed0e"
 modprobe uio_hv_generic
 echo $NET_UUID > /sys/bus/vmbus/drivers/uio_hv_generic/new_id
