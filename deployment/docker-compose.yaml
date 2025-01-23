@@ -11,6 +11,7 @@ services:
   TE1-5551:
     image: dosaru/ixia-c-traffic-engine-poc-24.11:version1
     network_mode: "host"
+    command: sleep infinity
     privileged: true
     volumes: 
       - /mnt/huge:/mnt/huge
