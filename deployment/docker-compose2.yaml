@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  TE1-5551:
+    image: dosaru/ixia-c-traffic-engine-poc-24.11:version1
+    network_mode: "host"
+    command: sleep infinity
+    privileged: true
+    volumes: 
+      - /mnt/huge:/mnt/huge
+      - /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages
+      - /sys/bus/pci/drivers:/sys/bus/pci/drivers
+      - /sys/devices/system/node:/sys/devices/system/node
+      - /dev:/dev
+    environment: 
+    - OPT_LISTEN_PORT=5551
+    - ARG_IFACE_LIST=pci@7870:00:00.0
+    - VMBUS_LIST=f8615163-0001-1000-2000-6045bd7b94ee
+    - MAC_LIST=60:45:bd:7b:94:ee
+    - ARG_CORE_LIST="0 1 2"
