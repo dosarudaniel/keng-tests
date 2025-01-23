@@ -52,11 +52,37 @@
                     "ethernet": {
                         "dst": {
                             "choice": "value",
-                            "value": "0c:42:a1:4a:77:25"
+                            "value": "60:45:bd:b4:cb:74"
                         },
                         "src": {
                             "choice": "value",
-                            "value": "0c:42:a1:4a:77:24"
+                            "value": "60:45:bd:7b:94:ee"
+                        }
+                    }
+                },
+                {
+                    "choice": "ipv4",
+                    "ipv4": {
+                        "dst": {
+                            "choice": "value",
+                            "value": "10.0.2.21"
+                        },
+                        "src": {
+                            "choice": "value",
+                            "value": "10.0.2.11"
+                        }
+                    }
+                },
+                {
+                    "choice": "tcp",
+                    "tcp": {
+                        "src_port": {
+                            "choice": "value",
+                            "value": 443
+                        },
+                        "dst_port": {
+                            "choice": "value",
+                            "value": 443
                         }
                     }
                 }
