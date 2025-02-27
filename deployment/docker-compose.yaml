@@ -9,7 +9,7 @@ services:
     restart: always
 
   TE1-5551:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.99
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.12
     network_mode: "host"
     privileged: true
     volumes: 
@@ -25,7 +25,7 @@ services:
 
 
   TE2-5552:
-    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.99
+    image: ghcr.io/open-traffic-generator/ixia-c-traffic-engine:1.8.0.12
     network_mode: "host"
     privileged: true
     volumes: 
